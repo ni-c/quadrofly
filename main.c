@@ -3,8 +3,8 @@
  *
  *  The main routine.
  *
- *  Created on: Mar 3, 2012
- *      Author: Willi Thiel
+ *  @date Mar 3, 2012
+ *  @author Willi Thiel
  */
 
 #include <avr/io.h>
@@ -14,9 +14,11 @@
  */
 int main(void) {
 
-	DDRA = 0xFF;
+	/* Set port PA0 to output */
+	DDRA = (1 << DDA0);
 
-	PORTB = (1<<PB1) | (1<<PB0);
+	/* Pull port PA0 up */
+	PORTA = (1 << PA0);
 
 	while (1) {
 		/* Our loop */
