@@ -1,7 +1,7 @@
 # Quadrofly
 
-## Description
+## Building a Quadrocopter
 
-Quadrofly is a Quadrocopter project.
+For more information about Quadrofly visit my blog:
 
 http://quadrofly.ni-c.de

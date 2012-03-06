@@ -13,13 +13,13 @@
  * CPU Speed
  */
 #ifndef F_CPU
-#define F_CPU 20000000
+#define F_CPU 20000000UL
 #endif
 
 /**
  * UART
  */
 #define UART_AVAILABLE
-#define BAUD 57600
+#define BAUD 57600UL
 
 #endif

@@ -10,22 +10,24 @@
 #include "init.h"
 
 #include <avr/io.h>
+#include <util/delay.h>
 
 /**
  * The main function.
  */
 int main(int argc, char * argv[]) {
 
+	/* Initialization */
 	init_qfly(argc, argv);
 
-	/* Set port PA0 to output */
-	DDRA = (1 << DDA0);
-
-	/* Pull port PA0 up */
-	PORTA = (1 << PA0);
-
+	/* Our loop */
 	while (1) {
-		/* Our loop */
+
+		/* Write "Hello world!\n" to UART */
+		uart_puts("Hello world!\n");
+
+		/* Wait a second */
+		delay_ms(1000);
 	}
 
 	/* Finally. (Never ever) */
