@@ -2,6 +2,7 @@
 .project
 .settings
 .dep
+doc
 main.eep
 main.elf
 main.hex

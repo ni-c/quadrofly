@@ -7,6 +7,7 @@
  * @date 	Mar 6, 2012
  */
 #include "main.h"
+#include "debug.h"
 
 #ifdef UART_AVAILABLE
 
@@ -53,10 +54,14 @@ int uart_putc(unsigned char c) {
  */
 void uart_puts(char *s) {
 
+#ifdef SIMULAVR_AVAILABLE
+	debug_puts(s);
+#else
 	while (*s) {
 		uart_putc(*s);
 		s++;
 	}
+#endif /* SIMULAVR_AVAILABLE */
 }
 
 #endif

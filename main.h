@@ -17,6 +17,11 @@
 #endif
 
 /**
+ * Debugging
+ */
+//#define SIMULAVR_AVAILABLE
+
+/**
  * UART
  */
 #define UART_AVAILABLE

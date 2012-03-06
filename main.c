@@ -27,7 +27,7 @@ int main(int argc, char * argv[]) {
 		uart_puts("Hello world!\n");
 
 		/* Wait a second */
-		delay_ms(1000);
+		_delay_ms(1000);
 	}
 
 	/* Finally. (Never ever) */
