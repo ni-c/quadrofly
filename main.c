@@ -1,18 +1,22 @@
 /**
- * main.c
+ * Quadrofly Software (http://quadrofly.ni-c.de)
  *
- *  The main routine.
- *
- *  @date Mar 3, 2012
- *  @author Willi Thiel
+ * @file 	main.c
+ * @brief 	Main program
+ * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
+ * @date 	Mar 6, 2012
  */
+#include "main.h"
+#include "init.h"
 
 #include <avr/io.h>
 
 /**
  * The main function.
  */
-int main(void) {
+int main(int argc, char * argv[]) {
+
+	init_qfly(argc, argv);
 
 	/* Set port PA0 to output */
 	DDRA = (1 << DDA0);
