@@ -8,6 +8,8 @@
  */
 #include "main.h"
 #include "init.h"
+#include "uart.h"
+#include "debug.h"
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -25,6 +27,9 @@ int main(int argc, char * argv[]) {
 
 		/* Write "Hello world!\n" to UART */
 		uart_puts("Hello world!\n");
+
+		/* Write "Hello debug!\n" to debug */
+		debug_puts("Hello debug!\n");
 
 		/* Wait a second */
 		_delay_ms(1000);

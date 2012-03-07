@@ -7,25 +7,45 @@
  * @date 	Mar 7, 2012
  */
 #include "main.h"
+#include "uart.h"
 
 #ifdef SIMULAVR_AVAILABLE
 
-/* This port correponds to the "-W 0x20,-" command line option. */
-#define special_output_port (*((volatile char *)0x20))
+#define SIMULAVR_PORT (*((volatile char *)0x20)) /*!< This port correponds to the "-W 0x20,-" command line option. */
 
 #endif
 
 /**
- * Poll the specified string out the debug port.
+ * Poll the specified char out the debug port.
  *
- * @param str The specified string
+ * @param c The specified char
  */
-void debug_puts(const char *str) {
+void debug_putc(const unsigned char c) {
 
 #ifdef SIMULAVR_AVAILABLE
-  const char *c;
+	/* write char to special output port */
+	SIMULAVR_PORT = c;
+#endif
+#ifdef UART_AVAILABLE
+	/* write char to UART */
+	uart_putc(c);
+#endif
+}
 
-  for(c = str; *c; c++)
-    special_output_port = *c;
+/**
+ * Poll the specified string out the debug port.
+ *
+ * @param s The specified string
+ */
+void debug_puts(const char *s) {
+
+#ifdef SIMULAVR_AVAILABLE
+	while (*s) {
+		debug_putc(*s);
+		s++;
+	}
+#endif
+#ifdef UART_AVAILABLE
+	uart_puts(*s);
 #endif
 }

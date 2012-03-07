@@ -19,13 +19,13 @@ void uart_init(void);
  *
  * @param c The char to send
  */
-int uart_putc(unsigned char c);
+void uart_putc(const unsigned char c);
 
 /**
  * Send an array of chars
  *
  * @param s An array of chars to send
  */
-void uart_puts(char *s);
+void uart_puts(const char *s);
 
 #endif /* UART_H_ */

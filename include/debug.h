@@ -11,10 +11,17 @@
 #define DEBUG_H_
 
 /**
+ * Poll the specified char out the debug port.
+ *
+ * @param c The specified char
+ */
+void debug_putc(const unsigned char c);
+
+/**
  * Poll the specified string out the debug port.
  *
- * @param str The specified string
+ * @param s The specified string
  */
-void debug_puts(const char *str);
+void debug_puts(const char *s);
 
 #endif /* DEBUG_H_ */

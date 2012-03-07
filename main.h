@@ -9,22 +9,18 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 
-/**
- * CPU Speed
- */
 #ifndef F_CPU
-#define F_CPU 20000000UL
+#define F_CPU 20000000UL /*!< Set CPU clock */
 #endif
 
-/**
- * Debugging
- */
-//#define SIMULAVR_AVAILABLE
+#define SIMULAVR_AVAILABLE /*!< Compile for the simulavr simulator */
 
-/**
- * UART
- */
-#define UART_AVAILABLE
-#define BAUD 57600UL
+#define UART_AVAILABLE /*!< Is UART available */
+#define BAUD 57600UL /*!< UART Baudrate in bit per second */
+
+/* Dependencies */
+#ifdef SIMULAVR_AVAILABLE
+#undef UART_AVAILABLE /*!< UART doesn't work if the software runs on simulavr, deactivate it */
+#endif /* SIMULAVR_AVAILABLE */
 
 #endif
