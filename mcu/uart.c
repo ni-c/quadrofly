@@ -12,6 +12,7 @@
 #include <avr/io.h>
 #include <util/setbaud.h>
 #endif /* UART_AVAILABLE */
+
 /**
  * UART Initialization
  */

@@ -13,7 +13,7 @@
 #define F_CPU 20000000UL /*!< Set CPU clock */
 #endif
 
-#define SIMULAVR_AVAILABLE /*!< Compile for the simulavr simulator */
+//#define SIMULAVR_AVAILABLE /*!< Compile for the simulavr simulator */
 
 #define UART_AVAILABLE /*!< Is UART available */
 #define BAUD 57600UL /*!< UART Baudrate in bit per second */
