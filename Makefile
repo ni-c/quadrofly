@@ -52,7 +52,7 @@ TARGET = main
 
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = init.c $(TARGET).c mcu/uart.c debug.c
+SRC = init.c $(TARGET).c mcu/uart.c log.c
 
 
 # List Assembler source files here.

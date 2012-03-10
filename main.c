@@ -9,7 +9,7 @@
 #include "main.h"
 #include "init.h"
 #include "uart.h"
-#include "debug.h"
+#include "log.h"
 
 #include <avr/io.h>
 #include <util/delay.h>
