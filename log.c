@@ -1,8 +1,8 @@
 /**
  * Quadrofly Software (http://quadrofly.ni-c.de)
  *
- * @file 	debug.c
- * @brief 	Debug helper class
+ * @file 	log.c
+ * @brief 	Log helper class
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
  * @date 	Mar 7, 2012
  */
@@ -16,11 +16,11 @@
 #endif
 
 /**
- * Poll the specified char out the debug port.
+ * Poll the specified char out the log port.
  *
  * @param c The specified char
  */
-void debug_putc(const unsigned char c) {
+void log_putc(const unsigned char c) {
 
 #ifdef SIMULAVR_AVAILABLE
 	/* write char to special output port */
@@ -33,15 +33,15 @@ void debug_putc(const unsigned char c) {
 }
 
 /**
- * Poll the specified string out the debug port.
+ * Poll the specified string out the log port.
  *
  * @param s The specified string
  */
-void debug_puts(const char *s) {
+void log_puts(const char *s) {
 
 #ifdef SIMULAVR_AVAILABLE
 	while (*s) {
-		debug_putc(*s);
+		log_putc(*s);
 		s++;
 	}
 #endif

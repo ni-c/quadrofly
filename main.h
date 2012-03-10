@@ -18,6 +18,8 @@
 #define UART_AVAILABLE /*!< Is UART available */
 #define BAUD 57600UL /*!< UART Baudrate in bit per second */
 
+#define MOTOR_AVAILABLE /*!< Is Motor control available */
+
 /* Dependencies */
 #ifdef SIMULAVR_AVAILABLE
 #undef UART_AVAILABLE /*!< UART doesn't work if the software runs on simulavr, deactivate it */

@@ -8,20 +8,25 @@
  */
 #include "main.h"
 #include "uart.h"
+#include "motor.h"
 
 /**
  * Quadrofly initialization
- *
- * @param argc argument count
- * @param argv arguments
  */
-void init_qfly(int argc, char * argv[]) {
+void init_qfly() {
 
-#ifdef UART_AVAILABLE
 	/*
 	 * Initialize UART
 	 */
+#ifdef UART_AVAILABLE
 	uart_init();
+#endif
+
+	/*
+	 * Initialize Motorcontrol
+	 */
+#ifdef MOTOR_AVAILABLE
+	motor_init();
 #endif
 
 }

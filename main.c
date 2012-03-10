@@ -17,10 +17,10 @@
 /**
  * The main function.
  */
-int main(int argc, char * argv[]) {
+int main() {
 
 	/* Initialization */
-	init_qfly(argc, argv);
+	init_qfly();
 
 	/* Our loop */
 	while (1) {
@@ -29,7 +29,7 @@ int main(int argc, char * argv[]) {
 		uart_puts("Hello world!\n");
 
 		/* Write "Hello debug!\n" to debug */
-		debug_puts("Hello debug!\n");
+		log_puts("Hello debug!\n");
 
 		/* Wait a second */
 		_delay_ms(1000);

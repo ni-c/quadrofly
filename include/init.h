@@ -11,10 +11,7 @@
 
 /**
  * Quadrofly initialization
- *
- * @param argc argument count
- * @param argv arguments
  */
-void init_qfly(int argc, char * argv[]);
+void init_qfly();
 
 #endif /* INIT_H_ */
