@@ -38,7 +38,7 @@
 
 
 # MCU name
-MCU = atmega1284
+MCU = atmega1284p
 
 # Main Oscillator Frequency
 # This is only used to define F_OSC in all assembler and c-sources.
@@ -52,7 +52,7 @@ TARGET = main
 
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = $(TARGET).c init.c ../shared/lib/log.c ../shared/lib/uart.c
+SRC = $(TARGET).c init.c lib/motor.c ../shared/lib/log.c ../shared/lib/uart.c lib/snap/snap.c lib/snap/snap_lnk.c
 
 
 # List Assembler source files here.
