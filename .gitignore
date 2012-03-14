@@ -2,7 +2,9 @@
 .project
 .settings
 .dep
-doc/html
+cpu/doc/html
+mcu/doc
+scu/doc
 main.eep
 main.elf
 main.hex
