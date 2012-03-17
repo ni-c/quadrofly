@@ -12,6 +12,6 @@
 /**
  * Quadrofly initialization
  */
-void init_qfly();
+void init_qfly(void);
 
 #endif /* INIT_H_ */

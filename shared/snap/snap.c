@@ -31,7 +31,6 @@
  */
 
 #include <avr/io.h>
-#include <avr/signal.h>
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
 #include <inttypes.h>
@@ -366,7 +365,8 @@ void snap_lnk_recv(uint8_t value, uint8_t err) {
 			return;
 		}
 		;
-#elif SNAP_EDM_ANY
+#endif
+#ifdef SNAP_EDM_ANY
 		edm_init(HDB1);
 #endif
 #ifdef SNAP_EDM_ANY

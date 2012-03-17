@@ -38,11 +38,11 @@
 
 
 # MCU name
-MCU = atmega8
+MCU = atmega88
 
 # Main Oscillator Frequency
 # This is only used to define F_OSC in all assembler and c-sources.
-F_OSC = 10000000
+F_OSC = 1000000
 
 # Output format. (can be srec, ihex, binary)
 FORMAT = ihex
@@ -52,7 +52,7 @@ TARGET = main
 
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = $(TARGET).c init.c ../shared/lib/log.c ../shared/lib/uart.c
+SRC = $(TARGET).c init.c ../shared/lib/log.c ../shared/lib/uart.c ../shared/snap/snap.c snap_lnk.c ../shared/lib/rfm12.c
 
 
 # List Assembler source files here.
@@ -79,7 +79,7 @@ DEBUG = dwarf-2
 
 # List any extra directories to look for include files here.
 #     Each directory must be seperated by a space.
-EXTRAINCDIRS = ./include ../shared/include
+EXTRAINCDIRS = ./include ../shared/include ../shared/snap
 
 
 # Compiler flag to set the C Standard level.

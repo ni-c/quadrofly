@@ -29,54 +29,75 @@
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
  * @date 	Mar 11, 2012
  */
+#include "main.h"
+#include "snap_def.h"
+#include "snap_lnk.h"
+#include "rfm12.h"
 
 #include <avr/io.h>
-#include <avr/signal.h>
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
 #include <inttypes.h>
-#include "snap_def.h"
-#include "snap_lnk.h"
 
-// function from network layer handling received bytes
+/**
+ * function from network layer handling received bytes
+ */
 extern void snap_lnk_recv(uint8_t value, uint8_t err);
 
-SIGNAL(SIG_UART_RECV) {
-	uint8_t err, value;
+ISR(INT1_vect) {
+#ifdef RFM12B_AVAILABLE
+	rfm12_rx_start();
 
-	if ((UCSR0A & _BV(FE0)) != 0)
-		err = SNAP_LNK_ERR_FRAMING;
-	else
-		err = 0;
-	value = UDR0;
-	if ((UCSR0A & _BV(DOR0)) != 0)
-		err |= SNAP_LNK_ERR_OVERRUN;
-	snap_lnk_recv(value, err);
+	/* Read 1 byte snap packet:
+	 *
+	 * SYNC Synchronization byte
+	 * HDB2 Header Definition Byte 2
+	 * HDB1 Header Definition Byte 1
+	 * DAB1 Destination Address Byte
+	 * SAB1 Source Address Byte
+	 * DB1  Data Byte 1
+	 * CRC2 High byte of CRC-16
+	 * CRC1 Low byte of CRC-16
+	 */
+	for (int i = 0; i < 4; i++) {
+		uint16_t rx = rfm12_rx();
+		uint8_t  hi = rx & 0xff00;
+		uint8_t  lo = rx & 0x00ff;
+		snap_lnk_recv(hi, 0);
+		snap_lnk_recv(lo, 0);
+	}
+
+	rfm12_rx_done();
+#endif
 }
 
 void snap_lnk_init(void) {
-	UBRR0 = SNAP_F_CLK / (SNAP_BAUD_RATE * 16l) - 1; // set baud rate
-	sbi(SEND_PORT, SEND_PIN); // configure send pin
-	sbi(SEND_DDR, SEND_PIN);
-	UCSR0A |= _BV(RXCIE0) | _BV(RXEN0); // enable receiver+interrupt
+#ifdef RFM12B_AVAILABLE
+	/*
+	 * Initialize RFM12B
+	 */
+	rfm12_init(); // Initialize module
+	rfm12_setfreq(RF12FREQ(433.92)); // set frequency to 433,92MHz
+	rfm12_setbandwidth(4, 1, 4); // 200kHz bandwith, -6dB, DRSSI threshold: -79dBm
+	rfm12_setbaud(19200); // 19200 BAUD
+	rfm12_setpower(0, 6); // 1mW power, 120kHz frequency shift
+#endif
 }
 
 void snap_lnk_send_start(void) {
-	cbi(UCSR0A, RXEN0); // disable receiver
-	sbi(UCSR0A, TXEN0); // enable transmitter
-	cbi(SEND_PORT, SEND_PIN); // enable driver
-	UCSR0A = _BV(TXC0); // clear txc flag
+#ifdef RFM12B_AVAILABLE
+	rfm12_tx_start();
+#endif
 }
 
 void snap_lnk_send(uint8_t value) {
-	loop_until_bit_is_set(UCSR0A, UDRE0);
-	UDR0 = value;
+#ifdef RFM12B_AVAILABLE
+	rfm12_tx(value);
+#endif
 }
 
 void snap_lnk_send_done(void) {
-	loop_until_bit_is_set(UCSR0A, TXC0);
-	// wait for end of transmission
-	sbi(SEND_PORT, SEND_PIN); // disable driver
-	cbi(UCSR0A, TXEN0); // disable transmitter
-	sbi(UCSR0A, RXEN0); // enable receiver
+#ifdef RFM12B_AVAILABLE
+	rfm12_tx_done();
+#endif
 }

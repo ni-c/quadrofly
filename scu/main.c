@@ -17,7 +17,7 @@
 /**
  * The main function.
  */
-int main() {
+int main(void) {
 
 	/* Initialization */
 	init_qfly();

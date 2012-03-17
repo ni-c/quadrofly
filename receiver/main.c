@@ -17,19 +17,14 @@
 /**
  * The main function.
  */
-int main() {
+int main(void) {
 
 	/* Initialization */
 	init_qfly();
+	log_puts("initialization... ok\n");
 
 	/* Our loop */
 	while (1) {
-
-		/* Write "Hello world!\n" to UART */
-		uart_puts("Hello world!\n");
-
-		/* Write "Hello debug!\n" to debug */
-		log_puts("Hello debug!\n");
 
 		/* Wait a second */
 		_delay_ms(1000);

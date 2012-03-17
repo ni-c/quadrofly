@@ -67,13 +67,6 @@
 //#define SNAP_EDM_FEC			/* not supported */
 
 /**
- * If you define a static node address, the sending code gets smaller and
- * faster. The drawback is that you have to recompile your whole program
- * for each node...
- */
-#define SNAP_STATIC_ADDR	0x0001
-
-/**
  * Specify the byte receive timeout in timer ticks (snap_check_timeout).
  * Adjust according to your timer interval and baud rate. A good choice
  * should be 3*(time between bytes).
@@ -93,12 +86,5 @@
  */
 #define SNAP_BAUD_RATE		9600		/*!< desired baud rate    */
 #define SNAP_F_CLK			F_CPU       /*!< your clock frequency */
-
-/*
- * Specifies the pin which switches the external bus driver on or off.
- */
-#define SEND_PORT			PORTD 		/*!< The port of the pin which switches the external bus driver on or off */
-#define SEND_DDR			DDRD 		/*!< The ddr of the pin which switches the external bus driver on or off */
-#define SEND_PIN			PD4 		/*!< The pin of the pin which switches the external bus driver on or off */
 
 #endif

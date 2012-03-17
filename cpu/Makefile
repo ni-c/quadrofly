@@ -52,7 +52,7 @@ TARGET = main
 
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = $(TARGET).c init.c lib/motor.c ../shared/lib/log.c ../shared/lib/uart.c lib/snap/snap.c lib/snap/snap_lnk.c
+SRC = $(TARGET).c init.c lib/motor.c ../shared/lib/log.c ../shared/lib/uart.c
 
 
 # List Assembler source files here.
@@ -79,7 +79,7 @@ DEBUG = dwarf-2
 
 # List any extra directories to look for include files here.
 #     Each directory must be seperated by a space.
-EXTRAINCDIRS = ./include ../shared/include
+EXTRAINCDIRS = ./include ../shared/include ../shared/snap
 
 
 # Compiler flag to set the C Standard level.
