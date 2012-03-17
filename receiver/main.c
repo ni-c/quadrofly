@@ -1,7 +1,7 @@
 /**
  * Quadrofly Software (http://quadrofly.ni-c.de)
  *
- * @file 	main.c
+ * @file 	receiver/main.c
  * @brief 	Main program
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
  * @date 	Mar 6, 2012

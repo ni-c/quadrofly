@@ -1,7 +1,7 @@
 /**
  * Quadrofly Software (http://quadrofly.ni-c.de)
  *
- * @file 	main.h
+ * @file 	scu/main.h
  * @brief 	Global header file.
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
  * @date 	Mar 6, 2012

@@ -22,7 +22,7 @@
 /**
  * Quadrofly Software (http://quadrofly.ni-c.de)
  *
- * @file 	snap_lnk.c
+ * @file 	receiver/snap_lnk.c
  * @brief 	Link layer for uart interface.
  * @details Library from http://www.avrfreaks.net/index.php?module=Freaks%20Academy&func=viewItem&item_id=156&item_type=project More info about S.N.A.P. can be found on http://www.hth.com/snap/
  * @author  Jan Klötzke (jk177883@inf.tu-dresden.de)
