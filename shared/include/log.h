@@ -15,13 +15,13 @@
  *
  * @param c The specified char
  */
-void log_putc(const unsigned char c);
+void log_c(const unsigned char c);
 
 /**
  * Poll the specified string out the debug port.
  *
  * @param s The specified string
  */
-void log_puts(const char *s);
+void log_s(const char *s);
 
 #endif /* LOG_H_ */

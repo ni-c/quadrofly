@@ -21,13 +21,15 @@ int main(void) {
 
 	/* Initialization */
 	init_qfly();
-	log_puts("initialization... ok\n");
+	log_s("initialization... ok\n");
 
 	/* Our loop */
 	while (1) {
 
 		/* Wait a second */
 		_delay_ms(1000);
+
+		uart_puts("Hello world!\n");
 	}
 
 	/* Finally. (Never ever) */

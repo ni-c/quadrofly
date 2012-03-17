@@ -14,6 +14,7 @@
 #endif
 
 //#define SIMULAVR_AVAILABLE /*!< Compile for the simulavr simulator */
+#define LOG_AVAILABLE /*!< Is Logging available */
 
 #define UART_AVAILABLE /*!< Is UART available */
 #define BAUD 57600UL /*!< UART Baudrate in bit per second */

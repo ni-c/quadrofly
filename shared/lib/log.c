@@ -20,16 +20,17 @@
  *
  * @param c The specified char
  */
-void log_putc(const unsigned char c) {
-
+void log_c(const unsigned char c) {
+#ifdef LOG_AVAILABLE
 #ifdef SIMULAVR_AVAILABLE
 	/* write char to special output port */
 	SIMULAVR_PORT = c;
-#endif
+#endif /* SIMULAVR_AVAILABLE */
 #ifdef UART_AVAILABLE
 	/* write char to UART */
 	uart_putc(c);
-#endif
+#endif /* UART_AVAILABLE */
+#endif /* LOG_AVAILBLE */
 }
 
 /**
@@ -37,15 +38,16 @@ void log_putc(const unsigned char c) {
  *
  * @param s The specified string
  */
-void log_puts(const char *s) {
-
+void log_s(const char *s) {
+#ifdef LOG_AVAILABLE
 #ifdef SIMULAVR_AVAILABLE
 	while (*s) {
-		log_putc(*s);
+		log_c(*s);
 		s++;
 	}
 #endif
 #ifdef UART_AVAILABLE
 	uart_puts(*s);
 #endif
+#endif /* LOG_AVAILBLE */
 }

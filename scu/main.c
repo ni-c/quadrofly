@@ -25,12 +25,6 @@ int main(void) {
 	/* Our loop */
 	while (1) {
 
-		/* Write "Hello world!\n" to UART */
-		uart_puts("Hello world!\n");
-
-		/* Write "Hello debug!\n" to debug */
-		log_puts("Hello debug!\n");
-
 		/* Wait a second */
 		_delay_ms(1000);
 	}

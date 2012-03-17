@@ -19,7 +19,7 @@ int main(void) {
 
 	/* Initialization */
 	init_qfly();
-	log_putc("initialization... ok");
+	log_s("initialization... ok");
 
 	/* Our loop */
 	while (1) {

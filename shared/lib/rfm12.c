@@ -45,7 +45,7 @@ unsigned int rfm12_write(unsigned int cmd) {
  * Initializes the RFM12 module
  */
 void rfm12_init(void) {
-	log_puts("rfm12 initialization...");
+	log_s("rfm12 initialization...");
 	DDRSPI &= (1 << SDI) | (1 << SCK) | (1 << CS); // SDI, SCK and CS output
 	DDRSPI |= ~(1 << SDO); // SDO  input
 	DDRD |= ~(1 << NIRQ); // NIRQ input
@@ -61,7 +61,7 @@ void rfm12_init(void) {
 	rfm12_write(0xE000); // disable wakeuptimer
 	rfm12_write(0xC800); // disable low duty cycle
 	rfm12_write(0xC4F7); // AFC settings: autotuning: -10kHz...+7,5kHz
-	log_puts(" ok\n");
+	log_s(" ok\n");
 }
 
 /**
@@ -133,7 +133,7 @@ void rfm12_ready(void) {
  * Start TX
  */
 void rfm12_tx_start(void) {
-	log_puts("rfm12 TX start...");
+	log_s("rfm12 TX start...");
 	rfm12_write(0x8238); // TX on
 	rfm12_ready();
 	rfm12_write(0xB8AA);
@@ -145,7 +145,7 @@ void rfm12_tx_start(void) {
 	rfm12_write(0xB82D);
 	rfm12_ready();
 	rfm12_write(0xB8D4);
-	log_puts(" ok\n");
+	log_s(" ok\n");
 }
 
 /**
@@ -154,7 +154,7 @@ void rfm12_tx_start(void) {
  * @param value The data to send
  */
 void rfm12_tx(uint8_t value) {
-	log_puts((const char *)value);
+	log_s((const char *)value);
 	rfm12_ready();
 	rfm12_write(0xB800 | (value));
 }
@@ -163,10 +163,10 @@ void rfm12_tx(uint8_t value) {
  * Finish TX
  */
 void rfm12_tx_done(void) {
-	log_puts("rfm12 TX done...");
+	log_s("rfm12 TX done...");
 	rfm12_ready();
 	rfm12_write(0x8208); // TX off
-	log_puts(" ok\n");
+	log_s(" ok\n");
 }
 
 /**
