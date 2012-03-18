@@ -11,6 +11,7 @@
 
 #ifdef UART_AVAILABLE
 #include <avr/io.h>
+#include <avr/interrupt.h>
 #include <util/setbaud.h>
 #endif /* UART_AVAILABLE */
 
