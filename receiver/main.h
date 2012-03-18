@@ -13,13 +13,14 @@
 #define F_CPU 1000000UL /*!< Set CPU clock */
 #endif
 
-//#define SIMULAVR_AVAILABLE /*!< Compile for the simulavr simulator */
+#define SIMULAVR_AVAILABLE /*!< Compile for the simulavr simulator */
 #define LOG_AVAILABLE /*!< Is Logging available */
 
 #define UART_AVAILABLE /*!< Is UART available */
 #define BAUD 9600UL /*!< UART Baudrate in bit per second */
 
-#define RFM12B_AVAILABLE /*!< Is RFM12B available */
+//#define RFM12B_AVAILABLE /*!< Is RFM12B available */
+
 #define SNAP_AVAILABLE /*!< Is Snap protocol available */
 
 /* Dependencies */

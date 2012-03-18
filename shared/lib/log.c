@@ -8,12 +8,35 @@
  */
 #include "main.h"
 #include "uart.h"
+#include "stdlib.h"
 
 #ifdef SIMULAVR_AVAILABLE
 
 #define SIMULAVR_PORT (*((volatile char *)0x20)) /*!< This port correponds to the "-W 0x20,-" command line option. */
 
 #endif
+
+
+/**
+ * Poll the specified uint8 out the log port.
+ *
+ * @param s The specified uint8
+ */
+void log_i(uint8_t i) {
+#ifdef LOG_AVAILABLE
+#ifdef SIMULAVR_AVAILABLE
+	char buffer[2];
+	char* buffer_p = buffer;
+	sprintf(buffer, "%02X", i);
+	SIMULAVR_PORT = *buffer_p++;
+	SIMULAVR_PORT = *buffer_p;
+	SIMULAVR_PORT = 32;
+#endif /* SIMULAVAR_AVAILABLE */
+#ifdef UART_AVAILABLE
+	uart_tx(*i);
+#endif /* UART_AVAILABLE */
+#endif /* LOG_AVAILBLE */
+}
 
 /**
  * Poll the specified string out the log port.
@@ -23,13 +46,12 @@
 void log_s(const char *s) {
 #ifdef LOG_AVAILABLE
 #ifdef SIMULAVR_AVAILABLE
-	while (*s) {
-		log_c(*s);
-		s++;
+	for(int i = 0; s[i] != '\0'; i++) {
+	    SIMULAVR_PORT = s[i];
 	}
-#endif
+#endif /* SIMULAVAR_AVAILABLE */
 #ifdef UART_AVAILABLE
 	uart_tx(s);
-#endif
+#endif /* UART_AVAILABLE */
 #endif /* LOG_AVAILBLE */
 }

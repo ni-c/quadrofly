@@ -52,17 +52,19 @@
  * wide as SNAP_MAX_PACKET_LENGTH is.
  */
 #define SNAP_MAX_PACKET_LENGTH	32	/*!< Value between 0..512 */
-#define SNAP_MAX_ADDRESS_BYTES	2	/*!< Value between 0..3   */
+#define SNAP_MAX_ADDRESS_BYTES	1	/*!< Value between 0..3   */
 #define SNAP_MAX_PROTOCOL_BYTES	0	/*!< Value between 0..3   */
  
+#define SNAP_STATIC_ADDR	0x12
+
 /**
  * Pay attantion that espacially the good EDM routines need more processing
  * time. Since the CRC's are calculated on the fly this may lead to overrun
  * errors if the baud rate is too high! 
  */
 //#define SNAP_EDM_CHECKSUM_8
-//#define SNAP_EDM_CRC_8
-#define SNAP_EDM_CRC_16
+#define SNAP_EDM_CRC_8
+//#define SNAP_EDM_CRC_16
 //#define SNAP_EDM_CRC_32
 //#define SNAP_EDM_FEC			/* not supported */
 

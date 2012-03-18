@@ -155,9 +155,6 @@ void rfm12_tx_start(void) {
  * @param value The data to send
  */
 void rfm12_tx(uint8_t value) {
-	char s[3];
-	itoa(value,s,3);
-	log_s(s);
 	rfm12_ready();
 	rfm12_write(0xB800 | (value));
 }

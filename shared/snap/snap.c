@@ -209,10 +209,6 @@ static void edm_crc_8_add(uint8_t value)
 		value >>= 1;
 	};
 }
-static uint8_t inline edm_crc_8_get(void)
-{
-	return edm_stat.crc08;
-}
 #endif
 
 #ifdef SNAP_EDM_CRC_16

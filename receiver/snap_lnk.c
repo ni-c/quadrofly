@@ -34,19 +34,22 @@
 #include "snap_lnk.h"
 #include "rfm12.h"
 #include "uart.h"
+#include "log.h"
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
 #include <inttypes.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
  * function from network layer handling received bytes
  */
+#ifdef RFM12B_AVAILABLE
 extern void snap_lnk_recv(uint8_t value, uint8_t err);
 
 ISR(INT1_vect) {
-#ifdef RFM12B_AVAILABLE
 	rfm12_rx_start();
 
 	/* Read 1 byte snap packet:
@@ -69,8 +72,8 @@ ISR(INT1_vect) {
 	}
 
 	rfm12_rx_done();
-#endif
 }
+#endif /* RFM12B_AVAILABLE */
 
 void snap_lnk_init(void) {
 #ifdef RFM12B_AVAILABLE
@@ -78,27 +81,33 @@ void snap_lnk_init(void) {
 	 * Initialize RFM12B
 	 */
 	rfm12_init(); // Initialize module
-	rfm12_setfreq(RF12FREQ(433.92)); // set frequency to 433,92MHz
-	rfm12_setbandwidth(4, 1, 4); // 200kHz bandwith, -6dB, DRSSI threshold: -79dBm
-	rfm12_setbaud(19200); // 19200 BAUD
-	rfm12_setpower(0, 6); // 1mW power, 120kHz frequency shift
-#endif
+	rfm12_setfreq(RF12FREQ(433.92));// set frequency to 433,92MHz
+	rfm12_setbandwidth(4, 1, 4);// 200kHz bandwith, -6dB, DRSSI threshold: -79dBm
+	rfm12_setbaud(19200);// 19200 BAUD
+	rfm12_setpower(0, 6);// 1mW power, 120kHz frequency shift
+#endif /* RFM12B_AVAILABLE */
 }
 
 void snap_lnk_send_start(void) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_tx_start();
-#endif
+#endif /* RFM12B_AVAILABLE */
 }
 
 void snap_lnk_send(uint8_t value) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_tx(value);
-#endif
+#endif /* RFM12B_AVAILABLE */
+#ifdef LOG_AVAILABLE
+	log_i(value);
+#endif /* LOG AVAILABLE */
 }
 
 void snap_lnk_send_done(void) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_tx_done();
-#endif
+#endif /* RFM12B_AVAILABLE */
+#ifdef LOG_AVAILABLE
+	log_s("\n");
+#endif /* LOG AVAILABLE */
 }

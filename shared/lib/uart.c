@@ -23,11 +23,11 @@ char uart_tx_buffer[UART_BUFFER_SIZE]; /*!< UART send buffer */
 char uart_rx_buffer[UART_BUFFER_SIZE]; /*!< UART receive buffer */
 #endif /* UART_AVAILABLE */
 
+#ifdef UART_AVAILABLE
 /**
  * UART TX data register empty interrupt. Writes the data from the UART buffer
  */
 ISR( USART_UDRE_vect) {
-#ifdef UART_AVAILABLE
 
 	static char* uart_tx_p = uart_tx_buffer; /*!< Pointer to TX buffer */
 
@@ -41,14 +41,14 @@ ISR( USART_UDRE_vect) {
 		uart_flag.tx = 1; // TX finished
 	} else
 		UDR0 = data;
-#endif /* UART_AVAILABLE */
 }
+#endif /* UART_AVAILABLE */
 
+#ifdef UART_AVAILABLE
 /**
  * UART RX complete interrupt. Reads the data from the UART
  */
 ISR( USART_RX_vect) {
-#ifdef UART_AVAILABLE
 
 	static uint8_t uart_rx_cnt; /*!< counter for received chars */
 	uint8_t data; /*!< received char */
@@ -66,8 +66,8 @@ ISR( USART_RX_vect) {
 			uart_rx_cnt++;
 		}
 	}
-#endif /* UART_AVAILABLE */
 }
+#endif /* UART_AVAILABLE */
 
 /**
  * UART Initialization
@@ -75,6 +75,9 @@ ISR( USART_RX_vect) {
 void uart_init(void) {
 
 #ifdef UART_AVAILABLE
+
+	uart_flag.tx = 1;
+	uart_flag.rx = 0;
 
 	UBRR0H = UBRRH_VALUE; // Set calculated baud rate for HIGH port
 	UBRR0L = UBRRL_VALUE; // Set calculated baud rate for LOW port
@@ -84,8 +87,7 @@ void uart_init(void) {
 #else
 	UCSR0A &= ~(1 << U2X0); // and not if 2X mode is not available
 #endif /* USE_2X */
-
-	UCSR0B = (1 << RXEN0) | (1 << TXEN0) | (1 << RXCIE0); // Disable UART receiver and transmitter, enable receive-interrupt.
+	UCSR0B |= (1 << RXEN0) | (1 << TXEN0) | (1 << RXCIE0); // enable UART receiver and transmitter, enable receive-interrupt.
 #endif /* UART_AVAILABLE */
 }
 
@@ -96,6 +98,7 @@ void uart_init(void) {
  */
 void tx_buffer(const char *data) {
 
+#ifdef UART_AVAILABLE
 	if (uart_flag.tx == 1) {
 		strcpy(uart_tx_buffer, data); // copy data to TX buffer
 		uart_flag.tx = 0; // remove TX flag
@@ -103,14 +106,20 @@ void tx_buffer(const char *data) {
 	} else {
 		strcat(uart_tx_buffer, data); // add the new data
 	}
+#endif /* UART_AVAILABLE */
 }
 
 /**
  * Returns the content of the UART RX buffer and resets the buffer
  */
 char* uart_rx(void) {
+
+#ifdef UART_AVAILABLE
 	uart_flag.rx = 0;
 	return uart_rx_buffer;
+#else
+	return "\0";
+#endif /* UART_AVAILABLE */
 }
 
 /**
@@ -119,7 +128,12 @@ char* uart_rx(void) {
  * @return 1 if the UART RX buffer is ready to read
  */
 uint8_t uart_rx_ready(void) {
+
+#ifdef UART_AVAILABLE
 	return uart_flag.rx;
+#else
+	return 0;
+#endif /* UART_AVAILABLE */
 }
 
 /**
@@ -132,4 +146,10 @@ void uart_tx(const char *s) {
 #ifdef UART_AVAILABLE
 	tx_buffer(s);
 #endif /* UART_AVAILABLE */
+}
+
+void uart_tx_i(uint8_t i) {
+#ifdef UART_AVAILABLE
+	tx_buffer(*i);
+#endif
 }

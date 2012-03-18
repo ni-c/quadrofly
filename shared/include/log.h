@@ -11,6 +11,13 @@
 #define LOG_H_
 
 /**
+ * Poll the specified uint8 out the log port.
+ *
+ * @param s The specified uint8
+ */
+void log_i(uint8_t i);
+
+/**
  * Poll the specified string out the debug port.
  *
  * @param s The specified string
