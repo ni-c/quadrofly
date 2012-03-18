@@ -26,7 +26,7 @@
 #define NIRQ	PD2		/*!< Interrupts request output(active low) */
 #define FFIT    PD3     /*!< Clock output (no FIFO )/ external filter capacitor(analog mode) / FIFO interrupts(active high)when FIFO level set to 1, FIFO empty interruption can be achieved */
 
-/**
+/*
  * Software method to write a 16-bit command over SPI to the RFM12
  *
  * @param cmd The command to write

@@ -9,6 +9,8 @@
 #ifndef UART_H_
 #define UART_H_
 
+#define UART_BUFFER_SIZE	32 /*!< The size of the uart TX and RX buffer */
+
 /**
  * UART Initialization
  */

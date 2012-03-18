@@ -17,7 +17,7 @@
 #define LOG_AVAILABLE /*!< Is Logging available */
 
 #define UART_AVAILABLE /*!< Is UART available */
-#define BAUD 57600UL /*!< UART Baudrate in bit per second */
+#define BAUD 9600UL /*!< UART Baudrate in bit per second */
 
 #define RFM12B_AVAILABLE /*!< Is RFM12B available */
 #define SNAP_AVAILABLE /*!< Is Snap protocol available */

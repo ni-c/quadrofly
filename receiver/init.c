@@ -9,6 +9,8 @@
 #include "main.h"
 #include "uart.h"
 
+#include <avr/interrupt.h>
+
 /**
  * Quadrofly initialization
  */
@@ -20,5 +22,7 @@ void init_qfly(void) {
 #ifdef UART_AVAILABLE
 	uart_init();
 #endif
+
+	sei();
 
 }

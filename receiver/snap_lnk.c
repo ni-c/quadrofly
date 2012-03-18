@@ -61,8 +61,8 @@ ISR(INT1_vect) {
 	 */
 	for (int i = 0; i < 4; i++) {
 		uint16_t rx = rfm12_rx();
-		uint8_t  hi = rx & 0xff00;
-		uint8_t  lo = rx & 0x00ff;
+		uint8_t hi = rx & 0xff00;
+		uint8_t lo = rx & 0x00ff;
 		snap_lnk_recv(hi, 0);
 		snap_lnk_recv(lo, 0);
 	}
@@ -93,6 +93,9 @@ void snap_lnk_send_start(void) {
 void snap_lnk_send(uint8_t value) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_tx(value);
+#endif
+#ifdef UART_AVAILABLE
+	uart_putc((const unsigned char) value);
 #endif
 }
 

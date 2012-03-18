@@ -18,7 +18,7 @@
  * The main function.
  */
 int main(void) {
-
+	DDRC = 0xff;
 	/* Initialization */
 	init_qfly();
 	log_s("initialization... ok\n");
@@ -28,8 +28,13 @@ int main(void) {
 
 		/* Wait a second */
 		_delay_ms(1000);
+		PORTC |= (1 << PC5);
 
 		uart_puts("Hello world!\n");
+
+		/* Wait a second */
+		_delay_ms(1000);
+		PORTC &= ~(1 << PC5);
 	}
 
 	/* Finally. (Never ever) */
