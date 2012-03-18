@@ -13,7 +13,6 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/setbaud.h>
-#endif /* UART_AVAILABLE */
 
 struct {
 	unsigned rx :1; /*<! If there is data in the RX buffer */
@@ -22,6 +21,8 @@ struct {
 
 char uart_tx_buffer[UART_BUFFER_SIZE]; /*!< UART send buffer */
 char uart_rx_buffer[UART_BUFFER_SIZE]; /*!< UART receive buffer */
+#endif /* UART_AVAILABLE */
+
 /**
  * UART TX data register empty interrupt. Writes the data from the UART buffer
  */
@@ -46,13 +47,13 @@ ISR( USART_UDRE_vect) {
 /**
  * UART RX complete interrupt. Reads the data from the UART
  */
-ISR( USART_RXC_vect) {
+ISR( USART_RX_vect) {
 #ifdef UART_AVAILABLE
 
 	static uint8_t uart_rx_cnt; /*!< counter for received chars */
 	uint8_t data; /*!< received char */
 
-	data = UDR0; // Read data from UART. Interrupt flag is deleted
+	data = UDR0; // Read data from UART
 
 	if (!uart_flag.rx) {
 		// end of string? (return)
@@ -105,15 +106,20 @@ void tx_buffer(const char *data) {
 }
 
 /**
- * Send a char
- *
- * @param c The char to send
+ * Returns the content of the UART RX buffer and resets the buffer
  */
-void uart_putc(const unsigned char c) {
+char* uart_rx(void) {
+	uart_flag.rx = 0;
+	return uart_rx_buffer;
+}
 
-#ifdef UART_AVAILABLE
-	tx_buffer(c);
-#endif /* UART_AVAILABLE */
+/**
+ * Returns 1 if the UART RX buffer is ready to read
+ *
+ * @return 1 if the UART RX buffer is ready to read
+ */
+uint8_t uart_rx_ready(void) {
+	return uart_flag.rx;
 }
 
 /**
@@ -121,7 +127,7 @@ void uart_putc(const unsigned char c) {
  *
  * @param s An array of chars to send
  */
-void uart_puts(const char *s) {
+void uart_tx(const char *s) {
 
 #ifdef UART_AVAILABLE
 	tx_buffer(s);

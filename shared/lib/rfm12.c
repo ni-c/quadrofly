@@ -10,6 +10,7 @@
 #include "log.h"
 
 #include <avr/io.h>
+#include <stdlib.h>
 
 /**
  * Software method to write a 16-bit command over SPI to the RFM12
@@ -154,7 +155,9 @@ void rfm12_tx_start(void) {
  * @param value The data to send
  */
 void rfm12_tx(uint8_t value) {
-	log_s((const char *)value);
+	char s[3];
+	itoa(value,s,3);
+	log_s(s);
 	rfm12_ready();
 	rfm12_write(0xB800 | (value));
 }

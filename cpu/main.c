@@ -8,6 +8,8 @@
  */
 #include "main.h"
 #include "init.h"
+#include "uart.h"
+#include "log.h"
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -24,8 +26,12 @@ int main(void) {
 	/* Our loop */
 	while (1) {
 
-		/* Wait a second */
-		_delay_ms(1000);
+#ifdef UART_AVAILABLE
+		if (uart_rx_ready()) {
+			uart_tx("Echo: ");
+			uart_tx(uart_rx);
+		}
+#endif /* UART_AVAILABLE */
 	}
 
 	/* Finally. (Never ever) */

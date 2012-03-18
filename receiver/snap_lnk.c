@@ -33,6 +33,7 @@
 #include "snap_def.h"
 #include "snap_lnk.h"
 #include "rfm12.h"
+#include "uart.h"
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -93,9 +94,6 @@ void snap_lnk_send_start(void) {
 void snap_lnk_send(uint8_t value) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_tx(value);
-#endif
-#ifdef UART_AVAILABLE
-	uart_putc((const unsigned char) value);
 #endif
 }
 

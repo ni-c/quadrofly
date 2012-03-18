@@ -11,13 +11,6 @@
 #define LOG_H_
 
 /**
- * Poll the specified char out the debug port.
- *
- * @param c The specified char
- */
-void log_c(const unsigned char c);
-
-/**
  * Poll the specified string out the debug port.
  *
  * @param s The specified string
