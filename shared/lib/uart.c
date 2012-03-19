@@ -21,7 +21,9 @@ struct {
 } uart_flag;
 
 char uart_tx_buffer[UART_BUFFER_SIZE]; /*!< UART send buffer */
+
 char uart_rx_buffer[UART_BUFFER_SIZE]; /*!< UART receive buffer */
+
 #endif /* UART_AVAILABLE */
 
 #ifdef UART_AVAILABLE

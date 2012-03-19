@@ -8,6 +8,9 @@
  * @date 	Mar 7, 2012
  */
 #include "main.h"
+
+#ifdef I2C_MASTER_AVAILABLE
+
 #include <inttypes.h>
 #include <compat/twi.h>
 
@@ -15,15 +18,18 @@
 
 #define SCL_CLOCK  	400000L /*!< I2C clock in Hz */
 
+#endif /* I2C_MASTER_AVAILABLE */
+
 /**
  * Initialization of the I2C bus interface. Need to be called only once
  */
 void i2c_init(void) {
+#ifdef I2C_MASTER_AVAILABLE
 	/* initialize TWI clock: 100 kHz clock, TWPS = 0 => prescaler = 1 */
 
 	TWSR = 0; /* no prescaler */
 	TWBR = ((F_CPU / SCL_CLOCK) - 16) / 2; /* must be > 10 for stable operation */
-
+#endif /* I2C_MASTER_AVAILABLE */
 }/* i2c_init */
 
 /**
@@ -33,6 +39,7 @@ void i2c_init(void) {
  * * @param adress address and transfer direction of I2C device
  */
 unsigned char i2c_start(unsigned char address) {
+#ifdef I2C_MASTER_AVAILABLE
 	uint8_t twst;
 
 	// send START condition
@@ -60,6 +67,7 @@ unsigned char i2c_start(unsigned char address) {
 	if ((twst != TW_MT_SLA_ACK) && (twst != TW_MR_SLA_ACK))
 		return 1;
 
+#endif /* I2C_MASTER_AVAILABLE */
 	return 0;
 
 }/* i2c_start */
@@ -71,6 +79,7 @@ unsigned char i2c_start(unsigned char address) {
  * @param adress address and transfer direction of I2C device
  */
 void i2c_start_wait(unsigned char address) {
+#ifdef I2C_MASTER_AVAILABLE
 	uint8_t twst;
 
 	while (1) {
@@ -109,7 +118,7 @@ void i2c_start_wait(unsigned char address) {
 		//if( twst != TW_MT_SLA_ACK) return 1;
 		break;
 	}
-
+#endif /* I2C_MASTER_AVAILABLE */
 }/* i2c_start_wait */
 
 /**
@@ -119,21 +128,25 @@ void i2c_start_wait(unsigned char address) {
  * @return 0 device accessible, 1 failed to access device
  */
 unsigned char i2c_rep_start(unsigned char address) {
+#ifdef I2C_MASTER_AVAILABLE
 	return i2c_start(address);
-
+#else
+	return 0;
+#endif /* I2C_MASTER_AVAILABLE */
 }/* i2c_rep_start */
 
 /**
  * Terminates the data transfer and releases the I2C bus
  */
 void i2c_stop(void) {
+#ifdef I2C_MASTER_AVAILABLE
 	/* send stop condition */
 	TWCR = (1 << TWINT) | (1 << TWEN) | (1 << TWSTO);
 
 	// wait until stop condition is executed and bus released
 	while (TWCR & (1 << TWSTO))
 		;
-
+#endif /* I2C_MASTER_AVAILABLE */
 }/* i2c_stop */
 
 /**
@@ -143,6 +156,7 @@ void i2c_stop(void) {
  * @return 0 write successful, 1 write failed
  */
 unsigned char i2c_write(unsigned char data) {
+#ifdef I2C_MASTER_AVAILABLE
 	uint8_t twst;
 
 	// send data to the previously addressed device
@@ -157,8 +171,9 @@ unsigned char i2c_write(unsigned char data) {
 	twst = TW_STATUS & 0xF8;
 	if (twst != TW_MT_DATA_ACK)
 		return 1;
-	return 0;
 
+#endif /* I2C_MASTER_AVAILABLE */
+	return 0;
 }/* i2c_write */
 
 /**
@@ -166,12 +181,15 @@ unsigned char i2c_write(unsigned char data) {
  * @return byte read from I2C device
  */
 unsigned char i2c_readAck(void) {
+#ifdef I2C_MASTER_AVAILABLE
 	TWCR = (1 << TWINT) | (1 << TWEN) | (1 << TWEA);
 	while (!(TWCR & (1 << TWINT)))
 		;
 
 	return TWDR;
-
+#else
+	return 0;
+#endif /* I2C_MASTER_AVAILABLE */
 }/* i2c_readAck */
 
 /**
@@ -180,10 +198,13 @@ unsigned char i2c_readAck(void) {
  * @return byte read from I2C device
  **/
 unsigned char i2c_readNak(void) {
+#ifdef I2C_MASTER_AVAILABLE
 	TWCR = (1 << TWINT) | (1 << TWEN);
 	while (!(TWCR & (1 << TWINT)))
 		;
 
 	return TWDR;
-
+#else
+	return 0;
+#endif /* I2C_MASTER_AVAILABLE */
 }/* i2c_readNak */

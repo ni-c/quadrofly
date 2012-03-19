@@ -7,6 +7,7 @@
  * @date 	Mar 6, 2012
  */
 #include "main.h"
+#include "global_def.h"
 #include "init.h"
 #include "log.h"
 #include "i2cmaster.h"
@@ -63,8 +64,8 @@ int main(void) {
 		_delay_ms(500);
 		PORTC &= ~(1 << PC5); // disable LED 1
 
-#ifdef I2C_AVAILABLE
-	if (!(i2c_start(0x12 + I2C_WRITE))) //slave ready to write?
+#ifdef I2C_MASTER_AVAILABLE
+	if (!(i2c_start(RECEIVER_I2C_ADDR + I2C_WRITE))) //slave ready to write?
 	{
 		i2c_write(0x00); // set buffer start address
 		i2c_write(0x11);
@@ -72,7 +73,7 @@ int main(void) {
 		i2c_write(0x13);
 		i2c_stop(); // finish
 	}
-#endif
+#endif /* I2C_MASTER_AVAILABLE */
 
 #ifdef SNAP_AVAILABLE
 		snap_send(e_test, SNAP_SEND_EDM_CRC_8 | SNAP_SEND_LEN_8 | SNAP_SEND_MEM_FLASH, 0x12);

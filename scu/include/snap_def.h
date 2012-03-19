@@ -32,11 +32,13 @@
 #ifndef SNAP_DEF_H_
 #define SNAP_DEF_H_
 
+#include "global_def.h"
+
 /*
  * Network layer definitions.
  */
 
-#define SNAP_STATIC_ADDR	0x12	/*!< The SNAP address */
+#define SNAP_STATIC_ADDR	SCU_SNAP_ADDR	/*!< The SNAP address */
 
 /**
  * Define the following symbol to make the network layer do extra checks
