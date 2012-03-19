@@ -19,6 +19,13 @@ volatile uint8_t i2c_rx_buffer[I2C_BUFFER_SIZE + 1]; /*!< The i2c RX buffer */
 volatile uint8_t i2c_tx_buffer[I2C_BUFFER_SIZE + 1]; /*!< The i2c TX buffer */
 
 /**
+ * Initialize the device as I2C slave with the given address
+ *
+ * @param addr The address of the I2C slave
+ */
+void i2c_slave_init(uint8_t addr);
+
+/**
  * Checks if there is new data in the I2C RX buffer
  *
  * @return 1 if there is new data in the I2C RX buffer

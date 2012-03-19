@@ -10,7 +10,6 @@
 #include "init.h"
 #include "uart.h"
 #include "log.h"
-#include "i2cslave.h"
 #include "snap.h"
 
 #include <avr/pgmspace.h>
@@ -67,15 +66,6 @@ int main(void) {
 #ifdef SNAP_AVAILABLE
 		snap_send(e_test, SNAP_SEND_EDM_CRC_8 | SNAP_SEND_LEN_8 | SNAP_SEND_MEM_FLASH, 0x12);
 #endif /* SNAP_AVAILABLE */
-
-#ifdef I2C_SLAVE_AVAILABLE
-		if (i2c_rx_ready()) {
-#ifdef UART_AVAILABLE
-			uart_tx(i2c_rx_buffer);
-			uart_tx("\n");
-#endif /* UART AVAILABLE */
-		}
-#endif /* I2C_SLAVE_AVAILABLE */
 
 #ifdef UART_AVAILABLE
 		if (uart_rx_ready()) {
