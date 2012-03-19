@@ -22,7 +22,7 @@
 /**
  * Quadrofly Software (http://quadrofly.ni-c.de)
  *
- * @file 	scu/snap_lnk.c
+ * @file 	receiver/lib/snap_lnk.c
  * @brief 	Link layer for uart interface.
  * @details Library from http://www.avrfreaks.net/index.php?module=Freaks%20Academy&func=viewItem&item_id=156&item_type=project More info about S.N.A.P. can be found on http://www.hth.com/snap/
  * @author  Jan Klötzke (jk177883@inf.tu-dresden.de)
@@ -33,19 +33,23 @@
 #include "snap_def.h"
 #include "snap_lnk.h"
 #include "rfm12.h"
+#include "uart.h"
+#include "log.h"
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
 #include <inttypes.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
  * function from network layer handling received bytes
  */
+#ifdef RFM12B_AVAILABLE
 extern void snap_lnk_recv(uint8_t value, uint8_t err);
 
 ISR(INT1_vect) {
-#ifdef RFM12B_AVAILABLE
 	rfm12_rx_start();
 
 	/* Read 1 byte snap packet:
@@ -61,43 +65,63 @@ ISR(INT1_vect) {
 	 */
 	for (int i = 0; i < 4; i++) {
 		uint16_t rx = rfm12_rx();
-		uint8_t  hi = rx & 0xff00;
-		uint8_t  lo = rx & 0x00ff;
+		uint8_t hi = rx & 0xff00;
+		uint8_t lo = rx & 0x00ff;
 		snap_lnk_recv(hi, 0);
 		snap_lnk_recv(lo, 0);
 	}
 
 	rfm12_rx_done();
-#endif
 }
+#endif /* RFM12B_AVAILABLE */
 
+/**
+ * Snap link layer initialization
+ */
 void snap_lnk_init(void) {
 #ifdef RFM12B_AVAILABLE
 	/*
 	 * Initialize RFM12B
 	 */
 	rfm12_init(); // Initialize module
-	rfm12_setfreq(RF12FREQ(433.92)); // set frequency to 433,92MHz
-	rfm12_setbandwidth(4, 1, 4); // 200kHz bandwith, -6dB, DRSSI threshold: -79dBm
-	rfm12_setbaud(19200); // 19200 BAUD
-	rfm12_setpower(0, 6); // 1mW power, 120kHz frequency shift
-#endif
+	rfm12_setfreq(RF12FREQ(433.92));// set frequency to 433,92MHz
+	rfm12_setbandwidth(4, 1, 4);// 200kHz bandwith, -6dB, DRSSI threshold: -79dBm
+	rfm12_setbaud(19200);// 19200 BAUD
+	rfm12_setpower(0, 6);// 1mW power, 120kHz frequency shift
+#endif /* RFM12B_AVAILABLE */
 }
 
+/**
+ * Called to start sending of a snap packet
+ */
 void snap_lnk_send_start(void) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_tx_start();
-#endif
+#endif /* RFM12B_AVAILABLE */
 }
 
+/**
+ * Called to send a byte of the snap protocol
+ *
+ * @param value The byte to send
+ */
 void snap_lnk_send(uint8_t value) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_tx(value);
-#endif
+#endif /* RFM12B_AVAILABLE */
+#ifdef LOG_AVAILABLE
+	log_i(value);
+#endif /* LOG AVAILABLE */
 }
 
+/**
+ * Called when the snap protocol finished sending
+ */
 void snap_lnk_send_done(void) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_tx_done();
-#endif
+#endif /* RFM12B_AVAILABLE */
+#ifdef LOG_AVAILABLE
+	log_s("\n");
+#endif /* LOG AVAILABLE */
 }

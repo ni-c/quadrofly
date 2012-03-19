@@ -7,7 +7,7 @@
  * @date 	Mar 6, 2012
  */
 #include "main.h"
-#include "uart.h"
+#include "i2cmaster.h"
 
 #include <avr/interrupt.h>
 
@@ -16,13 +16,9 @@
  */
 void init_qfly(void) {
 
-	/*
-	 * Initialize UART
-	 */
-#ifdef UART_AVAILABLE
-	uart_init();
+#ifdef I2C_AVAILABLE
+	i2c_init();
 #endif
 
 	sei();
-
 }

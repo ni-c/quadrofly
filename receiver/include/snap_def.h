@@ -22,7 +22,7 @@
 /**
  * Quadrofly Software (http://quadrofly.ni-c.de)
  *
- * @file 	snap_def.h
+ * @file 	receiver/include/snap_def.h
  * @brief 	Definitions of a nearly full implementation of the S.N.A.P protocol from HTH for avr-gcc.
  * @details Library from http://www.avrfreaks.net/index.php?module=Freaks%20Academy&func=viewItem&item_id=156&item_type=project More info about S.N.A.P. can be found on http://www.hth.com/snap/
  * @author  Jan Klötzke (jk177883@inf.tu-dresden.de)
@@ -35,6 +35,8 @@
 /*
  * Network layer definitions.
  */
+
+#define SNAP_STATIC_ADDR	0x11	/*!< The SNAP address */
 
 /**
  * Define the following symbol to make the network layer do extra checks
@@ -54,8 +56,6 @@
 #define SNAP_MAX_PACKET_LENGTH	32	/*!< Value between 0..512 */
 #define SNAP_MAX_ADDRESS_BYTES	1	/*!< Value between 0..3   */
 #define SNAP_MAX_PROTOCOL_BYTES	0	/*!< Value between 0..3   */
- 
-#define SNAP_STATIC_ADDR	0x12
 
 /**
  * Pay attantion that espacially the good EDM routines need more processing

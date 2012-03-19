@@ -8,7 +8,9 @@
  */
 #include "main.h"
 #include "uart.h"
-#include "stdlib.h"
+
+#include <stdio.h>
+#include <inttypes.h>
 
 #ifdef SIMULAVR_AVAILABLE
 
@@ -33,7 +35,9 @@ void log_i(uint8_t i) {
 	SIMULAVR_PORT = 32;
 #endif /* SIMULAVAR_AVAILABLE */
 #ifdef UART_AVAILABLE
-	uart_tx(*i);
+	char buffer[2];
+	sprintf(buffer, "%02X", i);
+	uart_tx(buffer);
 #endif /* UART_AVAILABLE */
 #endif /* LOG_AVAILBLE */
 }

@@ -10,6 +10,8 @@
 #ifndef LOG_H_
 #define LOG_H_
 
+#include <inttypes.h>
+
 /**
  * Poll the specified uint8 out the log port.
  *

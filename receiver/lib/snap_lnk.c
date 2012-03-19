@@ -22,7 +22,7 @@
 /**
  * Quadrofly Software (http://quadrofly.ni-c.de)
  *
- * @file 	receiver/snap_lnk.c
+ * @file 	receiver/lib/snap_lnk.c
  * @brief 	Link layer for uart interface.
  * @details Library from http://www.avrfreaks.net/index.php?module=Freaks%20Academy&func=viewItem&item_id=156&item_type=project More info about S.N.A.P. can be found on http://www.hth.com/snap/
  * @author  Jan Klötzke (jk177883@inf.tu-dresden.de)
@@ -75,6 +75,9 @@ ISR(INT1_vect) {
 }
 #endif /* RFM12B_AVAILABLE */
 
+/**
+ * Snap link layer initialization
+ */
 void snap_lnk_init(void) {
 #ifdef RFM12B_AVAILABLE
 	/*
@@ -88,12 +91,20 @@ void snap_lnk_init(void) {
 #endif /* RFM12B_AVAILABLE */
 }
 
+/**
+ * Called to start sending of a snap packet
+ */
 void snap_lnk_send_start(void) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_tx_start();
 #endif /* RFM12B_AVAILABLE */
 }
 
+/**
+ * Called to send a byte of the snap protocol
+ *
+ * @param value The byte to send
+ */
 void snap_lnk_send(uint8_t value) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_tx(value);
@@ -103,6 +114,9 @@ void snap_lnk_send(uint8_t value) {
 #endif /* LOG AVAILABLE */
 }
 
+/**
+ * Called when the snap protocol finished sending
+ */
 void snap_lnk_send_done(void) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_tx_done();

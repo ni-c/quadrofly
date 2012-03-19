@@ -13,6 +13,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/setbaud.h>
+#include <stdio.h>
 
 struct {
 	unsigned rx :1; /*<! If there is data in the RX buffer */
@@ -148,8 +149,15 @@ void uart_tx(const char *s) {
 #endif /* UART_AVAILABLE */
 }
 
+/**
+ * Converts the integer value to its HEX representation and sends it
+ *
+ * @param i The uint8_t to send
+ */
 void uart_tx_i(uint8_t i) {
 #ifdef UART_AVAILABLE
-	tx_buffer(*i);
+	char buffer[2];
+	sprintf(buffer, "%02X", i);
+	uart_tx(buffer);
 #endif
 }

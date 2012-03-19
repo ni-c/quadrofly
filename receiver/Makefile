@@ -52,7 +52,7 @@ TARGET = main
 
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = $(TARGET).c init.c ../shared/lib/log.c ../shared/lib/uart.c ../shared/snap/snap.c snap_lnk.c ../shared/lib/rfm12.c
+SRC = $(TARGET).c init.c ../shared/lib/log.c ../shared/lib/uart.c ../shared/snap/snap.c ./lib/snap_lnk.c ../shared/lib/rfm12.c
 
 
 # List Assembler source files here.

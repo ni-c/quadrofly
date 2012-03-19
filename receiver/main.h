@@ -19,9 +19,11 @@
 #define UART_AVAILABLE /*!< Is UART available */
 #define BAUD 9600UL /*!< UART Baudrate in bit per second */
 
+//#define I2C_AVAILABLE /*!< I2C is available */
+
 //#define RFM12B_AVAILABLE /*!< Is RFM12B available */
 
-#define SNAP_AVAILABLE /*!< Is Snap protocol available */
+//#define SNAP_AVAILABLE /*!< Is Snap protocol available */
 
 /* Dependencies */
 #ifdef SIMULAVR_AVAILABLE

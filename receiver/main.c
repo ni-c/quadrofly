@@ -17,12 +17,23 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-prog_char e_test[] = { 0xA0, 0x00, 0x01, 0x20, 0x37, 0x32, 0x78, 0x49 };
+#ifdef SNAP_AVAILABLE
+prog_char e_test[] = { 0xA0, 0x00, 0x01, 0x20, 0x37, 0x32, 0x78, 0x49 }; /*!< Some test value */
 
-
-// received a packet
-void receive(uint8_t status, uint8_t *buf) {
+/**
+ * Callback method that is called, if a snap packet is received
+ *
+ * @param status The status of the snap packet
+ * @param *buf The buffer of the snap packet
+ */
+void snap_receive(uint8_t status, uint8_t *buf) {
+	// do whatever you want, maybe...
+	if (snap_fail(status))
+		return;
+	if (!snap_is_for_me())
+		return;
 }
+#endif
 
 /**
  * The main function.
@@ -34,7 +45,13 @@ int main(void) {
 	/* Initialization */
 	init_qfly();
 	log_s("initialization ... ok\n");
-	snap_init(&receive);
+
+	/*
+	 * Initialize SNAP
+	 */
+#ifdef SNAP_AVAILABLE
+	snap_init(&snap_receive);
+#endif /* SNAP_AVAILABLE */
 
 	/* Our loop */
 	while (1) {
@@ -47,9 +64,9 @@ int main(void) {
 		_delay_ms(500);
 		PORTC &= ~(1 << PC5); // disable LED 1
 
-		snap_send(e_test,
-				SNAP_SEND_EDM_CRC_8	 | SNAP_SEND_LEN_8 | SNAP_SEND_MEM_FLASH,
-				0xab);
+#ifdef SNAP_AVAILABLE
+		snap_send(e_test, SNAP_SEND_EDM_CRC_8 | SNAP_SEND_LEN_8 | SNAP_SEND_MEM_FLASH, 0x12);
+#endif /* SNAP_AVAILABLE */
 
 #ifdef UART_AVAILABLE
 		if (uart_rx_ready()) {
