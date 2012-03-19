@@ -4,11 +4,11 @@
 
 ### Structure ###
 
-cpu/   The code for the main MCU, an ATMega1284
-scu/   The code for the sensor control unit, an ATMega88
-receiver/  The code for the data receiver, an ATMega88
+<p><code>cpu/</code> The code for the main MCU, an ATMega1284</p>
+<p><code>scu/</code> The code for the sensor control unit, an ATMega88</p>
+<p><code>receiver/</code> The code for the data receiver, an ATMega88
 
-### More ###
+### Links ###
 
 For more information about Quadrofly visit my blog:
 
