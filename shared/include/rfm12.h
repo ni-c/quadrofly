@@ -25,13 +25,12 @@
 
 #define NIRQ	PD2		/*!< Interrupts request output(active low) */
 
-/*
- * Software method to write a 16-bit command over SPI to the RFM12
+/**
+ * Send the value over the RFM12B module
  *
- * @param cmd The command to write
- * @return The result of the SPI line
+ * @value the value to send
  */
-unsigned int rfm12_write(unsigned int cmd);
+void rfm12_send(uint8_t value);
 
 /**
  * Initializes the RFM12 module
@@ -78,9 +77,30 @@ void rfm12_setbaud(unsigned short baud);
 void rfm12_setpower(unsigned char power, unsigned char mod);
 
 /**
- * Start TX
+ * Enable RX
  */
-void rfm12_tx_start(void);
+void rfm12_rx_on(void);
+
+/**
+ * Disable RX
+ */
+void rfm12_rx_off(void);
+
+
+/**
+ * Receive RX data
+ *
+ * @return 2 bytes of data
+ */
+uint16_t rfm12_rx(void);
+
+/**
+ * Software method to write a 16-bit command over SPI to the RFM12
+ *
+ * @param cmd The command to write
+ * @return The result of the SPI line
+ */
+unsigned int rfm12_write(unsigned int cmd);
 
 /**
  * Send data over TX
@@ -90,25 +110,10 @@ void rfm12_tx_start(void);
 void rfm12_tx(uint8_t value);
 
 /**
- * Finish TX
- */
-void rfm12_tx_done(void);
-
-/**
- * Start RX
- */
-void rfm12_rx_start(void);
-
-/**
- * Receive next 2 bytes of RX data
+ * Send the value over the RFM12B module
  *
- * @return 2 bytes of data
+ * @value the value to send
  */
-uint16_t rfm12_rx(void);
-
-/**
- * Finish RX
- */
-void rfm12_rx_done(void);
+void rfm12_send(uint8_t value);
 
 #endif /* RFM12_H_ */

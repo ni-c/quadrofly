@@ -7,13 +7,44 @@
  * @date 	Mar 15, 2012
  */
 #include "main.h"
+#include "global_def.h"
 #include "rfm12.h"
 #include "log.h"
+#include "i2cmaster.h"
 
 #ifdef RFM12B_AVAILABLE
 #include <avr/io.h>
 #include <stdlib.h>
+#include <avr/interrupt.h>
+
+/**
+ * interrupt funcition handling received bytes
+ */
+extern void rfm12_receive(uint8_t value);
+
+ISR(INT0_vect) {
+	uint16_t rx = rfm12_rx();
+	rfm12_write(0xCA80); // reset FIFO
+	rfm12_write(0xCA83);
+	rfm12_receive(rx); // lo byte
+}
 #endif /* RFM12B_AVAILABLE */
+
+/**
+ * Send the value over the RFM12B module
+ *
+ * @value the value to send
+ */
+void rfm12_send(uint8_t value) {
+#ifdef RFM12B_AVAILABLE
+	rfm12_rx_off();
+    EIMSK &= ~(1 << INT0); // disable INT0 interrupt
+	rfm12_tx(value);
+    EIMSK |= (1 << INT0); // enable INT0 interrupt
+	rfm12_rx_on();
+#endif
+}
+
 /**
  * Software method to write a 16-bit command over SPI to the RFM12
  *
@@ -150,11 +181,12 @@ void rfm12_ready(void) {
 }
 
 /**
- * Start TX
+ * Send data over TX
+ *
+ * @param value The data to send
  */
-void rfm12_tx_start(void) {
+void rfm12_tx(uint8_t value) {
 #ifdef RFM12B_AVAILABLE
-	log_s("rfm12 TX start...");
 	rfm12_write(0x8238); // TX on
 	rfm12_ready();
 	rfm12_write(0xB8AA);
@@ -168,39 +200,16 @@ void rfm12_tx_start(void) {
 	rfm12_write(0xB8D4);
 	rfm12_ready();
 	rfm12_write(0x0000);
-	log_s(" ok\n");
-#endif /* RFM12B_AVAILABLE */
-}
-
-/**
- * Send data over TX
- *
- * @param value The data to send
- */
-void rfm12_tx(uint8_t value) {
-#ifdef RFM12B_AVAILABLE
-	rfm12_ready();
-	rfm12_write(0x0000);
 	rfm12_write(0xB800 | (value));
-#endif /* RFM12B_AVAILABLE */
-}
-
-/**
- * Finish TX
- */
-void rfm12_tx_done(void) {
-#ifdef RFM12B_AVAILABLE
-	log_s("rfm12 TX done...");
 	rfm12_ready();
 	rfm12_write(0x8208); // TX off
-	log_s(" ok\n");
 #endif /* RFM12B_AVAILABLE */
 }
 
 /**
- * Start RX
+ * Enable RX
  */
-void rfm12_rx_start(void) {
+void rfm12_rx_on(void) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_write(0x82D8); // RX on
 	rfm12_write(0x8057);
@@ -218,16 +227,16 @@ void rfm12_rx_start(void) {
 uint16_t rfm12_rx(void) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_ready();
-	return rfm12_write(0xB000);
+	return rfm12_write(0xB000) & 0x00FF;
 #else
 	return 0;
 #endif /* RFM12B_AVAILABLE */
 }
 
 /**
- * Finish RX
+ * Disable RX
  */
-void rfm12_rx_done(void) {
+void rfm12_rx_off(void) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_write(0x8208); // RX off
 	rfm12_write(0x80D7);

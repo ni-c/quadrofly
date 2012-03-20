@@ -9,19 +9,22 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 
+#include <inttypes.h>
+
 #ifndef F_CPU
 #define F_CPU 1000000UL /*!< Set CPU clock */
 #endif
 
-#define SIMULAVR_AVAILABLE /*!< Compile for the simulavr simulator */
-#define LOG_AVAILABLE /*!< Is Logging available */
+//#define SIMULAVR_AVAILABLE /*!< Compile for the simulavr simulator */
+//#define LOG_AVAILABLE /*!< Is Logging available */
 
-#define UART_AVAILABLE /*!< Is UART available */
+//#define UART_AVAILABLE /*!< Is UART available */
 #define BAUD 9600UL /*!< UART Baudrate in bit per second */
 
-//#define RFM12B_AVAILABLE /*!< Is RFM12B available */
+#define I2C_MASTER_AVAILABLE /*!< I2C is available as master */
 
-//#define SNAP_AVAILABLE /*!< Is Snap protocol available */
+#define RFM12B_AVAILABLE /*!< Is RFM12B available */
+#define SNAP_AVAILABLE /*!< Is Snap protocol available */
 
 /* Dependencies */
 #ifdef SIMULAVR_AVAILABLE
