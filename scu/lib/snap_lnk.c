@@ -35,6 +35,7 @@
 #include "rfm12.h"
 #include "uart.h"
 #include "log.h"
+#include "i2cmaster.h"
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -49,9 +50,7 @@
 #ifdef RFM12B_AVAILABLE
 extern void snap_lnk_recv(uint8_t value, uint8_t err);
 
-ISR(INT1_vect) {
-	rfm12_rx_start();
-
+ISR(INT0_vect) {
 	/* Read 1 byte snap packet:
 	 *
 	 * SYNC Synchronization byte
@@ -63,16 +62,23 @@ ISR(INT1_vect) {
 	 * CRC2 High byte of CRC-16
 	 * CRC1 Low byte of CRC-16
 	 */
-	for (int i = 0; i < 4; i++) {
-		uint16_t rx = rfm12_rx();
-		uint8_t hi = rx & 0xff00;
-		uint8_t lo = rx & 0x00ff;
-		snap_lnk_recv(hi, 0);
-		snap_lnk_recv(lo, 0);
-	}
+	PORTC |= (1 << PC2);  // enable LED 2
 
-	rfm12_rx_done();
+	uint16_t rx = rfm12_rx();
+	rfm12_write(0xCA80); // reset FIFO
+	rfm12_write(0xCA83);
+	//snap_lnk_recv(rx & 0xff00, 0); // lo byte
+	if (!(i2c_start(RECEIVER_I2C_ADDR + I2C_WRITE))) //slave ready to write?
+	{
+		i2c_write(0x00); // set buffer start address
+		i2c_write(rx & 0xff00);
+		i2c_write(rx & 0x00ff);
+		i2c_stop();
+	}
+	PORTC &= ~(1 << PC2);  // enable LED 2
+
 }
+
 #endif /* RFM12B_AVAILABLE */
 
 /**
@@ -88,6 +94,15 @@ void snap_lnk_init(void) {
 	rfm12_setbandwidth(4, 1, 4);// 200kHz bandwith, -6dB, DRSSI threshold: -79dBm
 	rfm12_setbaud(19200);// 19200 BAUD
 	rfm12_setpower(0, 6);// 1mW power, 120kHz frequency shift
+
+	rfm12_rx_start();
+
+	/*
+	 * Initialize interrupt
+	 */
+	DDRD |= ~(1 << NIRQ); // set NIRQ to input
+    EICRA |= (1 << ISC01); // The falling edge of INT0 generates an interrupt request
+    EIMSK |= (1 << INT0); // enable INT0 interrupt
 #endif /* RFM12B_AVAILABLE */
 }
 
@@ -96,6 +111,8 @@ void snap_lnk_init(void) {
  */
 void snap_lnk_send_start(void) {
 #ifdef RFM12B_AVAILABLE
+	rfm12_rx_done();
+    EIMSK &= ~(1 << INT0); // disable INT0 interrupt
 	rfm12_tx_start();
 #endif /* RFM12B_AVAILABLE */
 }
@@ -120,6 +137,8 @@ void snap_lnk_send(uint8_t value) {
 void snap_lnk_send_done(void) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_tx_done();
+    EIMSK |= (1 << INT0); // enable INT0 interrupt
+	rfm12_rx_start();
 #endif /* RFM12B_AVAILABLE */
 #ifdef LOG_AVAILABLE
 	log_s("\n");

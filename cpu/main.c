@@ -20,9 +20,11 @@
  */
 int main(void) {
 
+	DDRA = 0xff; // set port A to output (there are our testing leds)
+
 	/* Initialization */
 	init_qfly();
-	log_s("initialization... ok");
+	log_s("initialization... ok\n");
 
 	/* Our loop */
 	while (1) {
@@ -30,9 +32,14 @@ int main(void) {
 #ifdef I2C_SLAVE_AVAILABLE
 		if (i2c_rx_ready()) {
 #ifdef UART_AVAILABLE
-			for (int i = 0; i < I2C_BUFFER_SIZE; ++i) {
-				uart_tx_i(i2c_rx_buffer[i]);
-			}
+			uart_tx_i(i2c_rx_buffer[0]);
+			uart_tx_i(i2c_rx_buffer[1]);
+			uart_tx_i(i2c_rx_buffer[2]);
+			uart_tx_i(i2c_rx_buffer[3]);
+			uart_tx_i(i2c_rx_buffer[4]);
+			uart_tx_i(i2c_rx_buffer[5]);
+			uart_tx_i(i2c_rx_buffer[6]);
+			uart_tx_i(i2c_rx_buffer[7]);
 			uart_tx("\n");
 #endif /* UART AVAILABLE */
 		}
@@ -41,7 +48,8 @@ int main(void) {
 #ifdef UART_AVAILABLE
 		if (uart_rx_ready()) {
 			uart_tx("Echo: ");
-			uart_tx(uart_rx);
+			uart_tx(uart_rx());
+			uart_tx("\n");
 		}
 #endif /* UART_AVAILABLE */
 	}

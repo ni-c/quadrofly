@@ -8,6 +8,7 @@
  */
 #include "main.h"
 #include "i2cmaster.h"
+#include "snap.h"
 
 #include <avr/interrupt.h>
 
@@ -16,9 +17,16 @@
  */
 void init_qfly(void) {
 
-#ifdef I2C_AVAILABLE
+	/*
+	 * Initialize I2C
+	 */
+#ifdef I2C_MASTER_AVAILABLE
 	i2c_init();
 #endif
 
+
+	/**
+	 * Enable global interrupts
+	 */
 	sei();
 }

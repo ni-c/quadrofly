@@ -56,7 +56,6 @@ void rfm12_init(void) {
 	log_s("rfm12 initialization...");
 	DDRSPI &= (1 << SDI) | (1 << SCK) | (1 << CS); // SDI, SCK and CS output
 	DDRSPI |= ~(1 << SDO); // SDO  input
-	DDRD |= ~(1 << NIRQ); // NIRQ input
 
 	PORTSPI |= (1 << CS); // Pull CS high
 	PORTSPI |= (1 << SDI); // Pull SDI high
@@ -65,7 +64,8 @@ void rfm12_init(void) {
 	rfm12_write(0x80D7); // Enable FIFO
 	rfm12_write(0xC000); // AVR CLK: 10MHz
 	rfm12_write(0xC2AB); // Data Filter: internal
-	rfm12_write(0xCA81); // Set FIFO mode
+	rfm12_write(0xCA80); // Set FIFO mode
+	rfm12_write(0xCA83); // Set FIFO mode
 	rfm12_write(0xE000); // disable wakeuptimer
 	rfm12_write(0xC800); // disable low duty cycle
 	rfm12_write(0xC4F7); // AFC settings: autotuning: -10kHz...+7,5kHz
@@ -142,9 +142,10 @@ void rfm12_setpower(unsigned char power, unsigned char mod) {
  */
 void rfm12_ready(void) {
 #ifdef RFM12B_AVAILABLE
-	PORTSPI &= ~(1 << CS);
+	PORTSPI &= ~(1 << CS); // Pull CS down
 	while (!(PINSPI & (1 << SDO)))
 		; // wait until FIFO ready
+	PORTSPI |= (1 << CS);
 #endif /* RFM12B_AVAILABLE */
 }
 
@@ -165,6 +166,8 @@ void rfm12_tx_start(void) {
 	rfm12_write(0xB82D);
 	rfm12_ready();
 	rfm12_write(0xB8D4);
+	rfm12_ready();
+	rfm12_write(0x0000);
 	log_s(" ok\n");
 #endif /* RFM12B_AVAILABLE */
 }
@@ -177,6 +180,7 @@ void rfm12_tx_start(void) {
 void rfm12_tx(uint8_t value) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_ready();
+	rfm12_write(0x0000);
 	rfm12_write(0xB800 | (value));
 #endif /* RFM12B_AVAILABLE */
 }
@@ -198,9 +202,11 @@ void rfm12_tx_done(void) {
  */
 void rfm12_rx_start(void) {
 #ifdef RFM12B_AVAILABLE
-	rfm12_write(0x82C8); // RX on
-	rfm12_write(0xCA81); // set FIFO mode
-	rfm12_write(0xCA83); // enable FIFO
+	rfm12_write(0x82D8); // RX on
+	rfm12_write(0x8057);
+	rfm12_write(0xCA80); // reset FIFO
+	rfm12_write(0xCA83);
+	rfm12_write(0x0000);
 #endif /* RFM12B_AVAILABLE */
 }
 
@@ -224,5 +230,6 @@ uint16_t rfm12_rx(void) {
 void rfm12_rx_done(void) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_write(0x8208); // RX off
+	rfm12_write(0x80D7);
 #endif /* RFM12B_AVAILABLE */
 }

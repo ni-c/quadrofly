@@ -73,24 +73,27 @@ void i2c_slave_init(uint8_t addr) {
  */
 ISR (TWI_vect) {
 	uint8_t data = 0;
-
 	switch (TW_STATUS) {
 // Slave Receiver
 		case TW_SR_SLA_ACK: // 0x60 slave receiver, slave is addressed
-			TWCR_ACK // receive next byte, send ACK
 			i2c_rx_buffer_addr = 0xFF; // bufferposition is undefined
-			i2c_flag.rx = 1;
+			TWCR_ACK // receive next byte, send ACK
 			break;
 
 		case TW_SR_DATA_ACK: // 0x80 slave receiver, received a byte
 			data = TWDR; // read byte
 			if (i2c_rx_buffer_addr == 0xFF) {
-				i2c_rx_buffer_addr = 0;
+				if (data < I2C_BUFFER_SIZE) {
+					i2c_rx_buffer_addr = data;
+				} else {
+					i2c_rx_buffer_addr = 0;
+				}
+			} else {
+				if (i2c_rx_buffer_addr < I2C_BUFFER_SIZE) {
+					i2c_rx_buffer[i2c_rx_buffer_addr] = data; // write data to buffer
+				}
+				i2c_rx_buffer_addr++;
 			}
-			if (i2c_rx_buffer_addr < I2C_BUFFER_SIZE) {
-				i2c_rx_buffer[i2c_rx_buffer_addr] = data; // write data to buffer
-			}
-			i2c_rx_buffer_addr++;
 			TWCR_ACK
 			break;
 
@@ -116,6 +119,7 @@ ISR (TWI_vect) {
 		case TW_ST_LAST_DATA: // 0xC8 last data byte in TWDR has been transmitted (TWEA = “0”); ACK has been received
 		case TW_SR_STOP:      // 0xA0 received STOP
 		default:
+			i2c_flag.rx = 1;
 			TWCR_RESET
 			break;
 

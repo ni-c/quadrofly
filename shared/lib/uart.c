@@ -164,6 +164,7 @@ void uart_tx(const char *s) {
  * @param i The uint8_t to send
  */
 void uart_tx_i(uint8_t i) {
+
 #ifdef UART_AVAILABLE
 	char buffer[2];
 	sprintf(buffer, "%02X", i);

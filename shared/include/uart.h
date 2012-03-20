@@ -32,6 +32,13 @@ char* uart_rx(void);
 uint8_t uart_rx_ready(void);
 
 /**
+ * Converts the integer value to its HEX representation and sends it
+ *
+ * @param i The uint8_t to send
+ */
+void uart_tx_i(uint8_t i);
+
+/**
  * Send an array of chars
  *
  * @param s An array of chars to send
