@@ -23,6 +23,7 @@
 extern void rfm12_receive(uint8_t value);
 
 ISR(INT0_vect) {
+
 	uint16_t rx = rfm12_rx();
 	rfm12_write(0xCA80); // reset FIFO
 	rfm12_write(0xCA83);
@@ -199,8 +200,11 @@ void rfm12_tx(uint8_t value) {
 	rfm12_ready();
 	rfm12_write(0xB8D4);
 	rfm12_ready();
-	rfm12_write(0x0000);
-	rfm12_write(0xB800 | (value));
+	rfm12_write(0xB800 | value);
+	rfm12_ready();
+	rfm12_write(0xB8AA);
+	rfm12_ready();
+	rfm12_write(0xB8AA);
 	rfm12_ready();
 	rfm12_write(0x8208); // TX off
 #endif /* RFM12B_AVAILABLE */
@@ -226,8 +230,9 @@ void rfm12_rx_on(void) {
  */
 uint16_t rfm12_rx(void) {
 #ifdef RFM12B_AVAILABLE
-	rfm12_ready();
-	return rfm12_write(0xB000) & 0x00FF;
+	while (PINSPI & (1 << SDO)==0);
+		;
+	return (rfm12_write(0xB000) & 0x00FF);
 #else
 	return 0;
 #endif /* RFM12B_AVAILABLE */

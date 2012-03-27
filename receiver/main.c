@@ -41,16 +41,26 @@ int main(void) {
 	/* Our loop */
 	while (1) {
 
-		/* Wait 500ms */
-		_delay_ms(500);
+		/* Wait 1000ms */
+		_delay_ms(1000);
 		PORTC |= (1 << PC5);  // enable LED 1
 
-		/* Wait 500ms */
-		_delay_ms(500);
+		/* Wait 1000ms */
+		_delay_ms(1000);
 		PORTC &= ~(1 << PC5); // disable LED 1
 
 #ifdef RFM12B_AVAILABLE
-		rfm12_send(0xee);
+		rfm12_send(0xAA);
+		_delay_ms(50);
+		rfm12_send(0xBB);
+		_delay_ms(50);
+		rfm12_send(0xCC);
+		_delay_ms(50);
+		rfm12_send(0xDD);
+		_delay_ms(50);
+		rfm12_send(0xEE);
+		_delay_ms(50);
+		rfm12_send(0xFF);
 #endif
 
 #ifdef UART_AVAILABLE
