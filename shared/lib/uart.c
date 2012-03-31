@@ -30,7 +30,7 @@ char uart_rx_buffer[UART_BUFFER_SIZE]; /*!< UART receive buffer */
 /**
  * UART TX data register empty interrupt. Writes the data from the UART buffer
  */
-#if defined __AVR_ATmega1284P__ || __AVR_ATMEGA644P__
+#if defined __AVR_ATmega1284P__ || __AVR_ATmega644P__
 ISR(USART0_UDRE_vect) {
 #else
 ISR(USART_UDRE_vect) {
@@ -54,7 +54,7 @@ ISR(USART_UDRE_vect) {
 /**
  * UART RX complete interrupt. Reads the data from the UART
  */
-#if defined __AVR_ATmega1284P__ || __AVR_ATMEGA644P__
+#if defined __AVR_ATmega1284P__ || __AVR_ATmega644P__
 ISR(USART0_RX_vect) {
 #else
 ISR(USART_RX_vect) {

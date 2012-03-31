@@ -38,7 +38,7 @@
 
 
 # MCU name
-MCU = atmega88
+MCU = atmega1284p
 
 # Main Oscillator Frequency
 # This is only used to define F_OSC in all assembler and c-sources.

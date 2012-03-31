@@ -18,12 +18,20 @@
 #define DDRSPI	DDRB	/*!< SPI Data Direction Register */
 #define PORTSPI PORTB   /*!< SPI Port */
 #define PINSPI	PINB	/*!< SPI Pin */
+
+#define NIRQ	PD2		/*!< Interrupts request output(active low) */
+
+#if defined __AVR_ATmega1284P__ || __AVR_ATmega644P__
+#define CS		PB4		/*!< SPI SS (Chip select (active low) */
+#define SDI		PB5		/*!< SPI Data input (RFM12 side) */
+#define SDO		PB6		/*!< SPI Data output (RFM12 side) */
+#define SCK		PB7		/*!< SPI clock output */
+#else // if defined __AVR_ATmega1284P__ || __AVR_ATMEGA644P__
 #define CS		PB2		/*!< SPI SS (Chip select (active low) */
 #define SDI		PB3		/*!< SPI Data input (RFM12 side) */
 #define SDO		PB4		/*!< SPI Data output (RFM12 side) */
 #define SCK		PB5		/*!< SPI clock output */
-
-#define NIRQ	PD2		/*!< Interrupts request output(active low) */
+#endif // if defined __AVR_ATmega1284P__ || __AVR_ATMEGA644P__
 
 /**
  * Send the value over the RFM12B module

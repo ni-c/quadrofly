@@ -23,14 +23,8 @@
  * @param value The packet data
  */
 void rfm12_receive(uint8_t value) {
-	if (!(i2c_start(RECEIVER_I2C_ADDR + I2C_WRITE))) //slave ready to write?
-	{
-		i2c_write(0x00); // set buffer start address
-		i2c_write(value);
-		i2c_stop();
-	}
+//
 }
-
 
 /**
  * The main function.
@@ -38,7 +32,7 @@ void rfm12_receive(uint8_t value) {
 int main(void) {
 
 	DDRC = 0xff; // set port c to output (there are our testing leds)
-	DDRD &= ~( (1<<PD2) | (1<<PD3) );  // set ports PD2 and PD3 as input
+	DDRD &= ~((1 << PD2) | (1 << PD3));  // set ports PD2 and PD3 as input
 
 	/* Initialization */
 	init_qfly();
@@ -48,12 +42,14 @@ int main(void) {
 	while (1) {
 
 		/* Wait 500ms */
-		_delay_ms(100);
+		_delay_ms(500);
 		PORTC |= (1 << PC3);  // enable LED 1
 
 		/* Wait 500ms */
-		_delay_ms(100);
+		_delay_ms(500);
 		PORTC &= ~(1 << PC3); // disable LED 1
+
+		rfm12_send(0xEE);
 	}
 
 	/* Finally. (Never ever) */

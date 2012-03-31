@@ -17,14 +17,18 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+
 /**
  * Received a rf12b packet
  *
  * @param value The packet data
  */
 void rfm12_receive(uint8_t value) {
-}
 
+#ifdef UART_AVAILABLE
+	uart_tx_i(value);
+#endif /* UART_AVAILABLE */
+}
 
 /**
  * The main function.
@@ -37,31 +41,16 @@ int main(void) {
 	init_qfly();
 	log_s("initialization ... ok\n");
 
-
 	/* Our loop */
 	while (1) {
 
-		/* Wait 1000ms */
-		_delay_ms(1000);
+		/* Wait 500ms */
+		_delay_ms(500);
 		PORTC |= (1 << PC5);  // enable LED 1
 
-		/* Wait 1000ms */
-		_delay_ms(1000);
+		/* Wait 500ms */
+		_delay_ms(500);
 		PORTC &= ~(1 << PC5); // disable LED 1
-
-#ifdef RFM12B_AVAILABLE
-		rfm12_send(0xAA);
-		_delay_ms(50);
-		rfm12_send(0xBB);
-		_delay_ms(50);
-		rfm12_send(0xCC);
-		_delay_ms(50);
-		rfm12_send(0xDD);
-		_delay_ms(50);
-		rfm12_send(0xEE);
-		_delay_ms(50);
-		rfm12_send(0xFF);
-#endif
 
 #ifdef UART_AVAILABLE
 		if (uart_rx_ready()) {

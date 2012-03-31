@@ -19,9 +19,14 @@
 
 /**
  * interrupt funcition handling received bytes
+ *
+ * @param value The value that has been received
  */
 extern void rfm12_receive(uint8_t value);
 
+/**
+ * Interrupt service routine that handles receiving of packets
+ */
 ISR(INT0_vect) {
 
 	uint16_t rx = rfm12_rx();
@@ -34,7 +39,7 @@ ISR(INT0_vect) {
 /**
  * Send the value over the RFM12B module
  *
- * @value the value to send
+ * @param value the value to send
  */
 void rfm12_send(uint8_t value) {
 #ifdef RFM12B_AVAILABLE
@@ -230,7 +235,7 @@ void rfm12_rx_on(void) {
  */
 uint16_t rfm12_rx(void) {
 #ifdef RFM12B_AVAILABLE
-	while (PINSPI & (1 << SDO)==0);
+	while ((PINSPI & (1 << SDO))==0);
 		;
 	return (rfm12_write(0xB000) & 0x00FF);
 #else
