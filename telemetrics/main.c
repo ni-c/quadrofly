@@ -35,22 +35,24 @@ void rfm12_receive(uint8_t value) {
  */
 int main(void) {
 
-	DDRC = 0xff; // set port c to output (there are our testing leds)
+	DDRA = 0xff; // set port c to output (there are our testing leds)
 
 	/* Initialization */
 	init_qfly();
-	log_s("initialization ... ok\n");
+	log_s("receiver initialization ... ok\n");
 
 	/* Our loop */
 	while (1) {
 
 		/* Wait 500ms */
 		_delay_ms(500);
-		PORTC |= (1 << PC5);  // enable LED 1
+		PORTA |= (1 << PA0);  // enable LED 1
+		PORTA &= ~(1 << PA1); // disable LED 1
 
 		/* Wait 500ms */
 		_delay_ms(500);
-		PORTC &= ~(1 << PC5); // disable LED 1
+		PORTA &= ~(1 << PA0); // disable LED 1
+		PORTA &= ~(1 << PA1); // disable LED 1
 
 #ifdef UART_AVAILABLE
 		if (uart_rx_ready()) {

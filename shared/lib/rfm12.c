@@ -26,9 +26,7 @@ extern void rfm12_receive(uint8_t value);
 
 /**
  * Interrupt service routine that handles receiving of packets
- */
-ISR(INT0_vect) {
-
+ */ISR(INT0_vect) {
 	uint16_t rx = rfm12_rx();
 	rfm12_write(0xCA80); // reset FIFO
 	rfm12_write(0xCA83);
@@ -44,9 +42,9 @@ ISR(INT0_vect) {
 void rfm12_send(uint8_t value) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_rx_off();
-    EIMSK &= ~(1 << INT0); // disable INT0 interrupt
+	EIMSK &= ~(1 << INT0); // disable INT0 interrupt
 	rfm12_tx(value);
-    EIMSK |= (1 << INT0); // enable INT0 interrupt
+	EIMSK |= (1 << INT0); // enable INT0 interrupt
 	rfm12_rx_on();
 #endif
 }
@@ -235,8 +233,6 @@ void rfm12_rx_on(void) {
  */
 uint16_t rfm12_rx(void) {
 #ifdef RFM12B_AVAILABLE
-	while ((PINSPI & (1 << SDO))==0);
-		;
 	return (rfm12_write(0xB000) & 0x00FF);
 #else
 	return 0;
