@@ -11,6 +11,7 @@
 #include "uart.h"
 #include "log.h"
 #include "rfm12.h"
+#include "i2cmaster.h"
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -29,56 +30,71 @@ void rfm12_receive(uint8_t value) {
  */
 int main(void) {
 
-	DDRC = 0xff; // set port c to output (there are our testing leds)
+    DDRC = 0xff;  // set port c to output (there are our testing leds)
 
-	DDRD &= ~((1 << PD2) | (1 << PD3));  // set ports PD2 and PD3 as input
+    DDRD &= ~((1 << PD2) | (1 << PD3));  // set ports PD2 and PD3 as input (interrupts)
 
-	/* Initialization */
-	init_qfly();
-	log_s("initialization... ok\n");
+    /* Initialization */
+    init_qfly();
+    log_s("initialization... ok\n");
 
-	/* Our loop */
-	while (1) {
+    /* Our loop */
+    while (1) {
 
-		/* Wait 500ms */
-		_delay_ms(500);
-		PORTC |= (1 << PC5);  // enable LED 1
+        /* Wait 500ms */
+        _delay_ms(500);
+        PORTC |= (1 << PC1);  // enable LED 1
 
-		uint8_t v1[5] = {0x54, 1, 2, 3, 4};
-		rfm12_send(v1);
+        uint8_t v1[5];
+        v1[0] = 0x54;
+        uint8_t v2[5];
+        v2[0] = 0x54;
 
-		/* Wait 500ms */
-		_delay_ms(500);
-		PORTC &= ~(1 << PC5); // disable LED 1
+        i2c_start(0x68 + I2C_WRITE);
+        v1[1] = i2c_write(0x3B);
+        i2c_rep_start(0x68 + I2C_READ);
+        v1[2] = i2c_readNak();
+        //v1[3] = i2c_readNak();
+        //v1[4] = i2c_readNak();
+        //v2[1] = i2c_readNak();
+        //v2[2] = i2c_readNak();
+        //v2[3] = i2c_readNak();
+        //v2[4] = i2c_readNak();
+        i2c_stop();
 
-		uint8_t v2[5] = {0x54, 8, 9, 10, 11};
-		rfm12_send(v2);
+        rfm12_send(v1);
+
+        /* Wait 500ms */
+        _delay_ms(100);
+        rfm12_send(v2);
+
+        PORTC &= ~(1 << PC1);  // disable LED 1
 
 #ifdef I2C_SLAVE_AVAILABLE
-		if (i2c_rx_ready()) {
+        if (i2c_rx_ready()) {
 #ifdef UART_AVAILABLE
-			uart_tx_i(i2c_rx_buffer[0]);
-			uart_tx_i(i2c_rx_buffer[1]);
-			uart_tx_i(i2c_rx_buffer[2]);
-			uart_tx_i(i2c_rx_buffer[3]);
-			uart_tx_i(i2c_rx_buffer[4]);
-			uart_tx_i(i2c_rx_buffer[5]);
-			uart_tx_i(i2c_rx_buffer[6]);
-			uart_tx_i(i2c_rx_buffer[7]);
-			uart_tx("\n");
+            uart_tx_i(i2c_rx_buffer[0]);
+            uart_tx_i(i2c_rx_buffer[1]);
+            uart_tx_i(i2c_rx_buffer[2]);
+            uart_tx_i(i2c_rx_buffer[3]);
+            uart_tx_i(i2c_rx_buffer[4]);
+            uart_tx_i(i2c_rx_buffer[5]);
+            uart_tx_i(i2c_rx_buffer[6]);
+            uart_tx_i(i2c_rx_buffer[7]);
+            uart_tx("\n");
 #endif /* UART AVAILABLE */
-		}
+        }
 #endif /* I2C_SLAVE_AVAILABLE */
 
 #ifdef UART_AVAILABLE
-		if (uart_rx_ready()) {
-			uart_tx("Echo: ");
-			uart_tx(uart_rx());
-			uart_tx("\n");
-		}
+        if (uart_rx_ready()) {
+            uart_tx("Echo: ");
+            uart_tx(uart_rx());
+            uart_tx("\n");
+        }
 #endif /* UART_AVAILABLE */
-	}
+    }
 
-	/* Finally. (Never ever) */
-	return 0;
+    /* Finally. (Never ever) */
+    return 0;
 }

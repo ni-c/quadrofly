@@ -19,14 +19,14 @@
  */
 int main(void) {
 
-	/* Initialization */
-	init_qfly();
-	log_s("initialization ... ok\n");
+    /* Initialization */
+    init_qfly();
+    log_s("initialization ... ok\n");
 
-	/* Our loop */
-	while (1) {
-	}
+    /* Our loop */
+    while (1) {
+    }
 
-	/* Finally. (Never ever) */
-	return 0;
+    /* Finally. (Never ever) */
+    return 0;
 }

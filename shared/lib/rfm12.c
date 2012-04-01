@@ -30,12 +30,12 @@ extern void rfm12_receive(uint8_t *data);
  * Interrupt service routine that handles received packets
  */
 ISR(INT0_vect) {
-	rfm12_rx(rfm_rx_buffer);
-	fifo_reset();
-	/* Check if 1st byte is SYNC byte */
-	if (rfm_rx_buffer[0]==0x54) {
-		rfm12_receive(rfm_rx_buffer); // the received data
-	}
+    rfm12_rx(rfm_rx_buffer);
+    fifo_reset();
+    /* Check if 1st byte is SYNC byte */
+    if (rfm_rx_buffer[0] == 0x54) {
+        rfm12_receive(rfm_rx_buffer);  // the received data
+    }
 }
 #endif /* RFM12B_AVAILABLE */
 
@@ -46,11 +46,11 @@ ISR(INT0_vect) {
  */
 void rfm12_send(uint8_t *data) {
 #ifdef RFM12B_AVAILABLE
-	rfm12_rx_off();
-	EIMSK &= ~(1 << INT0); // disable INT0 interrupt
-	rfm12_tx(data);
-	EIMSK |= (1 << INT0); // enable INT0 interrupt
-	rfm12_rx_on();
+    rfm12_rx_off();
+    EIMSK &= ~(1 << INT0);  // disable INT0 interrupt
+    rfm12_tx(data);
+    EIMSK |= (1 << INT0);  // enable INT0 interrupt
+    rfm12_rx_on();
 #endif
 }
 
@@ -62,29 +62,29 @@ void rfm12_send(uint8_t *data) {
  */
 unsigned int rfm12_write(unsigned int cmd) {
 #ifdef RFM12B_AVAILABLE
-	uint8_t i;
-	unsigned int recv;
-	recv = 0;
-	PORTSPI &= ~(1 << SCK);
-	PORTSPI &= ~(1 << CS);
-	for (i = 0; i < 16; i++) {
-		if (cmd & 0x8000) {
-			PORTSPI |= (1 << SDI);
-		} else {
-			PORTSPI &= ~(1 << SDI);
-		}
-		PORTSPI |= (1 << SCK);
-		recv <<= 1;
-		if (PINSPI & (1 << SDO)) {
-			recv |= 0x0001;
-		}
-		PORTSPI &= ~(1 << SCK);
-		cmd <<= 1;
-	}
-	PORTSPI |= (1 << CS);
-	return recv;
+    uint8_t i;
+    unsigned int recv;
+    recv = 0;
+    PORTSPI &= ~(1 << SCK);
+    PORTSPI &= ~(1 << CS);
+    for (i = 0; i < 16; i++) {
+        if (cmd & 0x8000) {
+            PORTSPI |= (1 << SDI);
+        } else {
+            PORTSPI &= ~(1 << SDI);
+        }
+        PORTSPI |= (1 << SCK);
+        recv <<= 1;
+        if (PINSPI & (1 << SDO)) {
+            recv |= 0x0001;
+        }
+        PORTSPI &= ~(1 << SCK);
+        cmd <<= 1;
+    }
+    PORTSPI |= (1 << CS);
+    return recv;
 #else
-	return 0;
+    return 0;
 #endif /* RFM12B_AVAILABLE */
 }
 
@@ -93,22 +93,22 @@ unsigned int rfm12_write(unsigned int cmd) {
  */
 void rfm12_init(void) {
 #ifdef RFM12B_AVAILABLE
-	log_s("rfm12 initialization...");
-	DDRSPI &= (1 << SDI) | (1 << SCK) | (1 << CS); // SDI, SCK and CS output
-	DDRSPI |= ~(1 << SDO); // SDO  input
+    log_s("rfm12 initialization...");
+    DDRSPI &= (1 << SDI) | (1 << SCK) | (1 << CS);  // SDI, SCK and CS output
+    DDRSPI |= ~(1 << SDO);  // SDO  input
 
-	PORTSPI |= (1 << CS); // Pull CS high
-	PORTSPI |= (1 << SDI); // Pull SDI high
-	PORTSPI &= ~(1 << SCK); // Pull SCK low
+    PORTSPI |= (1 << CS);  // Pull CS high
+    PORTSPI |= (1 << SDI);  // Pull SDI high
+    PORTSPI &= ~(1 << SCK);  // Pull SCK low
 
-	rfm12_write(0x80D7); // Enable FIFO
-	rfm12_write(0xC000); // AVR CLK: 10MHz
-	rfm12_write(0xC2AB); // Data Filter: internal
-	fifo_reset();
-	rfm12_write(0xE000); // disable wakeuptimer
-	rfm12_write(0xC800); // disable low duty cycle
-	rfm12_write(0xC4F7); // AFC settings: autotuning: -10kHz...+7,5kHz
-	log_s(" ok\n");
+    rfm12_write(0x80D7);  // Enable FIFO
+    rfm12_write(0xC000);  // AVR CLK: 10MHz
+    rfm12_write(0xC2AB);  // Data Filter: internal
+    fifo_reset();
+    rfm12_write(0xE000);  // disable wakeuptimer
+    rfm12_write(0xC800);  // disable low duty cycle
+    rfm12_write(0xC4F7);  // AFC settings: autotuning: -10kHz...+7,5kHz
+    log_s(" ok\n");
 #endif /* RFM12B_AVAILABLE */
 }
 
@@ -123,7 +123,7 @@ void rfm12_init(void) {
  */
 void rfm12_setbandwidth(uint8_t bandwidth, uint8_t gain, uint8_t drssi) {
 #ifdef RFM12B_AVAILABLE
-	rfm12_write(0x9400 | ((bandwidth & 7) << 5) | ((gain & 3) << 3) | (drssi & 7));
+    rfm12_write(0x9400 | ((bandwidth & 7) << 5) | ((gain & 3) << 3) | (drssi & 7));
 #endif /* RFM12B_AVAILABLE */
 }
 
@@ -136,11 +136,11 @@ void rfm12_setbandwidth(uint8_t bandwidth, uint8_t gain, uint8_t drssi) {
  */
 void rfm12_setfreq(unsigned short freq) {
 #ifdef RFM12B_AVAILABLE
-	if (freq < 96) // 430,2400MHz
-		freq = 96;
-	else if (freq > 3903) // 439,7575MHz
-		freq = 3903;
-	rfm12_write(0xA000 | freq);
+    if (freq < 96)  // 430,2400MHz
+        freq = 96;
+    else if (freq > 3903)  // 439,7575MHz
+        freq = 3903;
+    rfm12_write(0xA000 | freq);
 #endif /* RFM12B_AVAILABLE */
 }
 
@@ -153,12 +153,12 @@ void rfm12_setfreq(unsigned short freq) {
  */
 void rfm12_setbaud(unsigned short baud) {
 #ifdef RFM12B_AVAILABLE
-	if (baud < 663)
-		return;
-	if (baud < 5400) // Baudrate= 344827,58621/(R+1)/(1+CS*7)
-		rfm12_write(0xC680 | ((43104 / baud) - 1));
-	else
-		rfm12_write(0xC600 | ((344828UL / baud) - 1));
+    if (baud < 663)
+        return;
+    if (baud < 5400)  // Baudrate= 344827,58621/(R+1)/(1+CS*7)
+        rfm12_write(0xC680 | ((43104 / baud) - 1));
+    else
+        rfm12_write(0xC600 | ((344828UL / baud) - 1));
 #endif /* RFM12B_AVAILABLE */
 }
 
@@ -172,7 +172,7 @@ void rfm12_setbaud(unsigned short baud) {
  */
 void rfm12_setpower(uint8_t power, uint8_t mod) {
 #ifdef RFM12B_AVAILABLE
-	rfm12_write(0x9800 | (power & 7) | ((mod & 15) << 4));
+    rfm12_write(0x9800 | (power & 7) | ((mod & 15) << 4));
 #endif /* RFM12B_AVAILABLE */
 }
 
@@ -181,10 +181,10 @@ void rfm12_setpower(uint8_t power, uint8_t mod) {
  */
 void rfm12_ready(void) {
 #ifdef RFM12B_AVAILABLE
-	PORTSPI &= ~(1 << CS); // Pull CS down
-	while (!(PINSPI & (1 << SDO)))
-		; // wait until FIFO ready
-	PORTSPI |= (1 << CS);
+    PORTSPI &= ~(1 << CS);  // Pull CS down
+    while (!(PINSPI & (1 << SDO)))
+        ;  // wait until FIFO ready
+    PORTSPI |= (1 << CS);
 #endif /* RFM12B_AVAILABLE */
 }
 
@@ -195,27 +195,27 @@ void rfm12_ready(void) {
  */
 void rfm12_tx(uint8_t *data) {
 #ifdef RFM12B_AVAILABLE
-	rfm12_write(0x8238); // TX on
-	rfm12_ready();
-	rfm12_write(0xB8AA);
-	rfm12_ready();
-	rfm12_write(0xB8AA);
-	rfm12_ready();
-	rfm12_write(0xB8AA);
-	rfm12_ready();
-	rfm12_write(0xB82D);
-	rfm12_ready();
-	rfm12_write(0xB8D4);
-	for (uint8_t i=0; i<5; i++) {
-		rfm12_ready();
-		rfm12_write(0xB800 | data[i]);
-	}
-	rfm12_ready();
-	rfm12_write(0xB8AA);
-	rfm12_ready();
-	rfm12_write(0xB8AA);
-	rfm12_ready();
-	rfm12_write(0x8208); // TX off
+    rfm12_write(0x8238);  // TX on
+    rfm12_ready();
+    rfm12_write(0xB8AA);
+    rfm12_ready();
+    rfm12_write(0xB8AA);
+    rfm12_ready();
+    rfm12_write(0xB8AA);
+    rfm12_ready();
+    rfm12_write(0xB82D);
+    rfm12_ready();
+    rfm12_write(0xB8D4);
+    for (uint8_t i = 0; i < 5; i++) {
+        rfm12_ready();
+        rfm12_write(0xB800 | data[i]);
+    }
+    rfm12_ready();
+    rfm12_write(0xB8AA);
+    rfm12_ready();
+    rfm12_write(0xB8AA);
+    rfm12_ready();
+    rfm12_write(0x8208);  // TX off
 #endif /* RFM12B_AVAILABLE */
 }
 
@@ -224,10 +224,10 @@ void rfm12_tx(uint8_t *data) {
  */
 void rfm12_rx_on(void) {
 #ifdef RFM12B_AVAILABLE
-	rfm12_write(0x82D8); // RX on
-	rfm12_write(0x8057);
-	fifo_reset();
-	rfm12_write(0x0000);
+    rfm12_write(0x82D8);  // RX on
+    rfm12_write(0x8057);
+    fifo_reset();
+    rfm12_write(0x0000);
 #endif /* RFM12B_AVAILABLE */
 }
 
@@ -239,17 +239,16 @@ void rfm12_rx_on(void) {
  */
 uint8_t *rfm12_rx(uint8_t *data) {
 #ifdef RFM12B_AVAILABLE
-	for (uint8_t i=0; i<5; i++)
-	{
-		data[i] = rfm12_write(0xB000);
-		/* Check if 1st byte is SYNC byte */
-		if ((i==0) && (data[0]!=0x54)) {
-			return '\0';
-		}
-	}
-	return data;
+    for (uint8_t i = 0; i < 5; i++) {
+        data[i] = rfm12_write(0xB000);
+        /* Check if 1st byte is SYNC byte */
+        if ((i == 0) && (data[0] != 0x54)) {
+            return '\0';
+        }
+    }
+    return data;
 #else
-	return '\0';
+    return '\0';
 #endif /* RFM12B_AVAILABLE */
 }
 
@@ -258,8 +257,8 @@ uint8_t *rfm12_rx(uint8_t *data) {
  */
 void rfm12_rx_off(void) {
 #ifdef RFM12B_AVAILABLE
-	rfm12_write(0x8208); // RX off
-	rfm12_write(0x80D7);
+    rfm12_write(0x8208);  // RX off
+    rfm12_write(0x80D7);
 #endif /* RFM12B_AVAILABLE */
 }
 
@@ -267,6 +266,6 @@ void rfm12_rx_off(void) {
  * Reset the FIFO
  */
 void fifo_reset(void) {
-	rfm12_write(0xCAC0); // Set FIFO mode
-	rfm12_write(0xCAC3);
+    rfm12_write(0xCAC0);  // Set FIFO mode
+    rfm12_write(0xCAC3);
 }

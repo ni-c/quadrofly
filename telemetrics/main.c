@@ -25,11 +25,11 @@
 void rfm12_receive(uint8_t *value) {
 
 #ifdef UART_AVAILABLE
-	uart_tx_i(value[1]);
-	uart_tx_i(value[2]);
-	uart_tx_i(value[3]);
-	uart_tx_i(value[4]);
-	uart_tx("\n");
+    uart_tx_i(value[1]);
+    uart_tx_i(value[2]);
+    uart_tx_i(value[3]);
+    uart_tx_i(value[4]);
+    uart_tx("\n");
 #endif /* UART_AVAILABLE */
 }
 
@@ -38,25 +38,25 @@ void rfm12_receive(uint8_t *value) {
  */
 int main(void) {
 
-	/* Initialization */
-	init_qfly();
-	log_s("receiver initialization ... ok\n");
+    /* Initialization */
+    init_qfly();
+    log_s("receiver initialization ... ok\n");
 
-	/* Our loop */
-	while (1) {
+    /* Our loop */
+    while (1) {
 
-		/* Wait 100ms */
-		_delay_ms(100);
+        /* Wait 100ms */
+        _delay_ms(100);
 
 #ifdef UART_AVAILABLE
-		if (uart_rx_ready()) {
-			uart_tx("Echo: ");
-			uart_tx(uart_rx());
-			uart_tx("\n");
-		}
+        if (uart_rx_ready()) {
+            uart_tx("Echo: ");
+            uart_tx(uart_rx());
+            uart_tx("\n");
+        }
 #endif /* UART_AVAILABLE */
-	}
+    }
 
-	/* Finally. (Never ever) */
-	return 0;
+    /* Finally. (Never ever) */
+    return 0;
 }

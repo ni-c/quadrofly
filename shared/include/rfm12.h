@@ -34,7 +34,6 @@
 #define SDO		PB4		/*!< SPI Data output (RFM12 side) */
 #define SCK		PB5		/*!< SPI clock output */
 #endif // if defined __AVR_ATmega1284P__ || __AVR_ATMEGA644P__
-
 /**
  * Initializes the RFM12 module
  */

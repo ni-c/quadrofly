@@ -26,15 +26,15 @@
 void log_i(uint8_t i) {
 #ifdef LOG_AVAILABLE
 #ifdef SIMULAVR_AVAILABLE
-	char buffer[2];
-	char* buffer_p = buffer;
-	sprintf(buffer, "%02X", i);
-	SIMULAVR_PORT = *buffer_p++;
-	SIMULAVR_PORT = *buffer_p;
-	SIMULAVR_PORT = 32;
+    char buffer[2];
+    char* buffer_p = buffer;
+    sprintf(buffer, "%02X", i);
+    SIMULAVR_PORT = *buffer_p++;
+    SIMULAVR_PORT = *buffer_p;
+    SIMULAVR_PORT = 32;
 #endif /* SIMULAVAR_AVAILABLE */
 #ifdef UART_AVAILABLE
-	uart_tx_i(i);
+    uart_tx_i(i);
 #endif /* UART_AVAILABLE */
 #endif /* LOG_AVAILBLE */
 }
@@ -47,12 +47,12 @@ void log_i(uint8_t i) {
 void log_s(const char *s) {
 #ifdef LOG_AVAILABLE
 #ifdef SIMULAVR_AVAILABLE
-	for(int i = 0; s[i] != '\0'; i++) {
-		SIMULAVR_PORT = s[i];
-	}
+    for(int i = 0; s[i] != '\0'; i++) {
+        SIMULAVR_PORT = s[i];
+    }
 #endif /* SIMULAVAR_AVAILABLE */
 #ifdef UART_AVAILABLE
-	uart_tx(s);
+    uart_tx(s);
 #endif /* UART_AVAILABLE */
 #endif /* LOG_AVAILBLE */
 }
