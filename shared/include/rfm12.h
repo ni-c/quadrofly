@@ -12,7 +12,7 @@
 
 #include <inttypes.h>
 
-#define RFM12_BUFFER_SIZE 8 /*!< Size of the RFM12 buffer 2..254 */
+#define RFM12_BUFFER_SIZE 5 /*!< Size of the RFM12 buffer 2..254 */
 
 #define RF12FREQ(freq)	((freq-430.0)/0.0025) /*!< macro for calculating frequency value out of frequency in MHz */
 

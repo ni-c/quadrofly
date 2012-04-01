@@ -32,7 +32,8 @@ extern void rfm12_receive(uint8_t *data);
 ISR(INT0_vect) {
 	rfm12_rx(rfm_rx_buffer);
 	fifo_reset();
-	if (rfm_rx_buffer[0]!=0) {
+	/* Check if 1st byte is SYNC byte */
+	if (rfm_rx_buffer[0]==0x54) {
 		rfm12_receive(rfm_rx_buffer); // the received data
 	}
 }
@@ -205,9 +206,9 @@ void rfm12_tx(uint8_t *data) {
 	rfm12_write(0xB82D);
 	rfm12_ready();
 	rfm12_write(0xB8D4);
-	while (*data != '\0') {
+	for (uint8_t i=0; i<5; i++) {
 		rfm12_ready();
-		rfm12_write(0xB800 | *data++);
+		rfm12_write(0xB800 | data[i]);
 	}
 	rfm12_ready();
 	rfm12_write(0xB8AA);
@@ -238,9 +239,13 @@ void rfm12_rx_on(void) {
  */
 uint8_t *rfm12_rx(uint8_t *data) {
 #ifdef RFM12B_AVAILABLE
-	for (uint8_t i=0; i<4; i++)
+	for (uint8_t i=0; i<5; i++)
 	{
 		data[i] = rfm12_write(0xB000);
+		/* Check if 1st byte is SYNC byte */
+		if ((i==0) && (data[0]!=0x54)) {
+			return '\0';
+		}
 	}
 	return data;
 #else

@@ -44,14 +44,14 @@ int main(void) {
 		_delay_ms(500);
 		PORTC |= (1 << PC5);  // enable LED 1
 
-		uint8_t v1[4] = {1, 2, 3, '\0'};
+		uint8_t v1[5] = {0x54, 1, 2, 3, 4};
 		rfm12_send(v1);
 
 		/* Wait 500ms */
 		_delay_ms(500);
 		PORTC &= ~(1 << PC5); // disable LED 1
 
-		uint8_t v2[4] = {4, 5, 6, '\0'};
+		uint8_t v2[5] = {0x54, 8, 9, 10, 11};
 		rfm12_send(v2);
 
 #ifdef I2C_SLAVE_AVAILABLE
