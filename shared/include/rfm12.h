@@ -12,6 +12,8 @@
 
 #include <inttypes.h>
 
+#define RFM12_BUFFER_SIZE 8 /*!< Size of the RFM12 buffer 2..254 */
+
 #define RF12FREQ(freq)	((freq-430.0)/0.0025) /*!< macro for calculating frequency value out of frequency in MHz */
 
 /* RFM12 Interface */
@@ -34,16 +36,16 @@
 #endif // if defined __AVR_ATmega1284P__ || __AVR_ATMEGA644P__
 
 /**
- * Send the value over the RFM12B module
- *
- * @value the value to send
- */
-void rfm12_send(uint8_t value);
-
-/**
  * Initializes the RFM12 module
  */
 void rfm12_init(void);
+
+/**
+ * Send the value over the RFM12B module
+ *
+ * @param data The array of char to send
+ */
+void rfm12_send(uint8_t *data);
 
 /**
  * Set the bandwith, gain and DRSSI threshold of the RFM12
@@ -54,7 +56,7 @@ void rfm12_init(void);
  * @param gain The gain of the RFM12 module
  * @param drssi The DRSSI threshold of the module
  */
-void rfm12_setbandwidth(unsigned char bandwidth, unsigned char gain, unsigned char drssi);
+void rfm12_setbandwidth(uint8_t bandwidth, uint8_t gain, uint8_t drssi);
 
 /**
  * Set the frequency of the RFM12 module
@@ -82,7 +84,7 @@ void rfm12_setbaud(unsigned short baud);
  * @param power The db value to set
  * @param mod The frequency shift to set
  */
-void rfm12_setpower(unsigned char power, unsigned char mod);
+void rfm12_setpower(uint8_t power, uint8_t mod);
 
 /**
  * Enable RX
@@ -97,9 +99,10 @@ void rfm12_rx_off(void);
 /**
  * Receive RX data
  *
- * @return 2 bytes of data
+ * @param data Pointer to the data char array
+ * @return The received data
  */
-uint16_t rfm12_rx(void);
+uint8_t *rfm12_rx(uint8_t *data);
 
 /**
  * Software method to write a 16-bit command over SPI to the RFM12
@@ -112,15 +115,13 @@ unsigned int rfm12_write(unsigned int cmd);
 /**
  * Send data over TX
  *
- * @param value The data to send
+ * @param data The array of char to send
  */
-void rfm12_tx(uint8_t value);
+void rfm12_tx(uint8_t *data);
 
 /**
- * Send the value over the RFM12B module
- *
- * @value the value to send
+ * Reset the FIFO
  */
-void rfm12_send(uint8_t value);
+void fifo_reset(void);
 
 #endif /* RFM12_H_ */

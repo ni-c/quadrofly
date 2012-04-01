@@ -17,33 +17,37 @@
 #include <stdlib.h>
 #include <avr/interrupt.h>
 
+uint8_t rfm_rx_buffer[RFM12_BUFFER_SIZE + 1];
+
 /**
  * interrupt funcition handling received bytes
  *
  * @param value The value that has been received
  */
-extern void rfm12_receive(uint8_t value);
+extern void rfm12_receive(uint8_t *data);
 
 /**
- * Interrupt service routine that handles receiving of packets
- */ISR(INT0_vect) {
-	uint16_t rx = rfm12_rx();
-	rfm12_write(0xCA80); // reset FIFO
-	rfm12_write(0xCA83);
-	rfm12_receive(rx); // lo byte
+ * Interrupt service routine that handles received packets
+ */
+ISR(INT0_vect) {
+	rfm12_rx(rfm_rx_buffer);
+	fifo_reset();
+	if (rfm_rx_buffer[0]!=0) {
+		rfm12_receive(rfm_rx_buffer); // the received data
+	}
 }
 #endif /* RFM12B_AVAILABLE */
 
 /**
  * Send the value over the RFM12B module
  *
- * @param value The byte value to send
+ * @param data The array of char to send
  */
-void rfm12_send(uint8_t value) {
+void rfm12_send(uint8_t *data) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_rx_off();
 	EIMSK &= ~(1 << INT0); // disable INT0 interrupt
-	rfm12_tx(value);
+	rfm12_tx(data);
 	EIMSK |= (1 << INT0); // enable INT0 interrupt
 	rfm12_rx_on();
 #endif
@@ -57,7 +61,7 @@ void rfm12_send(uint8_t value) {
  */
 unsigned int rfm12_write(unsigned int cmd) {
 #ifdef RFM12B_AVAILABLE
-	unsigned char i;
+	uint8_t i;
 	unsigned int recv;
 	recv = 0;
 	PORTSPI &= ~(1 << SCK);
@@ -99,8 +103,7 @@ void rfm12_init(void) {
 	rfm12_write(0x80D7); // Enable FIFO
 	rfm12_write(0xC000); // AVR CLK: 10MHz
 	rfm12_write(0xC2AB); // Data Filter: internal
-	rfm12_write(0xCA80); // Set FIFO mode
-	rfm12_write(0xCA83); // Set FIFO mode
+	fifo_reset();
 	rfm12_write(0xE000); // disable wakeuptimer
 	rfm12_write(0xC800); // disable low duty cycle
 	rfm12_write(0xC4F7); // AFC settings: autotuning: -10kHz...+7,5kHz
@@ -117,7 +120,7 @@ void rfm12_init(void) {
  * @param gain The gain of the RFM12 module
  * @param drssi The DRSSI threshold of the module
  */
-void rfm12_setbandwidth(unsigned char bandwidth, unsigned char gain, unsigned char drssi) {
+void rfm12_setbandwidth(uint8_t bandwidth, uint8_t gain, uint8_t drssi) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_write(0x9400 | ((bandwidth & 7) << 5) | ((gain & 3) << 3) | (drssi & 7));
 #endif /* RFM12B_AVAILABLE */
@@ -166,7 +169,7 @@ void rfm12_setbaud(unsigned short baud) {
  * @param power The db value to set
  * @param mod The frequency shift to set
  */
-void rfm12_setpower(unsigned char power, unsigned char mod) {
+void rfm12_setpower(uint8_t power, uint8_t mod) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_write(0x9800 | (power & 7) | ((mod & 15) << 4));
 #endif /* RFM12B_AVAILABLE */
@@ -187,9 +190,9 @@ void rfm12_ready(void) {
 /**
  * Send data over TX
  *
- * @param value The data to send
+ * @param data The array of char to send
  */
-void rfm12_tx(uint8_t value) {
+void rfm12_tx(uint8_t *data) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_write(0x8238); // TX on
 	rfm12_ready();
@@ -202,8 +205,10 @@ void rfm12_tx(uint8_t value) {
 	rfm12_write(0xB82D);
 	rfm12_ready();
 	rfm12_write(0xB8D4);
-	rfm12_ready();
-	rfm12_write(0xB800 | value);
+	while (*data != '\0') {
+		rfm12_ready();
+		rfm12_write(0xB800 | *data++);
+	}
 	rfm12_ready();
 	rfm12_write(0xB8AA);
 	rfm12_ready();
@@ -220,8 +225,7 @@ void rfm12_rx_on(void) {
 #ifdef RFM12B_AVAILABLE
 	rfm12_write(0x82D8); // RX on
 	rfm12_write(0x8057);
-	rfm12_write(0xCA80); // reset FIFO
-	rfm12_write(0xCA83);
+	fifo_reset();
 	rfm12_write(0x0000);
 #endif /* RFM12B_AVAILABLE */
 }
@@ -229,13 +233,18 @@ void rfm12_rx_on(void) {
 /**
  * Receive RX data
  *
- * @return 2 bytes of data
+ * @param data Pointer to the data char array
+ * @return The received data
  */
-uint16_t rfm12_rx(void) {
+uint8_t *rfm12_rx(uint8_t *data) {
 #ifdef RFM12B_AVAILABLE
-	return (rfm12_write(0xB000) & 0x00FF);
+	for (uint8_t i=0; i<4; i++)
+	{
+		data[i] = rfm12_write(0xB000);
+	}
+	return data;
 #else
-	return 0;
+	return '\0';
 #endif /* RFM12B_AVAILABLE */
 }
 
@@ -247,4 +256,12 @@ void rfm12_rx_off(void) {
 	rfm12_write(0x8208); // RX off
 	rfm12_write(0x80D7);
 #endif /* RFM12B_AVAILABLE */
+}
+
+/**
+ * Reset the FIFO
+ */
+void fifo_reset(void) {
+	rfm12_write(0xCAC0); // Set FIFO mode
+	rfm12_write(0xCAC3);
 }

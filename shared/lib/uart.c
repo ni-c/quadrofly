@@ -24,17 +24,14 @@ char uart_tx_buffer[UART_BUFFER_SIZE]; /*!< UART send buffer */
 
 char uart_rx_buffer[UART_BUFFER_SIZE]; /*!< UART receive buffer */
 
-#endif /* UART_AVAILABLE */
-
-#ifdef UART_AVAILABLE
 /**
  * UART TX data register empty interrupt. Writes the data from the UART buffer
  */
 #if defined __AVR_ATmega1284P__ || __AVR_ATmega644P__
 ISR(USART0_UDRE_vect) {
-#else
+#else // defined __AVR_ATmega1284P__ || __AVR_ATmega644P__
 ISR(USART_UDRE_vect) {
-#endif
+#endif // defined __AVR_ATmega1284P__ || __AVR_ATmega644P__
 	static char* uart_tx_p = uart_tx_buffer; /*!< Pointer to TX buffer */
 
 	uint8_t data; /*!< Char to send */
@@ -48,17 +45,15 @@ ISR(USART_UDRE_vect) {
 	} else
 		UDR0 = data;
 }
-#endif /* UART_AVAILABLE */
 
-#ifdef UART_AVAILABLE
 /**
  * UART RX complete interrupt. Reads the data from the UART
  */
 #if defined __AVR_ATmega1284P__ || __AVR_ATmega644P__
 ISR(USART0_RX_vect) {
-#else
+#else // defined __AVR_ATmega1284P__ || __AVR_ATmega644P__
 ISR(USART_RX_vect) {
-#endif
+#endif // defined __AVR_ATmega1284P__ || __AVR_ATmega644P__
 
 	static uint8_t uart_rx_cnt; /*!< counter for received chars */
 	uint8_t data; /*!< received char */
@@ -166,8 +161,9 @@ void uart_tx(const char *s) {
 void uart_tx_i(uint8_t i) {
 
 #ifdef UART_AVAILABLE
-	char buffer[2];
-	sprintf(buffer, "%02X", i);
-	uart_tx((const char *) buffer);
+	char buffer[3];
+	sprintf(buffer, "%i", i);
+	uart_tx(buffer);
+	uart_tx(" ");
 #endif
 }

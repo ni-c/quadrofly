@@ -10,7 +10,7 @@
 #include "init.h"
 #include "uart.h"
 #include "log.h"
-#include "i2cmaster.h"
+#include "rfm12.h"
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -30,6 +30,7 @@ void rfm12_receive(uint8_t value) {
 int main(void) {
 
 	DDRC = 0xff; // set port c to output (there are our testing leds)
+
 	DDRD &= ~((1 << PD2) | (1 << PD3));  // set ports PD2 and PD3 as input
 
 	/* Initialization */
@@ -41,11 +42,17 @@ int main(void) {
 
 		/* Wait 500ms */
 		_delay_ms(500);
-		PORTC |= (1 << PC3);  // enable LED 1
+		PORTC |= (1 << PC5);  // enable LED 1
+
+		uint8_t v1[4] = {1, 2, 3, '\0'};
+		rfm12_send(v1);
 
 		/* Wait 500ms */
 		_delay_ms(500);
-		PORTC &= ~(1 << PC3); // disable LED 1
+		PORTC &= ~(1 << PC5); // disable LED 1
+
+		uint8_t v2[4] = {4, 5, 6, '\0'};
+		rfm12_send(v2);
 
 #ifdef I2C_SLAVE_AVAILABLE
 		if (i2c_rx_ready()) {

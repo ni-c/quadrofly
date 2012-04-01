@@ -14,17 +14,14 @@
 #endif
 
 //#define SIMULAVR_AVAILABLE /*!< Compile for the simulavr simulator */
-#define LOG_AVAILABLE /*!< Is Logging available */
+//#define LOG_AVAILABLE /*!< Is Logging available */
 
-#define UART_AVAILABLE /*!< Is UART available */
-#define BAUD 9600UL /*!< UART Baudrate in bit per second */
+//#define UART_AVAILABLE /*!< Is UART available */
+//#define BAUD 9600UL /*!< UART Baudrate in bit per second */
 
-#define I2C_MASTER_AVAILABLE /*!< I2C is available as master */
+//#define I2C_MASTER_AVAILABLE /*!< I2C is available as master */
 
 #define RFM12B_AVAILABLE /*!< Is RFM12B available */
-#define SNAP_AVAILABLE /*!< Is Snap protocol available */
-
-#define MOTOR_AVAILABLE /*!< Is Motor control available */
 
 /* Dependencies */
 #ifdef SIMULAVR_AVAILABLE

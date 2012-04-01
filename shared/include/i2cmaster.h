@@ -110,35 +110,35 @@ extern void i2c_stop(void);
 /** 
  @brief Issues a start condition and sends address and transfer direction 
 
- @param    addr address and transfer direction of I2C device
- @retval   0   device accessible 
- @retval   1   failed to access device 
+ @param  address address and transfer direction of I2C device
+ @retval 0 device accessible
+ @retval 1 failed to access device
  */
-extern unsigned char i2c_start(unsigned char addr);
+extern unsigned char i2c_start(unsigned char address);
 
 /**
  @brief Issues a repeated start condition and sends address and transfer direction 
 
- @param   addr address and transfer direction of I2C device
- @retval  0 device accessible
- @retval  1 failed to access device
+ @param address address and transfer direction of I2C device
+ @retval 0 device accessible
+ @retval 1 failed to access device
  */
-extern unsigned char i2c_rep_start(unsigned char addr);
+extern unsigned char i2c_rep_start(unsigned char address);
 
 /**
  @brief Issues a start condition and sends address and transfer direction 
 
  If device is busy, use ack polling to wait until device ready 
- @param    addr address and transfer direction of I2C device
+ @param    address address and transfer direction of I2C device
  @return   none
  */
-extern void i2c_start_wait(unsigned char addr);
+extern void i2c_start_wait(unsigned char address);
 
 /**
  @brief Send one byte to I2C device
- @param    data  byte to be transfered
- @retval   0 write successful
- @retval   1 write failed
+ @param data  byte to be transfered
+ @retval 0 write successful
+ @retval 1 write failed
  */
 extern unsigned char i2c_write(unsigned char data);
 
@@ -159,8 +159,7 @@ extern unsigned char i2c_readNak(void);
  
  Implemented as a macro, which calls either i2c_readAck or i2c_readNak
  
- @param    ack 1 send ack, request more data from device<br>
- 0 send nak, read is followed by a stop condition
+ @param    ack 1 send ack, request more data from device<br> 0 send nak, read is followed by a stop condition
  @return   byte read from I2C device
  */
 extern unsigned char i2c_read(unsigned char ack);
