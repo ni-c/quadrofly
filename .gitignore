@@ -3,6 +3,7 @@
 .settings
 .dep
 doc/html
+doc/latex
 main.eep
 main.elf
 main.hex

@@ -168,6 +168,6 @@ void uart_tx_i(uint8_t i) {
 #ifdef UART_AVAILABLE
 	char buffer[2];
 	sprintf(buffer, "%02X", i);
-	uart_tx((const char *)buffer);
+	uart_tx((const char *) buffer);
 #endif
 }

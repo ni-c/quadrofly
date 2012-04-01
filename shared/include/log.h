@@ -15,7 +15,7 @@
 /**
  * Poll the specified uint8 out the log port.
  *
- * @param s The specified uint8
+ * @param i The specified uint8
  */
 void log_i(uint8_t i);
 

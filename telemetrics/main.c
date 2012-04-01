@@ -1,7 +1,7 @@
 /**
  * Quadrofly Software (http://quadrofly.ni-c.de)
  *
- * @file 	receiver/main.c
+ * @file 	telemetrics/main.c
  * @brief 	Main program
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
  * @date 	Mar 6, 2012
@@ -17,9 +17,8 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-
 /**
- * Received a rf12b packet
+ * Received a rfm12 packet
  *
  * @param value The packet data
  */

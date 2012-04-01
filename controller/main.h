@@ -1,7 +1,7 @@
 /**
  * Quadrofly Software (http://quadrofly.ni-c.de)
  *
- * @file 	cpu/main.h
+ * @file 	controller/main.h
  * @brief 	Global header file.
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
  * @date 	Mar 6, 2012
@@ -19,7 +19,7 @@
 #define UART_AVAILABLE /*!< Is UART available */
 #define BAUD 9600UL /*!< UART Baudrate in bit per second */
 
-#define I2C_SLAVE_AVAILABLE /*!< I2C is available as slave */
+#define I2C_MASTER_AVAILABLE /*!< I2C is available as master */
 
 #define RFM12B_AVAILABLE /*!< Is RFM12B available */
 #define SNAP_AVAILABLE /*!< Is Snap protocol available */

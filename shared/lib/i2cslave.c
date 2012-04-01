@@ -19,7 +19,7 @@
 struct {
 	unsigned rx :1; /*<! If there is data in the RX buffer */
 	unsigned tx :1; /*<! If there is data in the TX buffer */
-} i2c_flag;
+}i2c_flag;
 
 volatile uint8_t i2c_rx_buffer[I2C_BUFFER_SIZE + 1]; /*!< The i2c RX buffer */
 
@@ -75,53 +75,53 @@ ISR (TWI_vect) {
 	uint8_t data = 0;
 	switch (TW_STATUS) {
 // Slave Receiver
-		case TW_SR_SLA_ACK: // 0x60 slave receiver, slave is addressed
-			i2c_rx_buffer_addr = 0xFF; // bufferposition is undefined
-			TWCR_ACK // receive next byte, send ACK
-			break;
+		case TW_SR_SLA_ACK:// 0x60 slave receiver, slave is addressed
+		i2c_rx_buffer_addr = 0xFF;// bufferposition is undefined
+		TWCR_ACK// receive next byte, send ACK
+		break;
 
-		case TW_SR_DATA_ACK: // 0x80 slave receiver, received a byte
-			data = TWDR; // read byte
-			if (i2c_rx_buffer_addr == 0xFF) {
-				if (data < I2C_BUFFER_SIZE) {
-					i2c_rx_buffer_addr = data;
-				} else {
-					i2c_rx_buffer_addr = 0;
-				}
+		case TW_SR_DATA_ACK:// 0x80 slave receiver, received a byte
+		data = TWDR;// read byte
+		if (i2c_rx_buffer_addr == 0xFF) {
+			if (data < I2C_BUFFER_SIZE) {
+				i2c_rx_buffer_addr = data;
 			} else {
-				if (i2c_rx_buffer_addr < I2C_BUFFER_SIZE) {
-					i2c_rx_buffer[i2c_rx_buffer_addr] = data; // write data to buffer
-				}
-				i2c_rx_buffer_addr++;
+				i2c_rx_buffer_addr = 0;
 			}
-			TWCR_ACK
-			break;
+		} else {
+			if (i2c_rx_buffer_addr < I2C_BUFFER_SIZE) {
+				i2c_rx_buffer[i2c_rx_buffer_addr] = data; // write data to buffer
+			}
+			i2c_rx_buffer_addr++;
+		}
+		TWCR_ACK
+		break;
 
 //Slave transmitter
-		case TW_ST_SLA_ACK: //0xA8 slave is addressed for read and answered ACK
-		case TW_ST_DATA_ACK: //0xB8 slave transmitter, data requested
+		case TW_ST_SLA_ACK://0xA8 slave is addressed for read and answered ACK
+		case TW_ST_DATA_ACK://0xB8 slave transmitter, data requested
 
-			if (i2c_tx_buffer_addr == 0xFF) {
-				i2c_tx_buffer_addr = 0;
-			}
-			if (i2c_tx_buffer_addr < I2C_BUFFER_SIZE) {
-				TWDR = i2c_tx_buffer[i2c_tx_buffer_addr]; // send byte
-				i2c_tx_buffer_addr++; // bufferaddress for next byte
-			} else {
-				TWDR = 0; // no more data
-				i2c_flag.tx = 0;
-			}
-			TWCR_ACK
-			break;
+		if (i2c_tx_buffer_addr == 0xFF) {
+			i2c_tx_buffer_addr = 0;
+		}
+		if (i2c_tx_buffer_addr < I2C_BUFFER_SIZE) {
+			TWDR = i2c_tx_buffer[i2c_tx_buffer_addr]; // send byte
+			i2c_tx_buffer_addr++;// bufferaddress for next byte
+		} else {
+			TWDR = 0; // no more data
+			i2c_flag.tx = 0;
+		}
+		TWCR_ACK
+		break;
 
 		case TW_ST_DATA_NACK: // 0xC0 no more data
-		case TW_SR_DATA_NACK: // 0x88
-		case TW_ST_LAST_DATA: // 0xC8 last data byte in TWDR has been transmitted (TWEA = “0”); ACK has been received
-		case TW_SR_STOP:      // 0xA0 received STOP
+		case TW_SR_DATA_NACK:// 0x88
+		case TW_ST_LAST_DATA:// 0xC8 last data byte in TWDR has been transmitted (TWEA = “0”); ACK has been received
+		case TW_SR_STOP:// 0xA0 received STOP
 		default:
-			i2c_flag.rx = 1;
-			TWCR_RESET
-			break;
+		i2c_flag.rx = 1;
+		TWCR_RESET
+		break;
 
 	}
 }

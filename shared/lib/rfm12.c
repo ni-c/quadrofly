@@ -37,7 +37,7 @@ extern void rfm12_receive(uint8_t value);
 /**
  * Send the value over the RFM12B module
  *
- * @param value the value to send
+ * @param value The byte value to send
  */
 void rfm12_send(uint8_t value) {
 #ifdef RFM12B_AVAILABLE

@@ -18,11 +18,10 @@
 
 #endif
 
-
 /**
  * Poll the specified uint8 out the log port.
  *
- * @param s The specified uint8
+ * @param i The specified uint8
  */
 void log_i(uint8_t i) {
 #ifdef LOG_AVAILABLE
@@ -51,7 +50,7 @@ void log_s(const char *s) {
 #ifdef LOG_AVAILABLE
 #ifdef SIMULAVR_AVAILABLE
 	for(int i = 0; s[i] != '\0'; i++) {
-	    SIMULAVR_PORT = s[i];
+		SIMULAVR_PORT = s[i];
 	}
 #endif /* SIMULAVAR_AVAILABLE */
 #ifdef UART_AVAILABLE

@@ -28,7 +28,7 @@ void i2c_init(void) {
 	/* initialize TWI clock: 100 kHz clock, TWPS = 0 => prescaler = 1 */
 
 	TWSR = 0; /* no prescaler */
-	TWBR = (uint8_t)((F_CPU / SCL_CLOCK) - 16) / 2; /* must be > 10 for stable operation */
+	TWBR = (uint8_t) ((F_CPU / SCL_CLOCK) - 16) / 2; /* must be > 10 for stable operation */
 #endif /* I2C_MASTER_AVAILABLE */
 }/* i2c_init */
 
@@ -36,7 +36,7 @@ void i2c_init(void) {
  * Issues a start condition and sends address and transfer direction.
  * return 0 = device accessible, 1= failed to access device
  *
- * * @param adress address and transfer direction of I2C device
+ * * @param address address and transfer direction of I2C device
  */
 unsigned char i2c_start(unsigned char address) {
 #ifdef I2C_MASTER_AVAILABLE
@@ -76,7 +76,7 @@ unsigned char i2c_start(unsigned char address) {
  * Issues a start condition and sends address and transfer direction.
  * If device is busy, use ack polling to wait until device is ready
  *
- * @param adress address and transfer direction of I2C device
+ * @param address address and transfer direction of I2C device
  */
 void i2c_start_wait(unsigned char address) {
 #ifdef I2C_MASTER_AVAILABLE
@@ -124,7 +124,7 @@ void i2c_start_wait(unsigned char address) {
 /**
  * Issues a repeated start condition and sends address and transfer direction
  *
- * @param adress address and transfer direction of I2C device
+ * @param address address and transfer direction of I2C device
  * @return 0 device accessible, 1 failed to access device
  */
 unsigned char i2c_rep_start(unsigned char address) {

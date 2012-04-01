@@ -94,7 +94,6 @@ void rfm12_rx_on(void);
  */
 void rfm12_rx_off(void);
 
-
 /**
  * Receive RX data
  *
