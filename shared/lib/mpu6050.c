@@ -14,6 +14,7 @@
  * Initializes the MPU-6050 device
  */
 void mpu6050_init(void) {
+#ifdef MPU6050_AVAILABLE
     i2c_start_wait(MPU6050_ADDRESS + I2C_WRITE);
 
     /* Set clock to X GYRO and disable sleep */
@@ -24,12 +25,12 @@ void mpu6050_init(void) {
     i2c_write(0x1B);
     i2c_write(0x00);
 
-
     /* Selects the full scale range of the accelerometer outputs to 2g and sets the High Pass filter to 2.5 Hz */
     i2c_write(0x1C);
     i2c_write(0x0A);
 
     i2c_stop();
+#endif // MPU6050_AVAILABLE
 }
 
 /**
@@ -38,13 +39,16 @@ void mpu6050_init(void) {
  * @return 1 If the communication is working
  */
 uint8_t mpu6050_test(void) {
-
+#ifdef MPU6050_AVAILABLE
     i2c_start_wait(MPU6050_ADDRESS + I2C_WRITE);
     i2c_write(0x75);
     i2c_rep_start(MPU6050_ADDRESS + I2C_READ);
-    uint8_t addr = i2c_readNak();
+    uint8_t addr = i2c_read_nak();
     i2c_stop();
     return (addr == MPU6050_ADDRESS);
+#else // MPU6050_AVAILABLE
+    return 0;
+#endif // MPU6050_AVAILABLE
 }
 
 /**
@@ -54,15 +58,19 @@ uint8_t mpu6050_test(void) {
  * @result The 16-bit value of the register
  */
 uint16_t mpu6050_get(uint8_t reg_address) {
+#ifdef MPU6050_AVAILABLE
     i2c_start_wait(MPU6050_ADDRESS + I2C_WRITE);
     i2c_write(reg_address);
     i2c_rep_start(MPU6050_ADDRESS + I2C_READ);
-    uint8_t hi = i2c_readNak();
+    uint8_t hi = i2c_read_nak();
     i2c_rep_start(MPU6050_ADDRESS + I2C_WRITE);
-    i2c_write(reg_address+1);
+    i2c_write(reg_address + 1);
     i2c_rep_start(MPU6050_ADDRESS + I2C_READ);
-    uint8_t lo = i2c_readNak();
+    uint8_t lo = i2c_read_nak();
     i2c_stop();
-    uint16_t result = (((int16_t)hi) << 8) | lo;
+    uint16_t result = (((int16_t) hi) << 8) | lo;
     return result;
+#else // MPU6050_AVAILABLE
+    return 0;
+#endif // MPU6050_AVAILABLE
 }

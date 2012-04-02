@@ -23,6 +23,8 @@
 
 #define RFM12B_AVAILABLE /*!< Is RFM12B available */
 
+#define MPU6050_AVAILABLE /*!< Is MPU6050 available */
+
 /* Dependencies */
 #ifdef SIMULAVR_AVAILABLE
 #undef UART_AVAILABLE /*!< UART doesn't work if the software runs on simulavr, deactivate it */

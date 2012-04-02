@@ -180,7 +180,7 @@ unsigned char i2c_write(unsigned char data) {
  * Read one byte from the I2C device, request more data from device
  * @return byte read from I2C device
  */
-unsigned char i2c_readAck(void) {
+unsigned char i2c_read_ack(void) {
 #ifdef I2C_MASTER_AVAILABLE
     TWCR = (1 << TWINT) | (1 << TWEN) | (1 << TWEA);
     while (!(TWCR & (1 << TWINT)))
@@ -197,7 +197,7 @@ unsigned char i2c_readAck(void) {
  *
  * @return byte read from I2C device
  **/
-unsigned char i2c_readNak(void) {
+unsigned char i2c_read_nak(void) {
 #ifdef I2C_MASTER_AVAILABLE
     TWCR = (1 << TWINT) | (1 << TWEN);
     while (!(TWCR & (1 << TWINT)))
