@@ -2,8 +2,7 @@
 .project
 .settings
 .dep
-doc/html
-doc/latex
+doc
 main.eep
 main.elf
 main.hex

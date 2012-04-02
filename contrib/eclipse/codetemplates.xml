@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="false" context="org.eclipse.cdt.ui.text.codetemplates.filecomment_context" deleted="false" description="Comment for created C/C++ files" enabled="true" id="org.eclipse.cdt.ui.text.codetemplates.filecomment" name="filecomment">/**
+ * Quadrofly Software (http://quadrofly.ni-c.de)
+ *  
+ * @file 	${file_path}/${file_name}
+ * @brief 	
+ * @package 
+ * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
+ * @license MIT License – http://www.opensource.org/licenses/mit-license.php
+ * @date 	${date}
+ */</template></templates>
