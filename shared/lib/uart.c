@@ -50,27 +50,27 @@ ISR(USART0_UDRE_vect) {
      * UART RX complete interrupt. Reads the data from the UART
      */
 #if defined __AVR_ATmega1284P__ || __AVR_ATmega644P__
-    ISR(USART0_RX_vect) {
+ISR(USART0_RX_vect) {
 #else // defined __AVR_ATmega1284P__ || __AVR_ATmega644P__
-        ISR(USART_RX_vect) {
+ISR(USART_RX_vect) {
 #endif // defined __AVR_ATmega1284P__ || __AVR_ATmega644P__
-            static uint8_t uart_rx_cnt; /*!< counter for received chars */
-            uint8_t data; /*!< received char */
+    static uint8_t uart_rx_cnt; /*!< counter for received chars */
+    uint8_t data; /*!< received char */
 
-            data = UDR0;  // Read data from UART
+    data = UDR0;  // Read data from UART
 
-            if (!uart_flag.rx) {
-                // end of string? (return)
-                if (data == '\r') {
-                    uart_rx_buffer[uart_rx_cnt] = 0;  // terminate buffer
-                    uart_flag.rx = 1;// buffer full
-                    uart_rx_cnt = 0;// reset counter
-                } else if (uart_rx_cnt < (UART_BUFFER_SIZE - 1)) {
-                    uart_rx_buffer[uart_rx_cnt] = data;
-                    uart_rx_cnt++;
-                }
-            }
+    if (!uart_flag.rx) {
+        // end of string? (return)
+        if (data == '\r') {
+            uart_rx_buffer[uart_rx_cnt] = 0;  // terminate buffer
+            uart_flag.rx = 1;// buffer full
+            uart_rx_cnt = 0;// reset counter
+        } else if (uart_rx_cnt < (UART_BUFFER_SIZE - 1)) {
+            uart_rx_buffer[uart_rx_cnt] = data;
+            uart_rx_cnt++;
         }
+    }
+}
 #endif /* UART_AVAILABLE */
 
 /**

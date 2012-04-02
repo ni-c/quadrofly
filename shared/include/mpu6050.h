@@ -7,11 +7,13 @@
  * @date 	Apr 1, 2012
  */
 
+#include <inttypes.h>
+
 #ifndef MPU6050_H_
 #define MPU6050_H_
 
-#define MPU6050_ADDRESS_AD0_LOW     0x68 /*!< address pin low (GND) */
-#define MPU6050_ADDRESS_AD0_HIGH    0x69 /*!< address pin high (VCC) */
+#define MPU6050_ADDRESS_AD0_LOW     0xD0 /*!< address pin low (GND) */
+#define MPU6050_ADDRESS_AD0_HIGH    0xD2 /*!< address pin high (VCC) */
 #define MPU6050_ADDRESS             MPU6050_ADDRESS_AD0_LOW /*!< MPU6050 address */
 
 #define MPU6050_ACCEL_XOUT          0x3B /*!< lo byte of the ACCEL_XOUT register */

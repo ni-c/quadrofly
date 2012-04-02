@@ -7,28 +7,45 @@
  * @date 	Apr 1, 2012
  */
 
+#include "main.h"
 #include "mpu6050.h"
 #include "i2cmaster.h"
+#include "log.h"
+
+#include <inttypes.h>
 
 /**
  * Initializes the MPU-6050 device
  */
 void mpu6050_init(void) {
 #ifdef MPU6050_AVAILABLE
-    i2c_start_wait(MPU6050_ADDRESS + I2C_WRITE);
+    log_s("mpu6050 initialization ...");
+    if (i2c_start(MPU6050_ADDRESS + I2C_WRITE)) {
 
-    /* Set clock to X GYRO and disable sleep */
-    i2c_write(0x6B);
-    i2c_write(0x01);
+        /* Set clock to X GYRO and disable sleep */
+        i2c_write(0x6B);
+        i2c_write(0x03);
 
-    /* Selects the full scale range of the gyroscope outputs to ± 250 °/s */
-    i2c_write(0x1B);
-    i2c_write(0x00);
+        /* Sampe rate = 200 Hz Fsample= 1Khz/(4+1) = 200Hz */
+        i2c_write(0x19);
+        i2c_write(0x04);
 
-    /* Selects the full scale range of the accelerometer outputs to 2g and sets the High Pass filter to 2.5 Hz */
-    i2c_write(0x1C);
-    i2c_write(0x0A);
+        /* Low pass filter */
+        i2c_write(0x1A);
+        i2c_write(0x03);
 
+        /* Selects the full scale range of the gyroscope outputs to ± 250 °/s */
+        i2c_write(0x1B);
+        i2c_write(0x00);
+
+        /* Selects the full scale range of the accelerometer outputs to 2g and sets the High Pass filter to 2.5 Hz */
+        i2c_write(0x1C);
+        i2c_write(0x0A);
+
+        log_s(" ok\n");
+    } else {
+        log_s(" failed\n");
+    }
     i2c_stop();
 #endif // MPU6050_AVAILABLE
 }
@@ -40,15 +57,17 @@ void mpu6050_init(void) {
  */
 uint8_t mpu6050_test(void) {
 #ifdef MPU6050_AVAILABLE
-    i2c_start_wait(MPU6050_ADDRESS + I2C_WRITE);
-    i2c_write(0x75);
-    i2c_rep_start(MPU6050_ADDRESS + I2C_READ);
-    uint8_t addr = i2c_read_nak();
+    if (i2c_start(MPU6050_ADDRESS + I2C_WRITE)) {
+        i2c_write(0x75);
+        if (i2c_rep_start(MPU6050_ADDRESS + I2C_READ)) {
+            uint8_t addr = i2c_read_nak();
+            i2c_stop();
+            return (addr == 0x68);
+        }
+    }
     i2c_stop();
-    return (addr == MPU6050_ADDRESS);
-#else // MPU6050_AVAILABLE
-    return 0;
 #endif // MPU6050_AVAILABLE
+    return 0;
 }
 
 /**
@@ -59,7 +78,7 @@ uint8_t mpu6050_test(void) {
  */
 uint16_t mpu6050_get(uint8_t reg_address) {
 #ifdef MPU6050_AVAILABLE
-    i2c_start_wait(MPU6050_ADDRESS + I2C_WRITE);
+    i2c_start(MPU6050_ADDRESS + I2C_WRITE);
     i2c_write(reg_address);
     i2c_rep_start(MPU6050_ADDRESS + I2C_READ);
     uint8_t hi = i2c_read_nak();

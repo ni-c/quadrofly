@@ -3,9 +3,7 @@
  *  
  * @file 	controller/main.c
  * @brief 	Main program
- * @package controller
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
- * @license MIT License – http://www.opensource.org/licenses/mit-license.php
  * @date 	Mar 6, 2012
  */
 #include "main.h"
@@ -14,6 +12,7 @@
 #include "log.h"
 #include "rfm12.h"
 #include "i2cmaster.h"
+#include "mpu6050.h"
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -32,45 +31,26 @@ void rfm12_receive(uint8_t value) {
  */
 int main(void) {
 
-    DDRC = 0xff;  // set port c to output (there are our testing leds)
-
-    DDRD &= ~((1 << PD2) | (1 << PD3));  // set ports PD2 and PD3 as input (interrupts)
-
     /* Initialization */
     init_qfly();
-    log_s("initialization... ok\n");
+    log_s("initialization finished\n");
+
+    _delay_ms(500);
 
     /* Our loop */
     while (1) {
 
-        /* Wait 500ms */
-        _delay_ms(500);
-        PORTC |= (1 << PC1);  // enable LED 1
 
         uint8_t v1[5];
         v1[0] = 0x54;
         uint8_t v2[5];
         v2[0] = 0x54;
 
-        i2c_start(0x68 + I2C_WRITE);
-        v1[1] = i2c_write(0x3B);
-        i2c_rep_start(0x68 + I2C_READ);
-        v1[2] = i2c_readNak();
-        //v1[3] = i2c_readNak();
-        //v1[4] = i2c_readNak();
-        //v2[1] = i2c_readNak();
-        //v2[2] = i2c_readNak();
-        //v2[3] = i2c_readNak();
-        //v2[4] = i2c_readNak();
-        i2c_stop();
-
-        rfm12_send(v1);
+        log_i(mpu6050_get(MPU6050_TEMP_OUT));
+        log_s("\n");
 
         /* Wait 500ms */
-        _delay_ms(100);
-        rfm12_send(v2);
-
-        PORTC &= ~(1 << PC1);  // disable LED 1
+        _delay_ms(500);
 
 #ifdef I2C_SLAVE_AVAILABLE
         if (i2c_rx_ready()) {

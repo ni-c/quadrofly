@@ -11,6 +11,8 @@
 
 #ifdef I2C_MASTER_AVAILABLE
 
+#include "log.h"
+
 #include <inttypes.h>
 #include <compat/twi.h>
 
@@ -29,6 +31,7 @@ void i2c_init(void) {
 
     TWSR = 0; /* no prescaler */
     TWBR = (uint8_t) ((F_CPU / SCL_CLOCK) - 16) / 2; /* must be > 10 for stable operation */
+    log_s(" master ...");
 #endif /* I2C_MASTER_AVAILABLE */
 }/* i2c_init */
 
@@ -52,7 +55,7 @@ unsigned char i2c_start(unsigned char address) {
     // check value of TWI Status Register. Mask prescaler bits.
     twst = TW_STATUS & 0xF8;
     if ((twst != TW_START) && (twst != TW_REP_START))
-        return 1;
+        return 0;
 
     // send device address
     TWDR = address;
@@ -65,10 +68,10 @@ unsigned char i2c_start(unsigned char address) {
     // check value of TWI Status Register. Mask prescaler bits.
     twst = TW_STATUS & 0xF8;
     if ((twst != TW_MT_SLA_ACK) && (twst != TW_MR_SLA_ACK))
-        return 1;
+        return 0;
 
 #endif /* I2C_MASTER_AVAILABLE */
-    return 0;
+    return 1;
 
 }/* i2c_start */
 
@@ -85,7 +88,6 @@ void i2c_start_wait(unsigned char address) {
     while (1) {
         // send START condition
         TWCR = (1 << TWINT) | (1 << TWSTA) | (1 << TWEN);
-
         // wait until transmission completed
         while (!(TWCR & (1 << TWINT)))
             ;
@@ -170,10 +172,10 @@ unsigned char i2c_write(unsigned char data) {
     // check value of TWI Status Register. Mask prescaler bits
     twst = TW_STATUS & 0xF8;
     if (twst != TW_MT_DATA_ACK)
-        return 1;
+        return 0;
 
 #endif /* I2C_MASTER_AVAILABLE */
-    return 0;
+    return 1;
 }/* i2c_write */
 
 /**

@@ -7,8 +7,11 @@
  * @date 	Mar 6, 2012
  */
 #include "main.h"
+#include "log.h"
+#include "uart.h"
 #include "i2cmaster.h"
 #include "rfm12.h"
+#include "mpu6050.h"
 
 #include <avr/interrupt.h>
 
@@ -17,11 +20,18 @@
  */
 void init_qfly(void) {
 
+#ifdef UART_AVAILABLE
+    uart_init();
+    log_s("uart initialization ... ok\n");
+#endif
+
 #ifdef I2C_MASTER_AVAILABLE
     /*
      * Initialize I2C
      */
+    log_s("i2c initialization ...");
     i2c_init();
+    log_s(" ok\n");
 #endif
 
 #ifdef RFM12B_AVAILABLE
@@ -34,11 +44,14 @@ void init_qfly(void) {
     rfm12_setbaud(19200);  // 19200 BAUD
     rfm12_setpower(0, 6);  // 1mW power, 120kHz frequency shift
 
+    log_s("interrupt initialization ...");
     /*
      * Initialize interrupt
-     */DDRD |= ~(1 << NIRQ);  // set NIRQ to input
+     */
+    DDRD |= ~(1 << NIRQ);  // set NIRQ to input
     EICRA |= (1 << ISC01);  // The falling edge of INT0 generates an interrupt request
     EIMSK |= (1 << INT0);  // enable INT0 interrupt
+    log_s(" ok\n");
 
     /**
      * Enable RX
@@ -46,6 +59,13 @@ void init_qfly(void) {
     rfm12_rx_on();
 
 #endif /* RFM12B_AVAILABLE */
+
+#ifdef MPU6050_AVAILABLE
+    /*
+     * Initialize MPU6050
+     */
+   // mpu6050_init();
+#endif /* MPU6050_AVAILABLE */
 
     /**
      * Enable global interrupts
