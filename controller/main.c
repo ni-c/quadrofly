@@ -1,9 +1,11 @@
 /**
  * Quadrofly Software (http://quadrofly.ni-c.de)
- *
+ *  
  * @file 	controller/main.c
  * @brief 	Main program
+ * @package controller
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
+ * @license MIT License – http://www.opensource.org/licenses/mit-license.php
  * @date 	Mar 6, 2012
  */
 #include "main.h"
