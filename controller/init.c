@@ -64,7 +64,7 @@ void init_qfly(void) {
     /*
      * Initialize MPU6050
      */
-   // mpu6050_init();
+    mpu6050_init();
 #endif /* MPU6050_AVAILABLE */
 
     /**

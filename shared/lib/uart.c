@@ -151,18 +151,59 @@ void uart_tx(const char *s) {
     tx_buffer(s);
 #endif /* UART_AVAILABLE */
 }
-
+	
+/**
+ * Converts the integer value to its HEX representation and sends it
+ *
+ * @param i The int8_t to send
+ */
+void uart_tx_int8_t(int8_t i) {
+		
+#ifdef UART_AVAILABLE
+	char buffer[4];
+	sprintf(buffer, "%i", i);
+	uart_tx(buffer);
+#endif /* UART_AVAILABLE */
+}
+	
 /**
  * Converts the integer value to its HEX representation and sends it
  *
  * @param i The uint8_t to send
  */
-void uart_tx_i(uint8_t i) {
+void uart_tx_uint8_t(uint8_t i) {
 
 #ifdef UART_AVAILABLE
     char buffer[3];
     sprintf(buffer, "%i", i);
     uart_tx(buffer);
-    uart_tx(" ");
-#endif
+#endif /* UART_AVAILABLE */
+}
+
+/**
+ * Converts the integer value to its HEX representation and sends it
+ *
+ * @param i The int16_t to send
+ */
+void uart_tx_int16_t(int16_t i) {
+		
+#ifdef UART_AVAILABLE
+	char buffer[6];
+	sprintf(buffer, "%i", i);
+	uart_tx(buffer);
+#endif /* UART_AVAILABLE */
+}
+
+/**
+ * Converts the integer value to its HEX representation and sends it
+ *
+ * @param i The uint16_t to send
+ */
+void uart_tx_uint16_t(uint16_t i) {
+	
+#ifdef UART_AVAILABLE
+	char buffer[5];
+	sprintf(buffer, "%i", i);
+	uart_tx(buffer);
+#endif /* UART_AVAILABLE */
 }

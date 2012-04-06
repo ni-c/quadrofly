@@ -25,10 +25,10 @@
 void rfm12_receive(uint8_t *value) {
 
 #ifdef UART_AVAILABLE
-    uart_tx_i(value[1]);
-    uart_tx_i(value[2]);
-    uart_tx_i(value[3]);
-    uart_tx_i(value[4]);
+    uart_tx_uint8_t(value[1]);
+    uart_tx_uint8_t(value[2]);
+    uart_tx_uint8_t(value[3]);
+    uart_tx_uint8_t(value[4]);
     uart_tx("\n");
 #endif /* UART_AVAILABLE */
 }

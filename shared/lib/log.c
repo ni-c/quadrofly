@@ -34,7 +34,7 @@ void log_i(uint8_t i) {
     SIMULAVR_PORT = 32;
 #endif /* SIMULAVAR_AVAILABLE */
 #ifdef UART_AVAILABLE
-    uart_tx_i(i);
+    uart_tx_uint8_t(i);
 #endif /* UART_AVAILABLE */
 #endif /* LOG_AVAILBLE */
 }

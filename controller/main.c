@@ -35,45 +35,47 @@ int main(void) {
     init_qfly();
     log_s("initialization finished\n");
 
-    _delay_ms(500);
+    _delay_ms(100);
 
     /* Our loop */
     while (1) {
 
+        int16_t buffer[7];
 
-        uint8_t v1[5];
-        v1[0] = 0x54;
-        uint8_t v2[5];
-        v2[0] = 0x54;
+        mpu6050_getall(&buffer[0], &buffer[1], &buffer[2], &buffer[3], &buffer[4], &buffer[5], &buffer[6]);
 
-        log_i(mpu6050_get(MPU6050_TEMP_OUT));
-        log_s("\n");
+        for (int i = 0; i < 7; i++) {
+            uart_tx_int16_t(buffer[i]);
+            uart_tx(", ");
+        }
+        uart_tx("\n");
 
-        /* Wait 500ms */
-        _delay_ms(500);
+        /* Wait 200ms */
+        _delay_ms(200);
 
 #ifdef I2C_SLAVE_AVAILABLE
         if (i2c_rx_ready()) {
 #ifdef UART_AVAILABLE
-            uart_tx_i(i2c_rx_buffer[0]);
-            uart_tx_i(i2c_rx_buffer[1]);
-            uart_tx_i(i2c_rx_buffer[2]);
-            uart_tx_i(i2c_rx_buffer[3]);
-            uart_tx_i(i2c_rx_buffer[4]);
-            uart_tx_i(i2c_rx_buffer[5]);
-            uart_tx_i(i2c_rx_buffer[6]);
-            uart_tx_i(i2c_rx_buffer[7]);
+            uart_tx_uint8_t(i2c_rx_buffer[0]);
+            uart_tx_uint8_t(i2c_rx_buffer[1]);
+            uart_tx_uint8_t(i2c_rx_buffer[2]);
+            uart_tx_uint8_t(i2c_rx_buffer[3]);
+            uart_tx_uint8_t(i2c_rx_buffer[4]);
+            uart_tx_uint8_t(i2c_rx_buffer[5]);
+            uart_tx_uint8_t(i2c_rx_buffer[6]);
+            uart_tx_uint8_t(i2c_rx_buffer[7]);
             uart_tx("\n");
 #endif /* UART AVAILABLE */
         }
 #endif /* I2C_SLAVE_AVAILABLE */
 
 #ifdef UART_AVAILABLE
-        if (uart_rx_ready()) {
+/*        if (uart_rx_ready()) {
             uart_tx("Echo: ");
             uart_tx(uart_rx());
             uart_tx("\n");
         }
+        */
 #endif /* UART_AVAILABLE */
     }
 
