@@ -10,12 +10,6 @@
 #ifndef GLOBAL_DEF_H_
 #define GLOBAL_DEF_H_
 
-#define CPU_SNAP_ADDR 0x10 /*!< The SNAP address of the CPU */
-
-#define SCU_I2C_ADDR 0x11 /*!< The I2C address of the SCU */
-#define SCU_SNAP_ADDR 0x11 /*!< The SNAP address of the SCU */
-
-#define RECEIVER_I2C_ADDR 0x12 /*!< The I2C address of the Receiver */
-#define RECEIVER_SNAP_ADDR 0x12 /*!< The SNAP address of the Receiver */
+#define I2C_ADDR_MOTORCONTROL 0x51 /*!< The I2C address of the MOTOR control */
 
 #endif /* GLOBAL_DEF_H_ */

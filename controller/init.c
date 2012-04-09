@@ -23,7 +23,7 @@ void init_qfly(void) {
 #ifdef UART_AVAILABLE
     uart_init();
     log_s("uart initialization ... ok\n");
-#endif
+#endif /* UART_AVAILABLE */
 
 #ifdef I2C_MASTER_AVAILABLE
     /*
@@ -32,7 +32,7 @@ void init_qfly(void) {
     log_s("i2c initialization ...");
     i2c_init();
     log_s(" ok\n");
-#endif
+#endif /* I2C_MASTER_AVAILABLE */
 
 #ifdef RFM12B_AVAILABLE
     /*

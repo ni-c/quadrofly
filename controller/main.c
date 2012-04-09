@@ -7,6 +7,7 @@
  * @date 	Mar 6, 2012
  */
 #include "main.h"
+#include "global_def.h"
 #include "init.h"
 #include "uart.h"
 #include "log.h"
@@ -35,47 +36,78 @@ int main(void) {
     init_qfly();
     log_s("initialization finished\n");
 
-    _delay_ms(100);
-
     /* Our loop */
     while (1) {
 
-        int16_t buffer[7];
-
-        mpu6050_getall(&buffer[0], &buffer[1], &buffer[2], &buffer[3], &buffer[4], &buffer[5], &buffer[6]);
-
-        for (int i = 0; i < 7; i++) {
-            uart_tx_int16_t(buffer[i]);
-            uart_tx(", ");
-        }
-        uart_tx("\n");
-
-        /* Wait 200ms */
-        _delay_ms(200);
-
-#ifdef I2C_SLAVE_AVAILABLE
-        if (i2c_rx_ready()) {
 #ifdef UART_AVAILABLE
-            uart_tx_uint8_t(i2c_rx_buffer[0]);
-            uart_tx_uint8_t(i2c_rx_buffer[1]);
-            uart_tx_uint8_t(i2c_rx_buffer[2]);
-            uart_tx_uint8_t(i2c_rx_buffer[3]);
-            uart_tx_uint8_t(i2c_rx_buffer[4]);
-            uart_tx_uint8_t(i2c_rx_buffer[5]);
-            uart_tx_uint8_t(i2c_rx_buffer[6]);
-            uart_tx_uint8_t(i2c_rx_buffer[7]);
-            uart_tx("\n");
-#endif /* UART AVAILABLE */
+        if (uart_rx_ready()) {
+            char *c = uart_rx();
+            if (c[0]=='0') {
+                if (i2c_start(I2C_ADDR_MOTORCONTROL - 1 + I2C_WRITE)) {
+                    i2c_write(0x00);
+                    i2c_write(0x00);
+                    i2c_write(0x00);
+                    i2c_write(0x00);
+                    i2c_write(0x00);
+                    i2c_stop();
+                    uart_tx("\nSetting motor speed to 0\n");
+                } else {
+                    uart_tx("I2C Error\n");
+                }
+            }
+            if (c[0]=='1') {
+                if (i2c_start(I2C_ADDR_MOTORCONTROL - 1 + I2C_WRITE)) {
+                    i2c_write(0x00);
+                    i2c_write(0x20);
+                    i2c_write(0x20);
+                    i2c_write(0x20);
+                    i2c_write(0x20);
+                    i2c_stop();
+                    uart_tx("\nSetting motor speed to 32\n");
+                } else {
+                    uart_tx("I2C Error\n");
+                }
+            }
+            if (c[0]=='2') {
+                if (i2c_start(I2C_ADDR_MOTORCONTROL - 1 + I2C_WRITE)) {
+                    i2c_write(0x00);
+                    i2c_write(0x40);
+                    i2c_write(0x40);
+                    i2c_write(0x40);
+                    i2c_write(0x40);
+                    i2c_stop();
+                    uart_tx("\nSetting motor speed to 64\n");
+                } else {
+                    uart_tx("I2C Error\n");
+                }
+            }
+            if (c[0]=='3') {
+                if (i2c_start(I2C_ADDR_MOTORCONTROL - 1 + I2C_WRITE)) {
+                    i2c_write(0x00);
+                    i2c_write(0x80);
+                    i2c_write(0x80);
+                    i2c_write(0x80);
+                    i2c_write(0x80);
+                    i2c_stop();
+                    uart_tx("\nSetting motor speed to 128\n");
+                } else {
+                    uart_tx("I2C Error\n");
+                }
+            }
+            if (c[0]=='4') {
+                if (i2c_start(I2C_ADDR_MOTORCONTROL - 1 + I2C_WRITE)) {
+                    i2c_write(0x00);
+                    i2c_write(0x80);
+                    i2c_write(0x80);
+                    i2c_write(0x80);
+                    i2c_write(0x80);
+                    i2c_stop();
+                    uart_tx("\nSetting motor speed to 255\n");
+                } else {
+                    uart_tx("I2C Error\n");
+                }
+            }
         }
-#endif /* I2C_SLAVE_AVAILABLE */
-
-#ifdef UART_AVAILABLE
-/*        if (uart_rx_ready()) {
-            uart_tx("Echo: ");
-            uart_tx(uart_rx());
-            uart_tx("\n");
-        }
-        */
 #endif /* UART_AVAILABLE */
     }
 

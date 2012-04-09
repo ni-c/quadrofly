@@ -12,10 +12,12 @@
 #include "inttypes.h"
 
 #ifndef F_CPU
-#define F_CPU 1000000UL /*!< Set CPU clock */
+#define F_CPU 20000000UL /*!< Set CPU clock */
 #endif
 
-#define MOTOR_AVAULABLE /*!< If the motor ESCs are available */
+#define MOTOR_AVAILABLE /*!< If the motor ESCs are available */
+
+#define I2C_SLAVE_AVAILABLE /*!< I2C is available as slave */
 
 //#define SIMULAVR_AVAILABLE /*!< Compile for the simulavr simulator */
 //#define LOG_AVAILABLE /*!< Is Logging available */

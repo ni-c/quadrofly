@@ -8,8 +8,47 @@
  */
 #include "main.h"
 #include "motor.h"
-#include <stdint.h>
+
+#ifdef MOTOR_AVAILABLE
+
+#include <inttypes.h>
 #include <avr/io.h>
+#include <avr/interrupt.h>
+
+uint8_t motor[4]; /*!< speed values for the motors */
+
+int16_t pwm_cnt; /*!< counter for the actual position in the PWM cycle */
+
+uint8_t tmp; /*!< tmp value */
+
+/**
+ * Timer Compare Interrupt
+ */
+ISR (TIMER0_COMPA_vect) {
+    pwm_cnt++;
+
+    // 1 ms
+    if (pwm_cnt == PWM_MAX) {
+        PORTB |= ((1 << PB1) | (1 << PB2));
+        PORTD |= ((1 << PD5) | (1 << PD6));
+        pwm_cnt = 0;
+    } else if ((pwm_cnt <= NO_THROTTLE + 255) && (pwm_cnt >= NO_THROTTLE)){
+        tmp = pwm_cnt - NO_THROTTLE;
+        if (tmp == motor[0]) {
+            PORTD &= ~(1 << PD6);
+        }
+        if (tmp == motor[1]) {
+            PORTB &= ~(1 << PB1);
+        }
+        if (tmp == motor[2]) {
+            PORTD &= ~(1 << PD5);
+        }
+        if (tmp == motor[3]) {
+            PORTB &= ~(1 << PB2);
+        }
+    }
+}
+#endif /* MOTOR_AVAILABLE */
 
 /**
  * Motor initialization
@@ -18,17 +57,38 @@ void motor_init(void) {
 
 #ifdef MOTOR_AVAILABLE
 
-    // Set ports PB3 (OC0A), PB4 (OC0B), PD6 (OC2B) and PD7 (OC2A) to output
-    DDRB &= ~((1 << PB3) | (1 << PB4));
-    DDRD &= ~((1 << PD6) | (1 << PD7));
+    // Initialization
+    pwm_cnt = 0;
+    motor[0] = 0;
+    motor[1] = 0;
+    motor[2] = 0;
+    motor[3] = 0;
 
-    // PWM Timer 0 - 76.29 Hz @ 20 MHz
-    TCCR0A |= (1 << COM0A1) | (1 << COM0B1) | (1 << WGM01) | (1 << WGM00);// NON Inverted Fast PWM
-    TCCR0B |= (1 << CS02) | (1 << CS01) | (1 << CS00);// Prescaler = 1024, Mode 3
+    // Set ports PD6 (OC0A), PB1 (OC1A), PB2 (OC0B) and PB1 (OC1B) to output
+    DDRB |= ((1 << PB1) | (1 << PB2));
+    DDRD |= ((1 << PD5) | (1 << PD6));
 
-    // PWM Timer 2 - 76.29 Hz @ 20 MHz
-    TCCR2A |= (1 << COM1A1) | (1 << COM1B1) | (1 << WGM11) | (1 << WGM10);// NON Inverted Fast PWM
-    TCCR2B |= (1 << CS12) | (1 << CS11) | (1 << CS10);// Prescaler = 1024, Mode 3
+    // CTC Modus
+    TCCR0A = (1 << WGM01);
 
+    // No prescaler
+    TCCR0B |= (1 << CS00);
+
+    // Output-Compare
+    OCR0A = TIMER_COMPARE;
+
+    // Enable interrupts
+    TIMSK0 |= (1 << OCIE0A);
 #endif /* MOTOR_AVAILABLE */
 }
+
+/**
+ * Set the motor with the given nr to the given speed
+ *
+ * @param nr The nr (0-3) of the motor to set
+ * @param speed The speed (0-255) of the motor
+ */
+void motor_set(uint8_t nr, uint8_t speed) {
+    motor[nr] = speed;
+}
+

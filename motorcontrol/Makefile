@@ -38,11 +38,11 @@
 
 
 # MCU name
-MCU = atmega88
+MCU = atmega88p
 
 # Main Oscillator Frequency
 # This is only used to define F_OSC in all assembler and c-sources.
-F_OSC = 1000000
+F_OSC = 20000000
 
 # Output format. (can be srec, ihex, binary)
 FORMAT = ihex
@@ -52,7 +52,7 @@ TARGET = main
 
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = $(TARGET).c init.c  lib/motor.c ../shared/lib/log.c ../shared/lib/uart.c ../shared/lib/i2cslave.c
+SRC = $(TARGET).c init.c lib/motor.c ../shared/lib/i2cslave.c
 
 
 # List Assembler source files here.

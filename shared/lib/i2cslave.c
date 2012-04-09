@@ -21,10 +21,6 @@ struct {
     unsigned tx :1; /*<! If there is data in the TX buffer */
 }i2c_flag;
 
-volatile uint8_t i2c_rx_buffer[I2C_BUFFER_SIZE + 1]; /*!< The i2c RX buffer */
-
-volatile uint8_t i2c_tx_buffer[I2C_BUFFER_SIZE + 1]; /*!< The i2c TX buffer */
-
 volatile uint8_t i2c_rx_buffer_addr; /*!< RX buffer address register */
 
 volatile uint8_t i2c_tx_buffer_addr; /*!< TX buffer address register */
@@ -77,6 +73,7 @@ ISR (TWI_vect) {
 // Slave Receiver
         case TW_SR_SLA_ACK:// 0x60 slave receiver, slave is addressed
         i2c_rx_buffer_addr = 0xFF;// bufferposition is undefined
+        PORTB = (1 << PB4);
         TWCR_ACK// receive next byte, send ACK
         break;
 

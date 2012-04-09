@@ -18,12 +18,12 @@
  */
 void init_qfly(void) {
 
+#ifdef UART_AVAILABLE
     /*
      * Initialize UART
      */
-#ifdef UART_AVAILABLE
     uart_init();
-#endif
+#endif /* UART_AVAILABLE */
 
 #ifdef RFM12B_AVAILABLE
     /*
@@ -48,6 +48,9 @@ void init_qfly(void) {
 
 #endif /* RFM12B_AVAILABLE */
 
+    /*
+     * Enable global interupts
+     */
     sei();
 
 }

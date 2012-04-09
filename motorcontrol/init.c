@@ -8,8 +8,8 @@
  */
 #include "main.h"
 #include "global_def.h"
-#include "uart.h"
 #include "i2cslave.h"
+#include "motor.h"
 
 #include <avr/interrupt.h>
 
@@ -18,19 +18,19 @@
  */
 void init_qfly(void) {
 
-#ifdef UART_AVAILABLE
-    /*
-     * Initialize UART
-     */
-    uart_init();
-#endif
-
 #ifdef I2C_SLAVE_AVAILABLE
     /*
      * Initialize I2C slave
      */
-    i2c_slave_init(RECEIVER_I2C_ADDR);
+    i2c_slave_init(I2C_ADDR_MOTORCONTROL);
 #endif /* I2C_SLAVE_AVAILABLE */
+
+#ifdef MOTOR_AVAILABLE
+    /*
+     * Initialize motors
+     */
+    motor_init();
+#endif /* MOTOR_AVAILABLE */
 
     /*
      * Enable global interupts
