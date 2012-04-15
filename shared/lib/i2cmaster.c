@@ -31,7 +31,7 @@ void i2c_init(void) {
 
     TWSR = 0; /* no prescaler */
     TWBR = (uint8_t) ((F_CPU / SCL_CLOCK) - 16) / 2; /* must be > 10 for stable operation */
-    log_s(" master ...");
+    log_s("i2c master ...");
 #endif /* I2C_MASTER_AVAILABLE */
 }/* i2c_init */
 

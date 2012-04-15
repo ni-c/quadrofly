@@ -18,6 +18,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+#ifdef RFM12B_AVAILABLE
 /**
  * Received a rf12b packet
  *
@@ -26,6 +27,7 @@
 void rfm12_receive(uint8_t value) {
 
 }
+#endif /* RFM12B_AVAILABLE */
 
 /**
  * The main function.
@@ -97,12 +99,12 @@ int main(void) {
             if (c[0]=='4') {
                 if (i2c_start(I2C_ADDR_MOTORCONTROL - 1 + I2C_WRITE)) {
                     i2c_write(0x00);
-                    i2c_write(0x80);
-                    i2c_write(0x80);
-                    i2c_write(0x80);
-                    i2c_write(0x80);
+                    i2c_write(0xFE);
+                    i2c_write(0xFE);
+                    i2c_write(0xFE);
+                    i2c_write(0xFE);
                     i2c_stop();
-                    uart_tx("\nSetting motor speed to 255\n");
+                    uart_tx("\nSetting motor speed to 254\n");
                 } else {
                     uart_tx("I2C Error\n");
                 }

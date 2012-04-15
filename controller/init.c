@@ -20,6 +20,12 @@
  */
 void init_qfly(void) {
 
+#ifdef LED_AVAILABLE
+    // Set pins to output
+    DDRB |= (1 << PB0) | (1 << PB1);
+    PORTB |= (1 << PB1);
+#endif /* LED_AVAILABLE */
+
 #ifdef UART_AVAILABLE
     uart_init();
     log_s("uart initialization ... ok\n");
@@ -71,4 +77,10 @@ void init_qfly(void) {
      * Enable global interrupts
      */
     sei();
+
+#ifdef LED_AVAILABLE
+    PORTB &= ~(1 << PB1);
+    PORTB |= (1 << PB0);
+#endif /* LED_AVAILABLE */
+
 }

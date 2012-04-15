@@ -10,20 +10,22 @@
 #define MAIN_H_
 
 #ifndef F_CPU
-#define F_CPU 16000000UL /*!< Set CPU clock */
+#define F_CPU 10000000UL /*!< Set CPU clock */
 #endif
+
+#define LED_AVAILABLE /*!< LEDs available */
 
 //#define SIMULAVR_AVAILABLE /*!< Compile for the simulavr simulator */
 #define LOG_AVAILABLE /*!< Is Logging available */
 
 #define UART_AVAILABLE /*!< Is UART available */
-#define BAUD 115200UL /*!< UART Baudrate in bit per second */
+#define BAUD 57600UL /*!< UART Baudrate in bit per second */
 
-#define I2C_MASTER_AVAILABLE /*!< I2C is available as master */
+//#define I2C_MASTER_AVAILABLE /*!< I2C is available as master */
 
-//#define RFM12B_AVAILABLE /*!< Is RFM12B available */
+#define RFM12B_AVAILABLE /*!< Is RFM12B available */
 
-//#define MPU6050_AVAILABLE /*!< Is MPU6050 available */
+#define MPU6050_AVAILABLE /*!< Is MPU6050 available */
 
 /* Dependencies */
 #ifdef SIMULAVR_AVAILABLE
@@ -31,7 +33,7 @@
 #endif /* SIMULAVR_AVAILABLE */
 
 #ifdef MPU6050_AVAILABLE
-#define I2C_MASER_AVAILABLE /*!< We need I2C to communicate with MPU6050 */
+#define I2C_MASTER_AVAILABLE /*!< We need I2C to communicate with MPU6050 */
 #endif
 
 #endif
