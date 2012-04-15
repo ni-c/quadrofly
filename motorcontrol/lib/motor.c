@@ -8,6 +8,7 @@
  */
 #include "main.h"
 #include "motor.h"
+#include "i2cslave.h"
 
 #ifdef MOTOR_AVAILABLE
 
@@ -34,16 +35,16 @@ ISR (TIMER0_COMPA_vect) {
         pwm_cnt = 0;
     } else if ((pwm_cnt <= NO_THROTTLE + 255) && (pwm_cnt >= NO_THROTTLE)){
         tmp = pwm_cnt - NO_THROTTLE;
-        if (tmp == motor[0]) {
+        if (tmp == i2c_buffer[0]) {
             PORTD &= ~(1 << PD6);
         }
-        if (tmp == motor[1]) {
+        if (tmp == i2c_buffer[1]) {
             PORTB &= ~(1 << PB1);
         }
-        if (tmp == motor[2]) {
+        if (tmp == i2c_buffer[2]) {
             PORTD &= ~(1 << PD5);
         }
-        if (tmp == motor[3]) {
+        if (tmp == i2c_buffer[3]) {
             PORTB &= ~(1 << PB2);
         }
     }
@@ -59,10 +60,6 @@ void motor_init(void) {
 
     // Initialization
     pwm_cnt = 0;
-    motor[0] = 0;
-    motor[1] = 0;
-    motor[2] = 0;
-    motor[3] = 0;
 
     // Set ports PD6 (OC0A), PB1 (OC1A), PB2 (OC0B) and PB1 (OC1B) to output
     DDRB |= ((1 << PB1) | (1 << PB2));
@@ -81,14 +78,3 @@ void motor_init(void) {
     TIMSK0 |= (1 << OCIE0A);
 #endif /* MOTOR_AVAILABLE */
 }
-
-/**
- * Set the motor with the given nr to the given speed
- *
- * @param nr The nr (0-3) of the motor to set
- * @param speed The speed (0-255) of the motor
- */
-void motor_set(uint8_t nr, uint8_t speed) {
-    motor[nr] = speed;
-}
-

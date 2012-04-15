@@ -22,4 +22,9 @@
 //#define SIMULAVR_AVAILABLE /*!< Compile for the simulavr simulator */
 //#define LOG_AVAILABLE /*!< Is Logging available */
 
+/* Dependencies */
+#ifdef MOTOR_AVAILABLE
+#define I2C_SLAVE_AVAILABLE
+#endif
+
 #endif

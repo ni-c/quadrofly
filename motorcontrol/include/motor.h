@@ -25,12 +25,4 @@
  */
 void motor_init(void);
 
-/**
- * Set the motor with the given nr to the given speed
- *
- * @param nr The nr (0-3) of the motor to set
- * @param speed The speed (0-255) of the motor
- */
-void motor_set(uint8_t nr, uint8_t speed);
-
 #endif /* MOTOR_H_ */
