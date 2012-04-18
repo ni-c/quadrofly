@@ -33,7 +33,7 @@
 /**
  * Initializes the MPU-6050 device
  */
-void mpu6050_init(void);
+uint8_t mpu6050_init(void);
 
 /**
  * Test the I2C communication with the mpu6050 module.

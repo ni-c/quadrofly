@@ -13,12 +13,12 @@
 #include <stdint.h>
 #include <avr/io.h>
 
-#define PWM_CYCLE       50 /*!< PWM Cycle in Hz */
+#define PWM_CYCLE       200 /*!< PWM Cycle in Hz */
 
-#define TIMER_COMPARE   (F_CPU / 100000) /*!< Timer compare */
+#define TIMER_COMPARE   (F_CPU / 250000) /*!< Timer compare */
 #define PWM_MAX         (100000 / PWM_CYCLE) /*!< PWM reset value */
 
-#define NO_THROTTLE     80 /*!< PWM length for no throttle */
+#define NO_THROTTLE     235 /*!< PWM length for no throttle */
 
 /**
  * Motor initialization

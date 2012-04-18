@@ -62,8 +62,8 @@ void motor_init(void) {
     pwm_cnt = 0;
 
     // Set ports PD6 (OC0A), PB1 (OC1A), PB2 (OC0B) and PB1 (OC1B) to output
-    DDRB |= ((1 << PB1) | (1 << PB2));
-    DDRD |= ((1 << PD5) | (1 << PD6));
+    DDRB |= ((1 << DDB1) | (1 << DDB2));
+    DDRD |= ((1 << DDD5) | (1 << DDD6));
 
     // CTC Modus
     TCCR0A = (1 << WGM01);

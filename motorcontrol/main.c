@@ -22,8 +22,8 @@ uint8_t running = 0; /*!< If one of the motors is set to another speed then 0, t
 int main(void) {
 
     /* LED on */
-    DDRC |= (1 << DDC6);
-    PORTC |= (1 << PC6);
+    DDRD |= (1 << DDD0);
+    PORTD |= (1 << PD0);
 
     /* Initialization */
     init_qfly();
@@ -31,9 +31,9 @@ int main(void) {
     /* Our loop */
     while (1) {
         /* Turn LED off if we get a signal */
-        if ((running==0) && (!((i2c_buffer[0]==0) && (i2c_buffer[0]==0) && (i2c_buffer[0]==0) && (i2c_buffer[0]==0)))) {
+        if ((running==0) && (!((i2c_buffer[0]==0) && (i2c_buffer[1]==0) && (i2c_buffer[2]==0) && (i2c_buffer[3]==0)))) {
             /* LED off */
-            PORTC &= ~(1 << PC6);
+            PORTD &= ~(1 << PD0);
             running=1;
         }
     }

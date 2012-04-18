@@ -115,6 +115,8 @@ void tx_buffer(const char *data) {
 
 /**
  * Returns the content of the UART RX buffer and resets the buffer
+ *
+ * @return the content of the UART RX buffer and resets the buffer
  */
 char* uart_rx(void) {
 

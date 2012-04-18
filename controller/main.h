@@ -27,6 +27,8 @@
 
 #define MPU6050_AVAILABLE /*!< Is MPU6050 available */
 
+#define MOTORCONTROL_AVAILABLE /*!< Is the motor control module available */
+
 /* Dependencies */
 #ifdef SIMULAVR_AVAILABLE
 #undef UART_AVAILABLE /*!< UART doesn't work if the software runs on simulavr, deactivate it */

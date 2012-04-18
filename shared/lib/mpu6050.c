@@ -20,9 +20,9 @@ uint8_t buffer[14]; /*!< Data holding buffer */
 /**
  * Initializes the MPU-6050 device
  */
-void mpu6050_init(void) {
+uint8_t mpu6050_init(void) {
 #ifdef MPU6050_AVAILABLE
-    log_s("mpu6050 initialization ...");
+    log_s("mpu6050 ...");
 
     /* Set clock to X GYRO and disable sleep */
     mpu6050_set(MPU6050_PWR_MGMT_1, 0x01);
@@ -41,8 +41,10 @@ void mpu6050_init(void) {
 
     if (mpu6050_test()) {
         log_s(" ok\n");
+        return 1;
     } else {
         log_s(" failed\n");
+        return 0;
     }
 #endif // MPU6050_AVAILABLE
 }

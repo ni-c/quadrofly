@@ -93,7 +93,7 @@ unsigned int rfm12_write(unsigned int cmd) {
  */
 void rfm12_init(void) {
 #ifdef RFM12B_AVAILABLE
-    log_s("rfm12 initialization ...");
+    log_s("rfm12 ...");
     DDRSPI &= (1 << SDI) | (1 << SCK) | (1 << CS);  // SDI, SCK and CS output
     DDRSPI |= ~(1 << SDO);  // SDO  input
 

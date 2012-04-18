@@ -12,7 +12,7 @@
 #include <inttypes.h>
 #include <string.h>
 
-#define UART_BUFFER_SIZE	32 /*!< The size of the uart TX and RX buffer */
+#define UART_BUFFER_SIZE	64 /*!< The size of the uart TX and RX buffer */
 
 /**
  * UART Initialization
