@@ -32,6 +32,13 @@ char* uart_rx(void);
 uint8_t uart_rx_ready(void);
 
 /**
+ * Returns 1 if the TX buffer is empty
+ *
+ * @return 1 if the TX buffer is empty
+ */
+uint8_t uart_tx_ready(void);
+
+/**
  * Send an array of chars
  *
  * @param s An array of chars to send

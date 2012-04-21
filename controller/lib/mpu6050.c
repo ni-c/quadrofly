@@ -15,8 +15,6 @@
 
 #include <inttypes.h>
 
-uint8_t buffer[14]; /*!< Data holding buffer */
-
 /**
  * Initializes the MPU-6050 device
  */
@@ -27,9 +25,6 @@ uint8_t mpu6050_init(void) {
     /* Set clock to X GYRO and disable sleep */
     mpu6050_set(MPU6050_PWR_MGMT_1, 0x01);
 
-    /* Enable all axes */
-    mpu6050_set(MPU6050_PWR_MGMT_2, 0x00);
-
     /* Set the low pass filter to 2 */
     mpu6050_set(MPU6050_CONFIG, 0x02);
 
@@ -39,6 +34,11 @@ uint8_t mpu6050_init(void) {
     /* Set the scale range of the acclerometer to ± 16g and the high pass filter to 5Hz */
     mpu6050_set(MPU6050_ACCEL_CONFIG, 0x19);
 
+    /* Enable DATA_RDY interrupt */
+    mpu6050_set(MPU6050_INT_ENABLE, 0x01);
+
+    /* Set interrupt pin D3 to input */DDRD &= ~(1 << DD3);
+
     if (mpu6050_test()) {
         log_s(" ok\n");
         return 1;
@@ -47,6 +47,19 @@ uint8_t mpu6050_init(void) {
         return 0;
     }
 #endif // MPU6050_AVAILABLE
+}
+
+/**
+ * Checks if the data ready interrupt of the MPU-6050 is set
+ *
+ * @return 1 if the data ready interrupt of the MPU-6050 is set
+ */
+uint8_t mpu6050_data_ready(void) {
+    if ( PIND & PD3 ) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 /**
@@ -128,6 +141,25 @@ uint16_t mpu6050_u_get(uint8_t reg_address) {
 }
 
 /**
+ * Reads the interrupt status of the MPU-6050 and returns it
+ *
+ * @result The interrupt status of the MPU-6050 register
+ */
+uint8_t mpu6050_get_int_status(void) {
+#ifdef MPU6050_AVAILABLE
+    if (i2c_start(MPU6050_ADDRESS + I2C_WRITE)) {
+        i2c_write(MPU6050_INT_STATUS);
+        if (i2c_rep_start(MPU6050_ADDRESS + I2C_READ)) {
+            uint8_t result = i2c_read_ack();
+            i2c_stop();
+            return result;
+        }
+    }
+#endif // MPU6050_AVAILABLE
+    return 0;
+}
+
+/**
  * Reads the MPU-6050 registers with the most recent accelerometer, temperature sensor and gyroscope measurements
  *
  * @param accel_xout Pointer to store the most recent X accelerometer measurement
@@ -153,5 +185,8 @@ void mpu6050_getall(int16_t *accel_xout, int16_t *accel_yout, int16_t *accel_zou
         }
     }
     i2c_stop();
+
+    // Clear interrupt register
+    mpu6050_get_int_status();
 #endif // MPU6050_AVAILABLE
 }

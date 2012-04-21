@@ -31,6 +31,10 @@ void rfm12_receive(uint8_t value) {
 
 uint8_t speed = 0x00;
 
+#ifdef MPU6050_AVAILABLE
+uint16_t mpu6050[7];
+#endif /* MPU6050_AVAILABLE */
+
 /**
  * The main function.
  */
@@ -45,33 +49,27 @@ int main(void) {
     /* Our loop */
     while (1) {
 
-
+#ifdef MPU6050_AVAILABLE
+        /* MPU-6050 update */
+        if (mpu6050_data_ready()) {
+            mpu6050_getall(mpu6050[ACC_X], mpu6050[ACC_Y], mpu6050[ACC_Z], mpu6050[GYRO_X], mpu6050[GYRO_Y], mpu6050[GYRO_Z], mpu6050[TEMP]);
+        }
+#endif /* MPU6050_AVAILABLE */
 
 #ifdef UART_AVAILABLE
-        if (uart_rx_ready()) {
-            char *c = uart_rx();
-            if (c[0]=='+') {
-                if (speed<255) {
-                    speed++;
-                }
-                log_s("Speed: ");
-                log_i(speed);
-                log_s("\n");
-                motor_set(speed, speed, speed, speed);
-            }
-            if (c[0]=='-') {
-                if (speed>0) {
-                    speed--;
-                }
-                log_s("Speed: ");
-                log_i(speed);
-                log_s("\n");
-                motor_set(speed, speed, speed, speed);
-            }
-            if (c[0]=='1') {
-                motor_set(0x1A, 0x1A, 0x1A, 0x1A);
-            }
-
+        if (uart_tx_ready()) {
+            uart_tx(mpu6050[ACC_X]);
+            uart_tx(mpu6050[ACC_X] >> 8);
+            uart_tx(mpu6050[ACC_Y]);
+            uart_tx(mpu6050[ACC_Y] >> 8);
+            uart_tx(mpu6050[ACC_Z]);
+            uart_tx(mpu6050[ACC_Z] >> 8);
+            uart_tx(mpu6050[GYRO_X]);
+            uart_tx(mpu6050[GYRO_X] >> 8);
+            uart_tx(mpu6050[GYRO_Y]);
+            uart_tx(mpu6050[GYRO_Y] >> 8);
+            uart_tx(mpu6050[GYRO_Z]);
+            uart_tx(mpu6050[GYRO_Z] >> 8);
         }
 #endif /* UART_AVAILABLE */
     }

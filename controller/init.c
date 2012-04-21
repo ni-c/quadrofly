@@ -31,7 +31,7 @@ void init_qfly(void) {
 
 #ifdef LED_AVAILABLE
     // Set pins to output
-    DDRB |= (1 << PB0) | (1 << PB1);
+    DDRB |= (1 << DD0) | (1 << DD1);
     PORTB |= (1 << PB1);
 #endif /* LED_AVAILABLE */
 

@@ -36,6 +36,16 @@
 
 #ifdef MPU6050_AVAILABLE
 #define I2C_MASTER_AVAILABLE /*!< We need I2C to communicate with MPU6050 */
+
+/* mpu6050 buffer array positions */
+#define ACC_X   0   /*!< X accelerator value */
+#define ACC_Y   1   /*!< Y accelerator value */
+#define ACC_Z   2   /*!< Z accelerator value */
+#define TEMP    3   /*!< TEMP value */
+#define GYRO_X  4   /*!< X gyroscope value */
+#define GYRO_Y  5   /*!< Y gyroscope value */
+#define GYRO_Z  6   /*!< Z gyroscope value */
 #endif
+
 
 #endif

@@ -143,6 +143,21 @@ uint8_t uart_rx_ready(void) {
 }
 
 /**
+ * Returns 1 if the TX buffer is empty
+ *
+ * @return 1 if the TX buffer is empty
+ */
+uint8_t uart_tx_ready(void) {
+
+#ifdef UART_AVAILABLE
+    if (uart_flag.tx==1) {
+        return 1;
+    }
+#endif /* UART_AVAILABLE */
+    return 0;
+}
+
+/**
  * Send an array of chars
  *
  * @param s An array of chars to send
