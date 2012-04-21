@@ -40,9 +40,12 @@ int main(void) {
     init_qfly();
     motor_set(0x01, 0x01, 0x01, 0x01);
     log_s("up and running\n");
+    motor_set(0x00, 0x00, 0x00, 0x00);
 
     /* Our loop */
     while (1) {
+
+
 
 #ifdef UART_AVAILABLE
         if (uart_rx_ready()) {

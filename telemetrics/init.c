@@ -37,7 +37,8 @@ void init_qfly(void) {
 
     /*
      * Initialize interrupt
-     */DDRD |= ~(1 << NIRQ);  // set NIRQ to input
+     */
+    DDRD |= ~(1 << NIRQ);  // set NIRQ to input
     EICRA |= (1 << ISC01);  // The falling edge of INT0 generates an interrupt request
     EIMSK |= (1 << INT0);  // enable INT0 interrupt
 
