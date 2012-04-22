@@ -13,6 +13,7 @@
 #include "i2cmaster.h"
 #include "rfm12.h"
 #include "mpu6050.h"
+#include "millis.h"
 
 #include <avr/interrupt.h>
 #include <util/delay.h>
@@ -76,16 +77,6 @@ void init_qfly(void) {
 
 #endif /* RFM12B_AVAILABLE */
 
-#ifdef MPU6050_AVAILABLE
-    /*
-     * Initialize MPU6050
-     */
-    if (!mpu6050_init()) {
-        ready = 0;
-    }
-    _delay_ms(10);
-#endif /* MPU6050_AVAILABLE */
-
 #ifdef MOTORCONTROL_AVAILABLE
     log_s("motorcontrol ... ");
     if (i2c_start(I2C_ADDR_MOTORCONTROL - 1 + I2C_WRITE)) {
@@ -101,6 +92,21 @@ void init_qfly(void) {
         log_s("failed\n");
     }
 #endif
+
+#ifdef MPU6050_AVAILABLE
+    /*
+     * Initialize MPU6050
+     */
+    if (!mpu6050_init()) {
+        ready = 0;
+    }
+    _delay_ms(10);
+#endif /* MPU6050_AVAILABLE */
+
+    /*
+     * Initialize Millis
+     */
+    millis_init();
 
 #ifdef LED_AVAILABLE
     if (ready) {

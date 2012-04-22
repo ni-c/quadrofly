@@ -29,8 +29,6 @@
 #define MPU6050_CONFIG              0x1A /*!< This register configures the external Frame Synchronization (FSYNC) pin sampling and the Digital Low Pass Filter (DLPF) setting for both the gyroscopes and accelerometers. */
 #define MPU6050_GYRO_CONFIG         0x1B /*!< This register is used to trigger gyroscope self-test and configure the gyroscopes’ full scale range. */
 #define MPU6050_ACCEL_CONFIG        0x1C /*!< This register is used to trigger accelerometer self test and configure the accelerometer full scale range. This register also configures the Digital High Pass Filter (DHPF). */
-#define MPU6050_INT_ENABLE          0x38 /*!< This register enables interrupt generation by interrupt sources. */
-#define MPU6050_INT_STATUS          0x3A /*!< This register shows the interrupt status of each interrupt generation source. Each bit will clear after the register is read. */
 
 /**
  * Initializes the MPU-6050 device
@@ -43,13 +41,6 @@ uint8_t mpu6050_init(void);
  * @return 1 If the communication is working
  */
 uint8_t mpu6050_test(void);
-
-/**
- * Checks if the data ready interrupt of the MPU-6050 is set
- *
- * @return 1 if the data ready interrupt of the MPU-6050 is set
- */
-uint8_t mpu6050_data_ready(void);
 
 /**
  * Set a register in the MPU-6050
@@ -74,13 +65,6 @@ int16_t mpu6050_get(uint8_t reg_address);
  * @result The UNSIGNED 16-bit value of the register
  */
 uint16_t mpu6050_u_get(uint8_t reg_address);
-
-/**
- * Reads the interrupt status of the MPU-6050 and returns it
- *
- * @result The interrupt status of the MPU-6050 register
- */
-uint8_t mpu6050_get_int_status(void);
 
 /**
  * Reads the MPU-6050 registers with the most recent accelerometer, temperature sensor and gyroscope measurements
