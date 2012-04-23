@@ -20,6 +20,14 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
+#ifdef MPU6050_AVAILABLE
+int16_t mpu6050[7]; /*!< MPU-6050 measurements */
+float kalman[3]; /*!< Kalman Filter results */
+#endif /* MPU6050_AVAILABLE */
+
+uint32_t lastlooptime = 0; /*!< Timestamp of the last loop */
+uint8_t looptime = 0; /*!< Loop time in ms */
+
 #ifdef RFM12B_AVAILABLE
 /**
  * Received a rf12b packet
@@ -30,12 +38,6 @@ void rfm12_receive(uint8_t value) {
 
 }
 #endif /* RFM12B_AVAILABLE */
-
-uint8_t speed = 0x00;
-
-#ifdef MPU6050_AVAILABLE
-int16_t mpu6050[7];
-#endif /* MPU6050_AVAILABLE */
 
 /**
  * The main function.
@@ -50,9 +52,21 @@ int main(void) {
     /* Our loop */
     while (1) {
 
+        looptime = millis - lastlooptime;
+        lastlooptime = millis;
+
 #ifdef MPU6050_AVAILABLE
+
+        /* Read MPU-6050 measurements */
         mpu6050_getall(&mpu6050[ACC_X], &mpu6050[ACC_Y], &mpu6050[ACC_Z], &mpu6050[GYRO_X], &mpu6050[GYRO_Y], &mpu6050[GYRO_Z], &mpu6050[TEMP]);
+
+        /* Kalman filter the MPU-6050 measurements */
+        for (int i = 0; i < 3; i++) {
+            kalman[i] = kalmanCalculate((float)mpu6050[i], (float)mpu6050[3+i], looptime, i);
+        }
+
 #endif /* MPU6050_AVAILABLE */
+
 
 #ifdef UART_AVAILABLE
         if (uart_tx_ready()) {
@@ -68,7 +82,12 @@ int main(void) {
             uart_tx(";");
             uart_tx_int16_t(mpu6050[GYRO_Z]);
             uart_tx(";");
-            uart_tx_int16_t(millis());
+            uart_tx_int16_t(kalman[0]);
+            uart_tx(";");
+            uart_tx_int16_t(kalman[1]);
+            uart_tx(";");
+            uart_tx_int16_t(kalman[0]);
+            uart_tx(";");
             uart_tx("\n");
         }
 #endif /* UART_AVAILABLE */
@@ -82,36 +101,43 @@ int main(void) {
 
 /* TODO Kalman filter */
 
-float Q_angle = 0.001;  //0.001
-float Q_gyro = 0.003;  //0.003
-float R_angle = 0.03;  //0.03
+#define Q_ANGLE 0.001
+#define Q_GYRO  0.003
+#define R_ANGLE 0.03
 
-float x_angle = 0;
-float x_bias = 0;
-float P_00 = 0, P_01 = 0, P_10 = 0, P_11 = 0;
-float dt, y, S;
-float K_0, K_1;
+float kalman_angle[3] = {0, 0, 0};
+float kalman_bias[3] = {0, 0, 0};
+float kalman_P_00[3] = {0, 0, 0};
+float kalman_P_01[3] = {0, 0, 0};
+float kalman_P_10[3] = {0, 0, 0};
+float kalman_P_11[3] = {0, 0, 0};
+float kalman_y[3] = {0, 0, 0};
+float kalman_S[3] = {0, 0, 0};
+float kalman_K_0[3] = {0, 0, 0};
+float kalman_K_1[3] = {0, 0, 0};
 
-float kalmanCalculate(float newAngle, float newRate, int looptime) {
-    dt = (float)looptime/1000;
-    x_angle += dt * (newRate - x_bias);
-    P_00 += -dt * (P_10 + P_01) + Q_angle * dt;
-    P_01 += -dt * P_11;
-    P_10 += -dt * P_11;
-    P_11 += +Q_gyro * dt;
+float kalmanCalculate(float acc, float gyro, uint8_t looptime, uint8_t key) {
 
-    y = newAngle - x_angle;
-    S = P_00 + R_angle;
-    K_0 = P_00 / S;
-    K_1 = P_10 / S;
+    float kalman_dt = (float)looptime/1000;
 
-    x_angle += K_0 * y;
-    x_bias += K_1 * y;
-    P_00 -= K_0 * P_00;
-    P_01 -= K_0 * P_01;
-    P_10 -= K_1 * P_00;
-    P_11 -= K_1 * P_01;
+    kalman_angle[key] += kalman_dt * (gyro - kalman_bias[key]);
+    kalman_P_00[key] += -kalman_dt * (kalman_P_10[key] + kalman_P_01[key]) + Q_ANGLE * kalman_dt;
+    kalman_P_01[key] += -kalman_dt * kalman_P_11[key];
+    kalman_P_10[key] += -kalman_dt * kalman_P_11[key];
+    kalman_P_11[key] += +Q_GYRO * kalman_dt;
 
-    return x_angle;
+    kalman_y[key] = acc - kalman_angle[key];
+    kalman_S[key] = kalman_P_00[key] + R_ANGLE;
+    kalman_K_0[key] = kalman_P_00[key] / kalman_S[key];
+    kalman_K_1[key] = kalman_P_10[key] / kalman_S[key];
+
+    kalman_angle[key] += kalman_K_0[key] * kalman_y[key];
+    kalman_bias[key] += kalman_K_1[key] * kalman_y[key];
+    kalman_P_00[key] -= kalman_K_0[key] * kalman_P_00[key];
+    kalman_P_01[key] -= kalman_K_0[key] * kalman_P_01[key];
+    kalman_P_10[key] -= kalman_K_1[key] * kalman_P_00[key];
+    kalman_P_11[key] -= kalman_K_1[key] * kalman_P_01[key];
+
+    return kalman_angle[key];
 }
 

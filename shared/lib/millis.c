@@ -14,7 +14,7 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 
-uint64_t ms = 0;
+uint32_t ms = 0;
 
 /**
  * Timer 0 interrupt
