@@ -82,11 +82,11 @@ int main(void) {
             uart_tx(";");
             uart_tx_int16_t(mpu6050[GYRO_Z]);
             uart_tx(";");
-            uart_tx_int16_t(kalman[0]);
+            uart_tx_int16_t((int16_t)kalman[0]);
             uart_tx(";");
-            uart_tx_int16_t(kalman[1]);
+            uart_tx_int16_t((int16_t)kalman[1]);
             uart_tx(";");
-            uart_tx_int16_t(kalman[0]);
+            uart_tx_int16_t((int16_t)kalman[2]);
             uart_tx(";");
             uart_tx("\n");
         }
