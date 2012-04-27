@@ -13,6 +13,8 @@
 #define F_CPU 10000000UL /*!< Set CPU clock */
 #endif
 
+#define I2C_BUFFER_SIZE 16 /*!< Size of the I2C buffer 2..254 */
+
 #define LED_AVAILABLE /*!< LEDs available */
 
 //#define SIMULAVR_AVAILABLE /*!< Compile for the simulavr simulator */

@@ -28,6 +28,57 @@ float kalman[3]; /*!< Kalman Filter results */
 uint32_t lastlooptime = 0; /*!< Timestamp of the last loop */
 uint8_t looptime = 0; /*!< Loop time in ms */
 
+
+/*
+ * ==========================================================================================================
+ * TODO Kalman filter
+ * ==========================================================================================================
+ */
+
+#define Q_ANGLE 0.001
+#define Q_GYRO  0.003
+#define R_ANGLE 0.03
+
+float kalman_angle[3] = {0, 0, 0};
+float kalman_bias[3] = {0, 0, 0};
+float kalman_P_00[3] = {0, 0, 0};
+float kalman_P_01[3] = {0, 0, 0};
+float kalman_P_10[3] = {0, 0, 0};
+float kalman_P_11[3] = {0, 0, 0};
+float kalman_y[3] = {0, 0, 0};
+float kalman_S[3] = {0, 0, 0};
+float kalman_K_0[3] = {0, 0, 0};
+float kalman_K_1[3] = {0, 0, 0};
+
+float kalmanCalculate(float acc, float gyro, uint8_t looptime, uint8_t key) {
+
+    float kalman_dt = (float)looptime/1000;
+
+    kalman_angle[key] += kalman_dt * (gyro - kalman_bias[key]);
+    kalman_P_00[key] += -kalman_dt * (kalman_P_10[key] + kalman_P_01[key]) + Q_ANGLE * kalman_dt;
+    kalman_P_01[key] += -kalman_dt * kalman_P_11[key];
+    kalman_P_10[key] += -kalman_dt * kalman_P_11[key];
+    kalman_P_11[key] += +Q_GYRO * kalman_dt;
+
+    kalman_y[key] = acc - kalman_angle[key];
+    kalman_S[key] = kalman_P_00[key] + R_ANGLE;
+    kalman_K_0[key] = kalman_P_00[key] / kalman_S[key];
+    kalman_K_1[key] = kalman_P_10[key] / kalman_S[key];
+
+    kalman_angle[key] += kalman_K_0[key] * kalman_y[key];
+    kalman_bias[key] += kalman_K_1[key] * kalman_y[key];
+    kalman_P_00[key] -= kalman_K_0[key] * kalman_P_00[key];
+    kalman_P_01[key] -= kalman_K_0[key] * kalman_P_01[key];
+    kalman_P_10[key] -= kalman_K_1[key] * kalman_P_00[key];
+    kalman_P_11[key] -= kalman_K_1[key] * kalman_P_01[key];
+
+    return kalman_angle[key];
+}
+
+/*
+ * ==========================================================================================================
+ */
+
 #ifdef RFM12B_AVAILABLE
 /**
  * Received a rf12b packet
@@ -47,13 +98,12 @@ int main(void) {
     /* Initialization */
     init_qfly();
     log_s("up and running\n");
-    motor_set(0x01, 0x01, 0x01, 0x01);
 
     /* Our loop */
     while (1) {
 
-        looptime = millis - lastlooptime;
-        lastlooptime = millis;
+        looptime = millis() - lastlooptime;
+        lastlooptime = millis();
 
 #ifdef MPU6050_AVAILABLE
 
@@ -96,48 +146,3 @@ int main(void) {
     /* Finally. (Never ever) */
     return 0;
 }
-
-
-
-/* TODO Kalman filter */
-
-#define Q_ANGLE 0.001
-#define Q_GYRO  0.003
-#define R_ANGLE 0.03
-
-float kalman_angle[3] = {0, 0, 0};
-float kalman_bias[3] = {0, 0, 0};
-float kalman_P_00[3] = {0, 0, 0};
-float kalman_P_01[3] = {0, 0, 0};
-float kalman_P_10[3] = {0, 0, 0};
-float kalman_P_11[3] = {0, 0, 0};
-float kalman_y[3] = {0, 0, 0};
-float kalman_S[3] = {0, 0, 0};
-float kalman_K_0[3] = {0, 0, 0};
-float kalman_K_1[3] = {0, 0, 0};
-
-float kalmanCalculate(float acc, float gyro, uint8_t looptime, uint8_t key) {
-
-    float kalman_dt = (float)looptime/1000;
-
-    kalman_angle[key] += kalman_dt * (gyro - kalman_bias[key]);
-    kalman_P_00[key] += -kalman_dt * (kalman_P_10[key] + kalman_P_01[key]) + Q_ANGLE * kalman_dt;
-    kalman_P_01[key] += -kalman_dt * kalman_P_11[key];
-    kalman_P_10[key] += -kalman_dt * kalman_P_11[key];
-    kalman_P_11[key] += +Q_GYRO * kalman_dt;
-
-    kalman_y[key] = acc - kalman_angle[key];
-    kalman_S[key] = kalman_P_00[key] + R_ANGLE;
-    kalman_K_0[key] = kalman_P_00[key] / kalman_S[key];
-    kalman_K_1[key] = kalman_P_10[key] / kalman_S[key];
-
-    kalman_angle[key] += kalman_K_0[key] * kalman_y[key];
-    kalman_bias[key] += kalman_K_1[key] * kalman_y[key];
-    kalman_P_00[key] -= kalman_K_0[key] * kalman_P_00[key];
-    kalman_P_01[key] -= kalman_K_0[key] * kalman_P_01[key];
-    kalman_P_10[key] -= kalman_K_1[key] * kalman_P_00[key];
-    kalman_P_11[key] -= kalman_K_1[key] * kalman_P_01[key];
-
-    return kalman_angle[key];
-}
-

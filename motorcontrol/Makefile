@@ -52,7 +52,7 @@ TARGET = main
 
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = $(TARGET).c init.c lib/motor.c ../shared/lib/i2cslave.c
+SRC = $(TARGET).c init.c lib/motor.c lib/rx.c ../shared/lib/i2cslave.c
 
 
 # List Assembler source files here.

@@ -8,6 +8,7 @@
  */
 #include "main.h"
 #include "global_def.h"
+#include "motorcontrol.h"
 #include "log.h"
 #include "uart.h"
 #include "i2cmaster.h"
@@ -18,7 +19,7 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
-uint8_t ready = 1; /*!< If the initialization was succesful */
+uint8_t ready = 1; /*!< If the initialization was successful */
 
 /**
  * Quadrofly initialization
@@ -80,8 +81,9 @@ void init_qfly(void) {
 #ifdef MOTORCONTROL_AVAILABLE
     log_s("motorcontrol ... ");
     if (i2c_start(I2C_ADDR_MOTORCONTROL - 1 + I2C_WRITE)) {
-        i2c_write(0x00);
-        i2c_write(0x00);
+        i2c_write(MC_ENABLE);
+        i2c_write(0x01); // Enable the motorcontrol
+        i2c_write(0x00); // Set motor speeds to 0x00
         i2c_write(0x00);
         i2c_write(0x00);
         i2c_write(0x00);
@@ -91,7 +93,7 @@ void init_qfly(void) {
         ready = 0;
         log_s("failed\n");
     }
-#endif
+#endif /* MOTORCONTROL_AVAILABLE */
 
 #ifdef MPU6050_AVAILABLE
     /*

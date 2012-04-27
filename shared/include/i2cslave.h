@@ -10,9 +10,8 @@
 #ifndef I2CSLAVE_H_
 #define I2CSLAVE_H_
 
+#include <main.h>
 #include <inttypes.h>
-
-#define I2C_BUFFER_SIZE 8 /*!< Size of the I2C buffer 2..254 */
 
 volatile uint8_t i2c_buffer[I2C_BUFFER_SIZE + 1]; /*!< The I2C Buffer */
 

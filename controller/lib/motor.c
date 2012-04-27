@@ -9,6 +9,7 @@
 
 #include "main.h"
 #include "global_def.h"
+#include "motorcontrol.h"
 #include "i2cmaster.h"
 
 #include <inttypes.h>
@@ -24,7 +25,7 @@
  */
 uint8_t motor_set(uint8_t a, uint8_t b, uint8_t c, uint8_t d) {
     if (i2c_start(I2C_ADDR_MOTORCONTROL - 1 + I2C_WRITE)) {
-        i2c_write(0x00);
+        i2c_write(MC_MOTOR_1_SPEED);
         i2c_write(a);
         i2c_write(b);
         i2c_write(c);

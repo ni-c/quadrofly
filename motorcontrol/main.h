@@ -11,11 +11,15 @@
 
 #include "inttypes.h"
 
+#define I2C_BUFFER_SIZE 16 /*!< Size of the I2C buffer 2..254 */
+
 #ifndef F_CPU
 #define F_CPU 20000000UL /*!< Set CPU clock */
 #endif
 
 #define MOTOR_AVAILABLE /*!< If the motor ESCs are available */
+
+#define RX_AVAILABLE /*!< If the RX decoder is available */
 
 #define I2C_SLAVE_AVAILABLE /*!< I2C is available as slave */
 

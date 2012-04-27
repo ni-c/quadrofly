@@ -6098,85 +6098,6 @@ Source: &lt;a href="http://www.farnell.com/datasheets/391098.pdf"&gt; Data sheet
 </deviceset>
 </devicesets>
 </library>
-<library name="ad7705">
-<packages>
-<package name="AD7705BNC">
-<pad name="1" x="-1.27" y="7.62" drill="0.8" shape="square"/>
-<pad name="2" x="-1.27" y="5.08" drill="0.8" shape="square"/>
-<pad name="3" x="-1.27" y="2.54" drill="0.8" shape="square"/>
-<pad name="4" x="-1.27" y="0" drill="0.8" shape="square"/>
-<pad name="5" x="-1.27" y="-2.54" drill="0.8" shape="square"/>
-<pad name="6" x="-1.27" y="-5.08" drill="0.8" shape="square"/>
-<pad name="7" x="-1.27" y="-7.62" drill="0.8" shape="square"/>
-<pad name="8" x="-1.27" y="-10.16" drill="0.8" shape="square"/>
-<pad name="9" x="2.54" y="-10.16" drill="0.8" shape="square"/>
-<pad name="10" x="2.54" y="-7.62" drill="0.8" shape="square"/>
-<pad name="11" x="2.54" y="-5.08" drill="0.8" shape="square"/>
-<pad name="12" x="2.54" y="-2.54" drill="0.8" shape="square"/>
-<pad name="13" x="2.54" y="0" drill="0.8" shape="square"/>
-<pad name="14" x="2.54" y="2.54" drill="0.8" shape="square"/>
-<pad name="15" x="2.54" y="5.08" drill="0.8" shape="square"/>
-<pad name="16" x="2.54" y="7.62" drill="0.8" shape="square"/>
-</package>
-</packages>
-<symbols>
-<symbol name="AD7705">
-<pin name="SCLK" x="-15.24" y="17.78" length="middle"/>
-<pin name="MCLKIN" x="-15.24" y="12.7" length="middle" direction="in"/>
-<pin name="MCLKOUT" x="-15.24" y="7.62" length="middle" direction="out"/>
-<pin name="CS" x="-15.24" y="2.54" length="middle" direction="in"/>
-<pin name="RESET" x="-15.24" y="-2.54" length="middle" direction="in"/>
-<pin name="AIN2+" x="-15.24" y="-7.62" length="middle" direction="in"/>
-<pin name="AIN1+" x="-15.24" y="-12.7" length="middle" direction="in"/>
-<pin name="AIN1-" x="-15.24" y="-17.78" length="middle" direction="in"/>
-<pin name="REF+" x="15.24" y="-17.78" length="middle" direction="in" rot="R180"/>
-<pin name="REF-" x="15.24" y="-12.7" length="middle" direction="in" rot="R180"/>
-<pin name="AIN2-" x="15.24" y="-7.62" length="middle" direction="in" rot="R180"/>
-<pin name="DRDY" x="15.24" y="-2.54" length="middle" rot="R180"/>
-<pin name="DOUT" x="15.24" y="2.54" length="middle" rot="R180"/>
-<pin name="DIN" x="15.24" y="7.62" length="middle" rot="R180"/>
-<pin name="VDD" x="15.24" y="12.7" length="middle" direction="pwr" rot="R180"/>
-<pin name="GND" x="15.24" y="17.78" length="middle" direction="in" rot="R180"/>
-<wire x1="-10.16" y1="20.32" x2="-10.16" y2="-20.32" width="0.254" layer="94"/>
-<wire x1="-10.16" y1="-20.32" x2="10.16" y2="-20.32" width="0.254" layer="94"/>
-<wire x1="10.16" y1="-20.32" x2="10.16" y2="20.32" width="0.254" layer="94"/>
-<wire x1="10.16" y1="20.32" x2="-10.16" y2="20.32" width="0.254" layer="94"/>
-<text x="-5.08" y="21.19658125" size="1.778" layer="95" font="vector">AD7705</text>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="AD7705">
-<gates>
-<gate name="G$1" symbol="AD7705" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="AD7705BNC">
-<connects>
-<connect gate="G$1" pin="AIN1+" pad="7"/>
-<connect gate="G$1" pin="AIN1-" pad="8"/>
-<connect gate="G$1" pin="AIN2+" pad="6"/>
-<connect gate="G$1" pin="AIN2-" pad="11"/>
-<connect gate="G$1" pin="CS" pad="4"/>
-<connect gate="G$1" pin="DIN" pad="14"/>
-<connect gate="G$1" pin="DOUT" pad="13"/>
-<connect gate="G$1" pin="DRDY" pad="12"/>
-<connect gate="G$1" pin="GND" pad="16"/>
-<connect gate="G$1" pin="MCLKIN" pad="2"/>
-<connect gate="G$1" pin="MCLKOUT" pad="3"/>
-<connect gate="G$1" pin="REF+" pad="9"/>
-<connect gate="G$1" pin="REF-" pad="10"/>
-<connect gate="G$1" pin="RESET" pad="5"/>
-<connect gate="G$1" pin="SCLK" pad="1"/>
-<connect gate="G$1" pin="VDD" pad="15"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="DTRX35">
 <packages>
 <package name="DTRX35">
@@ -6211,55 +6132,6 @@ Source: &lt;a href="http://www.farnell.com/datasheets/391098.pdf"&gt; Data sheet
 <connect gate="G$1" pin="GND" pad="1"/>
 <connect gate="G$1" pin="NC" pad="2"/>
 <connect gate="G$1" pin="VCC" pad="3"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
-<library name="MPX4115">
-<packages>
-<package name="MPX4115">
-<pad name="1" x="0" y="7.62" drill="0.8" shape="square"/>
-<pad name="2" x="0" y="5.08" drill="0.8" shape="square"/>
-<pad name="3" x="0" y="2.54" drill="0.8" shape="square"/>
-<pad name="4" x="0" y="0" drill="0.8" shape="square"/>
-<pad name="5" x="0" y="-2.54" drill="0.8" shape="square"/>
-<pad name="6" x="0" y="-5.08" drill="0.8" shape="square"/>
-</package>
-</packages>
-<symbols>
-<symbol name="MPX4115">
-<pin name="VOUT" x="-7.62" y="5.08" length="middle" direction="out"/>
-<pin name="GND" x="-7.62" y="2.54" length="middle" direction="in"/>
-<pin name="VS" x="-7.62" y="0" length="middle" direction="pwr"/>
-<pin name="NC4" x="-7.62" y="-2.54" length="middle" direction="nc"/>
-<pin name="NC5" x="-7.62" y="-5.08" length="middle" direction="nc"/>
-<pin name="NC6" x="-7.62" y="-7.62" length="middle" direction="nc"/>
-<wire x1="-2.54" y1="7.62" x2="-2.54" y2="-10.16" width="0.254" layer="94"/>
-<wire x1="-2.54" y1="-10.16" x2="7.62" y2="-10.16" width="0.254" layer="94"/>
-<wire x1="7.62" y1="7.62" x2="-2.54" y2="7.62" width="0.254" layer="94"/>
-<wire x1="7.62" y1="7.62" x2="7.62" y2="-10.16" width="0.254" layer="94"/>
-<text x="-3.016321875" y="8.432034375" size="1.778" layer="95">MPX4115</text>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="MPX4115">
-<gates>
-<gate name="G$1" symbol="MPX4115" x="-2.54" y="0"/>
-</gates>
-<devices>
-<device name="" package="MPX4115">
-<connects>
-<connect gate="G$1" pin="GND" pad="2"/>
-<connect gate="G$1" pin="NC4" pad="4"/>
-<connect gate="G$1" pin="NC5" pad="5"/>
-<connect gate="G$1" pin="NC6" pad="6"/>
-<connect gate="G$1" pin="VOUT" pad="1"/>
-<connect gate="G$1" pin="VS" pad="3"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -6312,24 +6184,13 @@ Source: &lt;a href="http://www.farnell.com/datasheets/391098.pdf"&gt; Data sheet
 <part name="GND6" library="supply1" deviceset="GND" device=""/>
 <part name="LED1" library="led" deviceset="TLLG4400" device=""/>
 <part name="R5" library="resistor" deviceset="R-EU_" device="0207/10" value="220"/>
-<part name="P+2" library="supply1" deviceset="VCC" device=""/>
-<part name="GND7" library="supply1" deviceset="GND" device=""/>
-<part name="P+6" library="supply1" deviceset="VCC" device=""/>
-<part name="GND8" library="supply1" deviceset="GND" device=""/>
-<part name="R6" library="resistor" deviceset="R-EU_" device="0207/2V" value="10k"/>
-<part name="R7" library="resistor" deviceset="R-EU_" device="0207/2V" value="10k"/>
-<part name="GND9" library="supply1" deviceset="GND" device=""/>
-<part name="P+7" library="supply1" deviceset="VCC" device=""/>
 <part name="GND10" library="supply1" deviceset="GND" device=""/>
 <part name="R8" library="resistor" deviceset="R-EU_" device="0207/2V" value="10k"/>
 <part name="P+8" library="supply1" deviceset="VCC" device=""/>
-<part name="U$1" library="ad7705" deviceset="AD7705" device=""/>
 <part name="U$2" library="DTRX35" deviceset="DTRX35" device=""/>
 <part name="P+9" library="supply1" deviceset="VCC" device=""/>
 <part name="GND11" library="supply1" deviceset="GND" device=""/>
-<part name="U$3" library="MPX4115" deviceset="MPX4115" device=""/>
-<part name="GND12" library="supply1" deviceset="GND" device=""/>
-<part name="P+10" library="supply1" deviceset="VCC" device=""/>
+<part name="C6" library="capacitor-wima" deviceset="C" device="2.5/2" value="100nF"/>
 </parts>
 <sheets>
 <sheet>
@@ -6370,24 +6231,13 @@ Source: &lt;a href="http://www.farnell.com/datasheets/391098.pdf"&gt; Data sheet
 <instance part="GND6" gate="1" x="48.26" y="-2.54" rot="R270"/>
 <instance part="LED1" gate="G$1" x="88.9" y="-48.26" rot="R90"/>
 <instance part="R5" gate="G$1" x="101.6" y="-48.26" rot="MR180"/>
-<instance part="P+2" gate="VCC" x="40.64" y="-127" rot="R90"/>
-<instance part="GND7" gate="1" x="81.28" y="-106.68" rot="R90"/>
-<instance part="P+6" gate="VCC" x="81.28" y="-111.76" rot="R270"/>
-<instance part="GND8" gate="1" x="83.82" y="-134.62" rot="R90"/>
-<instance part="R6" gate="G$1" x="137.16" y="-127"/>
-<instance part="R7" gate="G$1" x="121.92" y="-127"/>
-<instance part="GND9" gate="1" x="111.76" y="-127" rot="R270"/>
-<instance part="P+7" gate="VCC" x="147.32" y="-127" rot="R270"/>
 <instance part="GND10" gate="1" x="111.76" y="-48.26" rot="R90"/>
 <instance part="R8" gate="G$1" x="27.94" y="-25.4"/>
 <instance part="P+8" gate="VCC" x="17.78" y="-25.4" rot="R90"/>
-<instance part="U$1" gate="G$1" x="60.96" y="-124.46"/>
-<instance part="U$2" gate="G$1" x="149.86" y="-53.34"/>
-<instance part="P+9" gate="VCC" x="139.7" y="-53.34" rot="R90"/>
-<instance part="GND11" gate="1" x="139.7" y="-48.26" rot="R270"/>
-<instance part="U$3" gate="G$1" x="20.32" y="-111.76" rot="R90"/>
-<instance part="GND12" gate="1" x="17.78" y="-124.46"/>
-<instance part="P+10" gate="VCC" x="20.32" y="-124.46" rot="R180"/>
+<instance part="U$2" gate="G$1" x="149.86" y="-50.8"/>
+<instance part="P+9" gate="VCC" x="129.54" y="-50.8" rot="R90"/>
+<instance part="GND11" gate="1" x="129.54" y="-38.1" rot="R270"/>
+<instance part="C6" gate="G$1" x="134.62" y="-43.18"/>
 </instances>
 <busses>
 </busses>
@@ -6451,21 +6301,6 @@ Source: &lt;a href="http://www.farnell.com/datasheets/391098.pdf"&gt; Data sheet
 <wire x1="106.68" y1="-30.48" x2="109.22" y2="-30.48" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="P+2" gate="VCC" pin="VCC"/>
-<wire x1="43.18" y1="-127" x2="45.72" y2="-127" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="RESET"/>
-</segment>
-<segment>
-<pinref part="P+6" gate="VCC" pin="VCC"/>
-<wire x1="76.2" y1="-111.76" x2="78.74" y2="-111.76" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="VDD"/>
-</segment>
-<segment>
-<pinref part="R6" gate="G$1" pin="2"/>
-<pinref part="P+7" gate="VCC" pin="VCC"/>
-<wire x1="142.24" y1="-127" x2="144.78" y2="-127" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <pinref part="R8" gate="G$1" pin="1"/>
 <pinref part="P+8" gate="VCC" pin="VCC"/>
 <wire x1="22.86" y1="-25.4" x2="20.32" y2="-25.4" width="0.1524" layer="91"/>
@@ -6473,12 +6308,11 @@ Source: &lt;a href="http://www.farnell.com/datasheets/391098.pdf"&gt; Data sheet
 <segment>
 <pinref part="P+9" gate="VCC" pin="VCC"/>
 <pinref part="U$2" gate="G$1" pin="VCC"/>
-<wire x1="142.24" y1="-53.34" x2="144.78" y2="-53.34" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="P+10" gate="VCC" pin="VCC"/>
-<pinref part="U$3" gate="G$1" pin="VS"/>
-<wire x1="20.32" y1="-121.92" x2="20.32" y2="-119.38" width="0.1524" layer="91"/>
+<wire x1="132.08" y1="-50.8" x2="134.62" y2="-50.8" width="0.1524" layer="91"/>
+<pinref part="C6" gate="G$1" pin="2"/>
+<wire x1="134.62" y1="-50.8" x2="144.78" y2="-50.8" width="0.1524" layer="91"/>
+<wire x1="134.62" y1="-48.26" x2="134.62" y2="-50.8" width="0.1524" layer="91"/>
+<junction x="134.62" y="-50.8"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -6590,40 +6424,20 @@ Source: &lt;a href="http://www.farnell.com/datasheets/391098.pdf"&gt; Data sheet
 <pinref part="GND6" gate="1" pin="GND"/>
 </segment>
 <segment>
-<pinref part="GND7" gate="1" pin="GND"/>
-<wire x1="76.2" y1="-106.68" x2="78.74" y2="-106.68" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="GND"/>
-</segment>
-<segment>
-<wire x1="76.2" y1="-132.08" x2="78.74" y2="-132.08" width="0.1524" layer="91"/>
-<wire x1="78.74" y1="-132.08" x2="78.74" y2="-134.62" width="0.1524" layer="91"/>
-<pinref part="GND8" gate="1" pin="GND"/>
-<wire x1="78.74" y1="-134.62" x2="81.28" y2="-134.62" width="0.1524" layer="91"/>
-<wire x1="76.2" y1="-137.16" x2="78.74" y2="-137.16" width="0.1524" layer="91"/>
-<wire x1="78.74" y1="-137.16" x2="78.74" y2="-134.62" width="0.1524" layer="91"/>
-<junction x="78.74" y="-134.62"/>
-<pinref part="U$1" gate="G$1" pin="REF-"/>
-<pinref part="U$1" gate="G$1" pin="AIN2-"/>
-</segment>
-<segment>
-<pinref part="GND9" gate="1" pin="GND"/>
-<pinref part="R7" gate="G$1" pin="1"/>
-<wire x1="114.3" y1="-127" x2="116.84" y2="-127" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <pinref part="R5" gate="G$1" pin="2"/>
 <pinref part="GND10" gate="1" pin="GND"/>
 <wire x1="106.68" y1="-48.26" x2="109.22" y2="-48.26" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="GND11" gate="1" pin="GND"/>
+<pinref part="C6" gate="G$1" pin="1"/>
+<wire x1="132.08" y1="-38.1" x2="134.62" y2="-38.1" width="0.1524" layer="91"/>
+<wire x1="134.62" y1="-40.64" x2="134.62" y2="-38.1" width="0.1524" layer="91"/>
+<wire x1="134.62" y1="-38.1" x2="142.24" y2="-38.1" width="0.1524" layer="91"/>
+<wire x1="142.24" y1="-38.1" x2="142.24" y2="-45.72" width="0.1524" layer="91"/>
 <pinref part="U$2" gate="G$1" pin="GND"/>
-<wire x1="142.24" y1="-48.26" x2="144.78" y2="-48.26" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="U$3" gate="G$1" pin="GND"/>
-<pinref part="GND12" gate="1" pin="GND"/>
-<wire x1="17.78" y1="-119.38" x2="17.78" y2="-121.92" width="0.1524" layer="91"/>
+<wire x1="142.24" y1="-45.72" x2="144.78" y2="-45.72" width="0.1524" layer="91"/>
+<junction x="134.62" y="-38.1"/>
 </segment>
 </net>
 <net name="N$10" class="0">
@@ -6749,14 +6563,7 @@ Source: &lt;a href="http://www.farnell.com/datasheets/391098.pdf"&gt; Data sheet
 <segment>
 <pinref part="R4" gate="G$1" pin="2"/>
 <pinref part="R3" gate="G$1" pin="1"/>
-<wire x1="63.5" y1="-2.54" x2="66.04" y2="-2.54" width="0.1524" layer="91"/>
-<wire x1="66.04" y1="-2.54" x2="68.58" y2="-2.54" width="0.1524" layer="91"/>
-<wire x1="66.04" y1="-2.54" x2="66.04" y2="-17.78" width="0.1524" layer="91"/>
-<wire x1="66.04" y1="-17.78" x2="-2.54" y2="-17.78" width="0.1524" layer="91"/>
-<wire x1="-2.54" y1="-17.78" x2="-2.54" y2="-132.08" width="0.1524" layer="91"/>
-<wire x1="-2.54" y1="-132.08" x2="45.72" y2="-132.08" width="0.1524" layer="91"/>
-<junction x="66.04" y="-2.54"/>
-<pinref part="U$1" gate="G$1" pin="AIN2+"/>
+<wire x1="63.5" y1="-2.54" x2="68.58" y2="-2.54" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$4" class="0">
@@ -6764,80 +6571,6 @@ Source: &lt;a href="http://www.farnell.com/datasheets/391098.pdf"&gt; Data sheet
 <pinref part="R5" gate="G$1" pin="1"/>
 <pinref part="LED1" gate="G$1" pin="C"/>
 <wire x1="96.52" y1="-48.26" x2="93.98" y2="-48.26" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$15" class="0">
-<segment>
-<wire x1="76.2" y1="-121.92" x2="88.9" y2="-121.92" width="0.1524" layer="91"/>
-<wire x1="88.9" y1="-121.92" x2="88.9" y2="-81.28" width="0.1524" layer="91"/>
-<pinref part="IC1" gate="G$1" pin="PB4(MISO)"/>
-<wire x1="88.9" y1="-81.28" x2="83.82" y2="-81.28" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="DOUT"/>
-</segment>
-</net>
-<net name="N$16" class="0">
-<segment>
-<pinref part="IC1" gate="G$1" pin="PB3(MOSI/OC2)"/>
-<wire x1="83.82" y1="-78.74" x2="91.44" y2="-78.74" width="0.1524" layer="91"/>
-<wire x1="91.44" y1="-78.74" x2="91.44" y2="-116.84" width="0.1524" layer="91"/>
-<wire x1="91.44" y1="-116.84" x2="76.2" y2="-116.84" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="DIN"/>
-</segment>
-</net>
-<net name="N$17" class="0">
-<segment>
-<pinref part="IC1" gate="G$1" pin="PB5(SCK)"/>
-<wire x1="83.82" y1="-83.82" x2="86.36" y2="-83.82" width="0.1524" layer="91"/>
-<wire x1="86.36" y1="-83.82" x2="86.36" y2="-96.52" width="0.1524" layer="91"/>
-<wire x1="86.36" y1="-96.52" x2="43.18" y2="-96.52" width="0.1524" layer="91"/>
-<wire x1="43.18" y1="-96.52" x2="43.18" y2="-106.68" width="0.1524" layer="91"/>
-<wire x1="43.18" y1="-106.68" x2="45.72" y2="-106.68" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="SCLK"/>
-</segment>
-</net>
-<net name="N$19" class="0">
-<segment>
-<wire x1="45.72" y1="-121.92" x2="40.64" y2="-121.92" width="0.1524" layer="91"/>
-<wire x1="40.64" y1="-121.92" x2="40.64" y2="-93.98" width="0.1524" layer="91"/>
-<wire x1="40.64" y1="-93.98" x2="93.98" y2="-93.98" width="0.1524" layer="91"/>
-<wire x1="93.98" y1="-93.98" x2="93.98" y2="-71.12" width="0.1524" layer="91"/>
-<pinref part="IC1" gate="G$1" pin="PB0(ICP)"/>
-<wire x1="93.98" y1="-71.12" x2="83.82" y2="-71.12" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="CS"/>
-</segment>
-</net>
-<net name="N$20" class="0">
-<segment>
-<pinref part="IC1" gate="G$1" pin="PD2(INT0)"/>
-<wire x1="83.82" y1="-53.34" x2="96.52" y2="-53.34" width="0.1524" layer="91"/>
-<wire x1="96.52" y1="-53.34" x2="96.52" y2="-127" width="0.1524" layer="91"/>
-<wire x1="96.52" y1="-127" x2="76.2" y2="-127" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="DRDY"/>
-</segment>
-</net>
-<net name="N$21" class="0">
-<segment>
-<pinref part="IC1" gate="G$1" pin="PC0(ADC0)"/>
-<wire x1="86.36" y1="-25.4" x2="83.82" y2="-25.4" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$22" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="REF+"/>
-<pinref part="U$1" gate="G$1" pin="AIN1-"/>
-<wire x1="78.74" y1="-142.24" x2="76.2" y2="-142.24" width="0.1524" layer="91"/>
-<wire x1="45.72" y1="-142.24" x2="43.18" y2="-142.24" width="0.1524" layer="91"/>
-<wire x1="43.18" y1="-142.24" x2="43.18" y2="-147.32" width="0.1524" layer="91"/>
-<wire x1="43.18" y1="-147.32" x2="78.74" y2="-147.32" width="0.1524" layer="91"/>
-<wire x1="78.74" y1="-147.32" x2="78.74" y2="-142.24" width="0.1524" layer="91"/>
-<pinref part="R6" gate="G$1" pin="1"/>
-<pinref part="R7" gate="G$1" pin="2"/>
-<wire x1="127" y1="-127" x2="129.54" y2="-127" width="0.1524" layer="91"/>
-<wire x1="129.54" y1="-127" x2="132.08" y2="-127" width="0.1524" layer="91"/>
-<wire x1="78.74" y1="-147.32" x2="129.54" y2="-147.32" width="0.1524" layer="91"/>
-<wire x1="129.54" y1="-147.32" x2="129.54" y2="-127" width="0.1524" layer="91"/>
-<junction x="129.54" y="-127"/>
-<junction x="78.74" y="-147.32"/>
 </segment>
 </net>
 <net name="N$5" class="0">
@@ -6856,17 +6589,9 @@ Source: &lt;a href="http://www.farnell.com/datasheets/391098.pdf"&gt; Data sheet
 </net>
 <net name="N$24" class="0">
 <segment>
-<pinref part="IC1" gate="G$1" pin="PD3(INT1)"/>
 <pinref part="U$2" gate="G$1" pin="CH3"/>
-<wire x1="83.82" y1="-55.88" x2="144.78" y2="-55.88" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$25" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="AIN1+"/>
-<wire x1="15.24" y1="-137.16" x2="45.72" y2="-137.16" width="0.1524" layer="91"/>
-<pinref part="U$3" gate="G$1" pin="VOUT"/>
-<wire x1="15.24" y1="-119.38" x2="15.24" y2="-137.16" width="0.1524" layer="91"/>
+<pinref part="IC1" gate="G$1" pin="PD2(INT0)"/>
+<wire x1="144.78" y1="-53.34" x2="83.82" y2="-53.34" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

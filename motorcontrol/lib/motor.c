@@ -7,6 +7,7 @@
  * @date 	Mar 10, 2012
  */
 #include "main.h"
+#include "motorcontrol.h"
 #include "motor.h"
 #include "i2cslave.h"
 
@@ -15,8 +16,6 @@
 #include <inttypes.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
-
-uint8_t motor[4]; /*!< speed values for the motors */
 
 int16_t pwm_cnt; /*!< counter for the actual position in the PWM cycle */
 
@@ -29,22 +28,22 @@ ISR (TIMER0_COMPA_vect) {
     pwm_cnt++;
 
     // 1 ms
-    if (pwm_cnt == PWM_MAX) {
+    if (pwm_cnt >= PWM_MAX) {
         PORTB |= ((1 << PB1) | (1 << PB2));
         PORTD |= ((1 << PD5) | (1 << PD6));
         pwm_cnt = 0;
     } else if ((pwm_cnt <= NO_THROTTLE + 255) && (pwm_cnt >= NO_THROTTLE)){
         tmp = pwm_cnt - NO_THROTTLE;
-        if (tmp == i2c_buffer[0]) {
+        if (tmp == i2c_buffer[MC_MOTOR_1_SPEED]) {
             PORTD &= ~(1 << PD6);
         }
-        if (tmp == i2c_buffer[1]) {
+        if (tmp == i2c_buffer[MC_MOTOR_2_SPEED]) {
             PORTB &= ~(1 << PB1);
         }
-        if (tmp == i2c_buffer[2]) {
+        if (tmp == i2c_buffer[MC_MOTOR_3_SPEED]) {
             PORTD &= ~(1 << PD5);
         }
-        if (tmp == i2c_buffer[3]) {
+        if (tmp == i2c_buffer[MC_MOTOR_4_SPEED]) {
             PORTB &= ~(1 << PB2);
         }
     }

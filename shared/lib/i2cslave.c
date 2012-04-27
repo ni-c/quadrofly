@@ -24,6 +24,13 @@ volatile uint8_t i2c_buffer_addr; /*!< TX buffer address register */
 
 #define TWCR_RESET TWCR = (1<<TWEN)|(1<<TWIE)|(1<<TWINT)|(1<<TWEA)|(0<<TWSTA)|(1<<TWSTO)|(0<<TWWC); /*!< switch to the non adressed slave mode */
 
+/**
+ * interrupt funcition handling received bytes
+ *
+ * @param addr The address of the last received bytes
+ */
+extern void i2c_receive(uint8_t *addr);
+
 #endif /*I2C_SLAVE_AVAILABLE */
 
 /**
@@ -70,6 +77,7 @@ ISR (TWI_vect) {
             i2c_buffer_addr++;
         }
         TWCR_ACK
+        i2c_receive(i2c_buffer_addr-1);
         break;
 
 //Slave transmitter

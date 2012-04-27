@@ -10,6 +10,7 @@
 #include "global_def.h"
 #include "i2cslave.h"
 #include "motor.h"
+#include "rx.h"
 
 #include <avr/interrupt.h>
 
@@ -35,6 +36,13 @@ void init_qfly(void) {
      */
     motor_init();
 #endif /* MOTOR_AVAILABLE */
+
+#ifdef RX_AVAILABLE
+    /*
+     * Initialize motors
+     */
+    rx_init();
+#endif /* RX_AVAILABLE */
 
     /*
      * Enable global interupts
