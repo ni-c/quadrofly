@@ -10,6 +10,6 @@
 #ifndef GLOBAL_DEF_H_
 #define GLOBAL_DEF_H_
 
-#define I2C_ADDR_MOTORCONTROL 0x51 /*!< The I2C address of the MOTOR control */
+#define I2C_ADDR_MOTORCONTROL 0xD4 /*!< The I2C address of the MOTOR control */
 
 #endif /* GLOBAL_DEF_H_ */

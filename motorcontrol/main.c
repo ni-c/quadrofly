@@ -40,15 +40,6 @@
  * @param addr The address of the last received bytes
  */
 void i2c_receive(uint8_t *addr) {
-    if (addr==0) {
-        if (i2c_buffer[MC_ENABLE]>0x00) {
-            /* LED off */
-            PORTD &= ~(1 << PD0);
-        } else {
-            /* LED on */
-            PORTD |= (1 << PD0);
-        }
-    }
 }
 
 /**
@@ -65,6 +56,9 @@ int main(void) {
 
     /* Our loop */
     while (1) {
+        if (i2c_buffer[MC_RC_CHANNEL_1]!=0) {
+            PORTD &= ~(1 << PD0);
+        }
     }
 
     /* Finally. (Never ever) */

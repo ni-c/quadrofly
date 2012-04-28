@@ -12,6 +12,10 @@
 #ifndef MPU6050_H_
 #define MPU6050_H_
 
+#define ACC_X_OFFSET                0 /*!< The Offset for the X accelerometer */
+#define ACC_Y_OFFSET                0 /*!< The Offset for the Y accelerometer */
+#define ACC_Z_OFFSET                -8750 /*!< The Offset for the Z accelerometer */
+
 #define MPU6050_ADDRESS_AD0_LOW     0xD0 /*!< address pin low (GND) */
 #define MPU6050_ADDRESS_AD0_HIGH    0xD2 /*!< address pin high (VCC) */
 #define MPU6050_ADDRESS             MPU6050_ADDRESS_AD0_LOW /*!< MPU6050 address */

@@ -24,10 +24,6 @@ void init_qfly(void) {
      * Initialize I2C slave
      */
     i2c_slave_init(I2C_ADDR_MOTORCONTROL);
-    i2c_buffer[0] = 0;
-    i2c_buffer[1] = 0;
-    i2c_buffer[2] = 0;
-    i2c_buffer[3] = 0;
 #endif /* I2C_SLAVE_AVAILABLE */
 
 #ifdef MOTOR_AVAILABLE

@@ -26,15 +26,14 @@ volatile uint8_t channelPos[] = { 0, 0, 0, 0, 0, 0, 0, 0 }; /*!< Positions of th
 ISR( TIMER1_COMPA_vect )
 {
     /* 1 tick = 200µs */
-    TCNT1 = 0;
     pulse++;
+    TCNT1 = 0;
 }
 
-ISR( PCINT0_vect )
+ISR( INT0_vect )
 {
     /* Read pulseTime in µs */
     uint16_t pulseTime = pulse * 200 + 4 * TCNT1 / 5;
-
     /* Reset Timer */
     TCNT1 = 0;
     pulse = 0;
@@ -52,7 +51,7 @@ ISR( PCINT0_vect )
     else if (channelIndex < 8)
     {
         /* Save channel position and increase servo index */
-        channelPos[channelIndex++] = pulseTime / 200;
+        channelPos[channelIndex++] = (pulseTime - 1000) / 5;
     }
 }
 #endif /* RX_AVAILABLE */
@@ -63,19 +62,17 @@ ISR( PCINT0_vect )
 void rx_init(void)
 {
 #ifdef RX_AVAILABLE
-    DDRB &= ~(1 << PB1);
-    PORTB |= (1 << PB1);
 
     /* Timer 1 */
-    TCCR1A |= ((1 << CS10) | (1 << CS12)); /* Prescaler 16 - 800ns */
-    TIMSK1 |= (1 << OCIE1A); /* Timer/Counter1, Output Compare A Match Interrupt Enable */
-    OCR1A = 250; /* 200µs */
+    TCCR1B |= (1 << CS11); /* Prescaler 8 - 400ns */
+    TIMSK1 |= (1 <<  OCIE1A); /* Timer/Counter1, Output Compare A Match Interrupt Enable */
+    OCR1A = 500; /* 200µs */
 
     /* Enable Pin Change Interrupt on falling edge */
-    MCUCR |= (1 << ISC01);
-    PCMSK1 = 0x00;
+    DDRD &= ~(1 << PD2);
+    PORTD |= (1 << PD2);
+    EICRA |= (1 << ISC01);
+    EIMSK |= (1 << INT0);
 
-    /* Enable PCINT on PB1 */
-    PCMSK1 |= (1 << PCINT1);
 #endif /* RX_AVAILABLE */
 }

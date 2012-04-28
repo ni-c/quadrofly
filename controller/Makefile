@@ -52,7 +52,7 @@ TARGET = main
 
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = $(TARGET).c init.c lib/motor.c lib/mpu6050.c ../shared/lib/log.c ../shared/lib/uart.c ../shared/lib/i2cmaster.c ../shared/lib/rfm12.c ../shared/lib/millis.c
+SRC = $(TARGET).c init.c lib/motorcom.c lib/kalman.c lib/mpu6050.c ../shared/lib/log.c ../shared/lib/uart.c ../shared/lib/i2cmaster.c ../shared/lib/rfm12.c ../shared/lib/millis.c
 
 
 # List Assembler source files here.

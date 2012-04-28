@@ -30,11 +30,19 @@ void init_qfly(void) {
      * Enable global interrupts
      */
     sei();
+    _delay_ms(10);
+
+    /*
+     * Initialize Millis
+     */
+    millis_init();
+    _delay_ms(10);
 
 #ifdef LED_AVAILABLE
     // Set pins to output
     DDRB |= (1 << DD0) | (1 << DD1);
     PORTB |= (1 << PB1);
+    _delay_ms(10);
 #endif /* LED_AVAILABLE */
 
 #ifdef UART_AVAILABLE
@@ -80,19 +88,13 @@ void init_qfly(void) {
 
 #ifdef MOTORCONTROL_AVAILABLE
     log_s("motorcontrol ... ");
-    if (i2c_start(I2C_ADDR_MOTORCONTROL - 1 + I2C_WRITE)) {
-        i2c_write(MC_ENABLE);
-        i2c_write(0x01); // Enable the motorcontrol
-        i2c_write(0x00); // Set motor speeds to 0x00
-        i2c_write(0x00);
-        i2c_write(0x00);
-        i2c_write(0x00);
-        i2c_stop();
+    if (motorcontrol_init(0x01)) {
         log_s("ok\n");
     } else {
-        ready = 0;
         log_s("failed\n");
+        ready = 0;
     }
+    _delay_ms(10);
 #endif /* MOTORCONTROL_AVAILABLE */
 
 #ifdef MPU6050_AVAILABLE
@@ -105,16 +107,12 @@ void init_qfly(void) {
     _delay_ms(10);
 #endif /* MPU6050_AVAILABLE */
 
-    /*
-     * Initialize Millis
-     */
-    millis_init();
-
 #ifdef LED_AVAILABLE
     if (ready) {
         PORTB |= (1 << PB0);
         PORTB &= ~(1 << PB1);
     }
+    _delay_ms(10);
 #endif /* LED_AVAILABLE */
 
 }

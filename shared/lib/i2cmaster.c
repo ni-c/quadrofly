@@ -127,7 +127,7 @@ void i2c_start_wait(unsigned char address) {
  * Issues a repeated start condition and sends address and transfer direction
  *
  * @param address address and transfer direction of I2C device
- * @return 0 device accessible, 1 failed to access device
+ * @return 1 device accessible, 0 failed to access device
  */
 unsigned char i2c_rep_start(unsigned char address) {
 #ifdef I2C_MASTER_AVAILABLE
