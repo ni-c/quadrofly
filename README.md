@@ -2,6 +2,8 @@
 
 ## Building a Quadrocopter
 
+![Quadrofly](http://quadrofly.ni-c.de/wp-content/uploads/2012/06/IMG_0027-500x333.jpg)
+
 ### Structure ###
 
 <p><code>controller/</code> The code for the main controller of the Quadrocopter, an ATMega1284</p>
