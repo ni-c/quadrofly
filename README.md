@@ -2,7 +2,7 @@
 
 ## Building a Quadrocopter
 
-![Quadrofly](http://quadrofly.ni-c.de/wp-content/uploads/2012/06/IMG_0027-500x333.jpg)
+![Quadrofly](http://quadrofly.ni-c.de/wp-content/uploads/2012/06/IMG_0027.jpg)
 
 ### Structure ###
 
