@@ -9,6 +9,7 @@
 #include "main.h"
 #include "global_def.h"
 #include "motorcontrol.h"
+#include "motorcom.h"
 #include "log.h"
 #include "uart.h"
 #include "i2cmaster.h"

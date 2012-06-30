@@ -10,6 +10,8 @@
 #ifndef MOTOR_H_
 #define MOTOR_H_
 
+#include <inttypes.h>
+
 /**
  * Writes value to the ENABLE register of the motorcontrol unit
  *
