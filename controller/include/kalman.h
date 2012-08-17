@@ -25,6 +25,6 @@
  * @param looptime The looptime since the last call
  * @param key A unique key to identify the kalman filter (0..2)
  */
-float kalmanCalculate(float acc, float gyro, uint8_t looptime, uint8_t key);
+float kalman_calculate(float acc, float gyro, uint8_t looptime, uint8_t key);
 
 #endif /* KALMAN_H_ */

@@ -74,8 +74,8 @@ void mpu6050_update(void) {
  */
 void pid_update(void) {
     for (int i = 0; i < 3; i++) {
-        kalman[i] = kalmanCalculate((float)mpu6050[i], (float)mpu6050[3+i], looptime, i);
-        pid[i] = pidCalculate(0, kalman[i]) / 10;
+        kalman[i] = kalman_calculate((float)mpu6050[i], (float)mpu6050[3+i], looptime, i);
+        pid[i] = pid_calculate(0, kalman[i]) / 10;
     }
 }
 
