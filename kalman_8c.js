@@ -1,6 +1,6 @@
 var kalman_8c =
 [
-    [ "kalmanCalculate", "kalman_8c.html#a825685d0ee928cd837b7f9bbbaf0a4aa", null ],
+    [ "kalman_calculate", "kalman_8c.html#affdcfb81c8cd94121e09346aa7f4b9f4", null ],
     [ "kalman_angle", "kalman_8c.html#aceb4050dd06548d019ceecf4e9c0d2ab", null ],
     [ "kalman_bias", "kalman_8c.html#a3f40789239da912d149c96dd9c162b6f", null ],
     [ "kalman_K_0", "kalman_8c.html#a2747bcb726be7e431ae3a9d42c63c013", null ],

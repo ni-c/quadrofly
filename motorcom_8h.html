@@ -96,7 +96,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="motorcom_8h.html#a3aebac05cddf55a260df4c14dacc3f70">motorcontrol_init</a> (uint8_t value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="motorcom_8h.html#a2eab2112c5a610ac5c4815420b18be4b">motorcontrol_set_motors</a> (uint8_t a, uint8_t b, uint8_t c, uint8_t d)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="motorcom_8h.html#a78f7ac10b46ee54b3ecd973c7cbc0bc0">motorcontrol_set_motors</a> (uint8_t motor_a, uint8_t motor_b, uint8_t motor_c, uint8_t motor_d)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="motorcom_8h.html#ab26fd394a1ea7fa5c053193958580bc6">motorcontrol_get_rc_channels</a> (uint8_t *channel_a, uint8_t *channel_b, uint8_t *channel_c, uint8_t *channel_d)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="motorcom_8h.html#a6d0e2fed00f11cb2685499227fbf8b52">motorcontrol</a> (uint8_t motor_a, uint8_t motor_b, uint8_t motor_c, uint8_t motor_d, uint8_t *channel_a, uint8_t *channel_b, uint8_t *channel_c, uint8_t *channel_d)</td></tr>
 </table>
@@ -174,9 +174,9 @@ Functions</h2></td></tr>
     <tr><td class="paramname">motor_c</td><td>Speed of motor 3 </td></tr>
     <tr><td class="paramname">motor_d</td><td>Speed of motor 4 </td></tr>
     <tr><td class="paramname">channel_a</td><td>Value of channel_a </td></tr>
-    <tr><td class="paramname">channel_a</td><td>Value of channel_b </td></tr>
-    <tr><td class="paramname">channel_a</td><td>Value of channel_c </td></tr>
-    <tr><td class="paramname">channel_a</td><td>Value of channel_d </td></tr>
+    <tr><td class="paramname">channel_b</td><td>Value of channel_b </td></tr>
+    <tr><td class="paramname">channel_c</td><td>Value of channel_c </td></tr>
+    <tr><td class="paramname">channel_d</td><td>Value of channel_d </td></tr>
   </table>
   </dd>
 </dl>
@@ -233,9 +233,9 @@ Here is the call graph for this function:</div>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">channel_a</td><td>Value of channel_a </td></tr>
-    <tr><td class="paramname">channel_a</td><td>Value of channel_b </td></tr>
-    <tr><td class="paramname">channel_a</td><td>Value of channel_c </td></tr>
-    <tr><td class="paramname">channel_a</td><td>Value of channel_d </td></tr>
+    <tr><td class="paramname">channel_b</td><td>Value of channel_b </td></tr>
+    <tr><td class="paramname">channel_c</td><td>Value of channel_c </td></tr>
+    <tr><td class="paramname">channel_d</td><td>Value of channel_d </td></tr>
   </table>
   </dd>
 </dl>
@@ -267,7 +267,12 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 <p>Writes value to the ENABLE register of the motorcontrol unit</p>
-<p>The value to write </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>The value to write </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -280,7 +285,7 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="a2eab2112c5a610ac5c4815420b18be4b"></a><!-- doxytag: member="motorcom.h::motorcontrol_set_motors" ref="a2eab2112c5a610ac5c4815420b18be4b" args="(uint8_t a, uint8_t b, uint8_t c, uint8_t d)" -->
+<a class="anchor" id="a78f7ac10b46ee54b3ecd973c7cbc0bc0"></a><!-- doxytag: member="motorcom.h::motorcontrol_set_motors" ref="a78f7ac10b46ee54b3ecd973c7cbc0bc0" args="(uint8_t motor_a, uint8_t motor_b, uint8_t motor_c, uint8_t motor_d)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -319,10 +324,10 @@ Here is the call graph for this function:</div>
 <p>Set the speed of the motors</p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">a</td><td>Speed of motor A </td></tr>
-    <tr><td class="paramname">b</td><td>Speed of motor B </td></tr>
-    <tr><td class="paramname">c</td><td>Speed of motor C </td></tr>
-    <tr><td class="paramname">d</td><td>Speed of motor D </td></tr>
+    <tr><td class="paramname">motor_a</td><td>Speed of motor A </td></tr>
+    <tr><td class="paramname">motor_b</td><td>Speed of motor B </td></tr>
+    <tr><td class="paramname">motor_c</td><td>Speed of motor C </td></tr>
+    <tr><td class="paramname">motor_d</td><td>Speed of motor D </td></tr>
   </table>
   </dd>
 </dl>
@@ -342,8 +347,8 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="motorcom_8h_a2eab2112c5a610ac5c4815420b18be4b_cgraph.png" border="0" usemap="#motorcom_8h_a2eab2112c5a610ac5c4815420b18be4b_cgraph" alt=""/></div>
-<map name="motorcom_8h_a2eab2112c5a610ac5c4815420b18be4b_cgraph" id="motorcom_8h_a2eab2112c5a610ac5c4815420b18be4b_cgraph">
+<div class="center"><img src="motorcom_8h_a78f7ac10b46ee54b3ecd973c7cbc0bc0_cgraph.png" border="0" usemap="#motorcom_8h_a78f7ac10b46ee54b3ecd973c7cbc0bc0_cgraph" alt=""/></div>
+<map name="motorcom_8h_a78f7ac10b46ee54b3ecd973c7cbc0bc0_cgraph" id="motorcom_8h_a78f7ac10b46ee54b3ecd973c7cbc0bc0_cgraph">
 <area shape="rect" id="node3" href="i2cmaster_8h.html#aa3d328f00326115e9c660ccc838417c8" title="Issues a start condition and sends address and transfer direction." alt="" coords="223,5,295,35"/><area shape="rect" id="node5" href="i2cmaster_8h.html#add947aade44ed6b7f92265f9dec4a711" title="Send one byte to I2C device." alt="" coords="221,59,296,88"/><area shape="rect" id="node7" href="i2cmaster_8h.html#ad35d4e4f52ca74b503d5e5e1e0a3f5f3" title="Terminates the data transfer and releases the I2C bus." alt="" coords="224,112,293,141"/></map>
 </div>
 </p>
@@ -356,7 +361,7 @@ Here is the call graph for this function:</div>
     <ul>
       <li class="navelem"><a class="el" href="motorcom_8h.html">motorcom.h</a>      </li>
 
-    <li class="footer">Generated on Fri Aug 17 2012 20:21:42 for Quadrofly by
+    <li class="footer">Generated on Fri Aug 17 2012 21:38:34 for Quadrofly by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

@@ -98,7 +98,7 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pid_8c.html#a3fa5131163a4775229163e648c213789">PID_ERROR_CAP</a>&#160;&#160;&#160;-10</td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pid_8c.html#a370f35ad21369cfed44e5501459e22b6">pidCalculate</a> (int16_t target, int16_t actual)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pid_8c.html#a4c77c277ae0934404fb21846d9226a6a">pid_calculate</a> (int16_t target, int16_t actual)</td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">volatile int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pid_8c.html#a1cb1784de8ec5998c0fc0ba80a075666">pid_e_sum</a></td></tr>
@@ -139,12 +139,12 @@ Variables</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="a370f35ad21369cfed44e5501459e22b6"></a><!-- doxytag: member="pid.c::pidCalculate" ref="a370f35ad21369cfed44e5501459e22b6" args="(int16_t target, int16_t actual)" -->
+<a class="anchor" id="a4c77c277ae0934404fb21846d9226a6a"></a><!-- doxytag: member="pid.c::pid_calculate" ref="a4c77c277ae0934404fb21846d9226a6a" args="(int16_t target, int16_t actual)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int16_t <a class="el" href="pid_8c.html#a370f35ad21369cfed44e5501459e22b6">pidCalculate</a> </td>
+          <td class="memname">int16_t <a class="el" href="pid_8c.html#a4c77c277ae0934404fb21846d9226a6a">pid_calculate</a> </td>
           <td>(</td>
           <td class="paramtype">int16_t&#160;</td>
           <td class="paramname"><em>target</em>, </td>
@@ -168,10 +168,10 @@ Variables</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">target</td><td>The target value to reach </td></tr>
     <tr><td class="paramname">actual</td><td>The actual value </td></tr>
-    <tr><td class="paramname">The</td><td>control value </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The calculated PID control value </dd></dl>
 <p>&lt; Result</p>
 <p>&lt; Error</p>
 <p>&lt; Temporary Factor I </p>
@@ -211,7 +211,7 @@ Variables</h2></td></tr>
     <ul>
       <li class="navelem"><a class="el" href="pid_8c.html">pid.c</a>      </li>
 
-    <li class="footer">Generated on Fri Aug 17 2012 20:21:42 for Quadrofly by
+    <li class="footer">Generated on Fri Aug 17 2012 21:38:35 for Quadrofly by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

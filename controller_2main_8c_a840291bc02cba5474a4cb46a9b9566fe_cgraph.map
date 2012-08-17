@@ -1,19 +1,20 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$controller_2include_2init_8h.html#a3093aa084cccba48441fb76c640822d0" title="init_qfly" alt="" coords="132,5,199,35"/>
-<area shape="rect" id="node5" href="$log_8h.html#a1ae4bed30c73ea75ff9836ba4eb37697" title="log_s" alt="" coords="139,59,192,88"/>
-<area shape="rect" id="node11" href="$millis_8h.html#ac4da2262c9e029e8213116c8482099b9" title="millis" alt="" coords="140,112,191,141"/>
-<area shape="rect" id="node13" href="$controller_2main_8c.html#a7aaf9462e9aec00c00f87e81bb9d1f92" title="mpu6050_update" alt="" coords="105,216,225,245"/>
-<area shape="rect" id="node30" href="$kalman_8h.html#a825685d0ee928cd837b7f9bbbaf0a4aa" title="kalmanCalculate" alt="" coords="107,269,224,299"/>
-<area shape="rect" id="node32" href="$pid_8h.html#a370f35ad21369cfed44e5501459e22b6" title="pidCalculate" alt="" coords="119,323,212,352"/>
-<area shape="rect" id="node34" href="$motorcom_8h.html#a6d0e2fed00f11cb2685499227fbf8b52" title="motorcontrol" alt="" coords="285,164,379,193"/>
-<area shape="rect" id="node42" href="$uart_8h.html#ae5e5f7763d634c03f48edd8f0ea99d91" title="uart_tx_ready" alt="" coords="115,376,216,405"/>
-<area shape="rect" id="node7" href="$uart_8h.html#a4ff96641e032cfc64cb3a9262429fb27" title="uart_tx" alt="" coords="301,33,363,63"/>
-<area shape="rect" id="node9" href="$uart_8c.html#a81f78171155efa18b7e545203194ef13" title="tx_buffer" alt="" coords="451,7,523,36"/>
-<area shape="rect" id="node15" href="$mpu6050_8h.html#a70f521a2549e64a1a6bf2251755c9aec" title="mpu6050_getall" alt="" coords="276,217,388,247"/>
-<area shape="rect" id="node17" href="$i2cmaster_8h.html#aa3d328f00326115e9c660ccc838417c8" title="Issues a start condition and sends address and transfer direction." alt="" coords="584,217,656,247"/>
-<area shape="rect" id="node19" href="$i2cmaster_8h.html#add947aade44ed6b7f92265f9dec4a711" title="Send one byte to I2C device." alt="" coords="449,164,524,193"/>
-<area shape="rect" id="node21" href="$i2cmaster_8h.html#a70c934b61f3c6ba8524104a1d7197d30" title="Issues a repeated start condition and sends address and transfer direction." alt="" coords="439,217,535,247"/>
-<area shape="rect" id="node24" href="$i2cmaster_8h.html#a9d083c878f400523eba6e073e36c6fd8" title="read one byte from the I2C device, request more data from device" alt="" coords="437,271,536,300"/>
-<area shape="rect" id="node26" href="$i2cmaster_8h.html#ad4bda1a6138ccdad09a3fa9dda383c84" title="read one byte from the I2C device, read is followed by a stop condition" alt="" coords="437,324,536,353"/>
-<area shape="rect" id="node28" href="$i2cmaster_8h.html#ad35d4e4f52ca74b503d5e5e1e0a3f5f3" title="Terminates the data transfer and releases the I2C bus." alt="" coords="452,111,521,140"/>
+<area shape="rect" id="node3" href="$controller_2include_2init_8h.html#a3093aa084cccba48441fb76c640822d0" title="init_qfly" alt="" coords="141,5,208,35"/>
+<area shape="rect" id="node5" href="$log_8h.html#a1ae4bed30c73ea75ff9836ba4eb37697" title="log_s" alt="" coords="148,59,201,88"/>
+<area shape="rect" id="node11" href="$millis_8h.html#ac4da2262c9e029e8213116c8482099b9" title="millis" alt="" coords="149,112,200,141"/>
+<area shape="rect" id="node13" href="$controller_2main_8c.html#a7aaf9462e9aec00c00f87e81bb9d1f92" title="mpu6050_update" alt="" coords="115,219,235,248"/>
+<area shape="rect" id="node30" href="$controller_2main_8c.html#a55d9adccabe077df9a55b345522d0126" title="pid_update" alt="" coords="132,272,217,301"/>
+<area shape="rect" id="node36" href="$controller_2main_8c.html#a44a86a9e48f1e8da0be4a326482782ba" title="motorcontrol_update" alt="" coords="105,165,244,195"/>
+<area shape="rect" id="node7" href="$uart_8h.html#a4ff96641e032cfc64cb3a9262429fb27" title="uart_tx" alt="" coords="324,33,385,63"/>
+<area shape="rect" id="node9" href="$uart_8c.html#a81f78171155efa18b7e545203194ef13" title="tx_buffer" alt="" coords="477,8,549,37"/>
+<area shape="rect" id="node15" href="$mpu6050_8h.html#a70f521a2549e64a1a6bf2251755c9aec" title="mpu6050_getall" alt="" coords="299,219,411,248"/>
+<area shape="rect" id="node17" href="$i2cmaster_8h.html#aa3d328f00326115e9c660ccc838417c8" title="Issues a start condition and sends address and transfer direction." alt="" coords="611,219,683,248"/>
+<area shape="rect" id="node19" href="$i2cmaster_8h.html#add947aade44ed6b7f92265f9dec4a711" title="Send one byte to I2C device." alt="" coords="476,165,551,195"/>
+<area shape="rect" id="node21" href="$i2cmaster_8h.html#a70c934b61f3c6ba8524104a1d7197d30" title="Issues a repeated start condition and sends address and transfer direction." alt="" coords="465,219,561,248"/>
+<area shape="rect" id="node24" href="$i2cmaster_8h.html#a9d083c878f400523eba6e073e36c6fd8" title="read one byte from the I2C device, request more data from device" alt="" coords="464,272,563,301"/>
+<area shape="rect" id="node26" href="$i2cmaster_8h.html#ad4bda1a6138ccdad09a3fa9dda383c84" title="read one byte from the I2C device, read is followed by a stop condition" alt="" coords="464,325,563,355"/>
+<area shape="rect" id="node28" href="$i2cmaster_8h.html#ad35d4e4f52ca74b503d5e5e1e0a3f5f3" title="Terminates the data transfer and releases the I2C bus." alt="" coords="479,112,548,141"/>
+<area shape="rect" id="node32" href="$kalman_8h.html#affdcfb81c8cd94121e09346aa7f4b9f4" title="kalman_calculate" alt="" coords="293,325,416,355"/>
+<area shape="rect" id="node34" href="$pid_8h.html#a4c77c277ae0934404fb21846d9226a6a" title="pid_calculate" alt="" coords="305,272,404,301"/>
+<area shape="rect" id="node38" href="$motorcom_8h.html#a6d0e2fed00f11cb2685499227fbf8b52" title="motorcontrol" alt="" coords="308,165,401,195"/>
 </map>
