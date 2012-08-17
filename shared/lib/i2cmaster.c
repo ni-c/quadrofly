@@ -24,6 +24,7 @@
 
 /**
  * Initialization of the I2C bus interface. Need to be called only once
+ *
  */
 void i2c_init(void) {
 #ifdef I2C_MASTER_AVAILABLE

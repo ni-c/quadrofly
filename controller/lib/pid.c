@@ -24,7 +24,7 @@ volatile int16_t pid_e_old;
  *
  * @param target The target value to reach
  * @param actual The actual value
- * @param The control value
+ * @return The calculated PID control value
  */
 int16_t pidCalculate(int16_t target, int16_t actual) {
     int16_t u; /*!< Result */

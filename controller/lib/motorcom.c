@@ -21,7 +21,7 @@
 /**
  * Writes value to the ENABLE register of the motorcontrol unit
  *
- * @value The value to write
+ * @param value The value to write
  */
 uint8_t motorcontrol_init(uint8_t value) {
 #ifdef MOTORCONTROL_AVAILABLE
@@ -63,9 +63,9 @@ uint8_t motorcontrol_set_motors(uint8_t motor_a, uint8_t motor_b, uint8_t motor_
  * Reads the values of the RC channels from the motorcontrol unit
  *
  * @param channel_a Value of channel_a
- * @param channel_a Value of channel_b
- * @param channel_a Value of channel_c
- * @param channel_a Value of channel_d
+ * @param channel_b Value of channel_b
+ * @param channel_c Value of channel_c
+ * @param channel_d Value of channel_d
  * @return If the communication was succesful
  */
 uint8_t motorcontrol_get_rc_channels(uint8_t *channel_a, uint8_t *channel_b, uint8_t *channel_c, uint8_t *channel_d) {
@@ -93,9 +93,9 @@ uint8_t motorcontrol_get_rc_channels(uint8_t *channel_a, uint8_t *channel_b, uin
  * @param motor_c Speed of motor 3
  * @param motor_d Speed of motor 4
  * @param channel_a Value of channel_a
- * @param channel_a Value of channel_b
- * @param channel_a Value of channel_c
- * @param channel_a Value of channel_d
+ * @param channel_b Value of channel_b
+ * @param channel_c Value of channel_c
+ * @param channel_d Value of channel_d
  * @return If the communication was succesful
  */
 uint8_t motorcontrol(uint8_t motor_a, uint8_t motor_b, uint8_t motor_c, uint8_t motor_d, uint8_t *channel_a, uint8_t *channel_b, uint8_t *channel_c, uint8_t *channel_d) {

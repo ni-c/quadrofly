@@ -93,14 +93,12 @@
 
 /**
  @brief initialize the I2C master interace. Need to be called only once 
- @param  void
  @return none
  */
 extern void i2c_init(void);
 
 /** 
  @brief Terminates the data transfer and releases the I2C bus 
- @param void
  @return none
  */
 extern void i2c_stop(void);

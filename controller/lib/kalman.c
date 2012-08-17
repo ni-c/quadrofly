@@ -1,7 +1,7 @@
 /**
  * Quadrofly Software (http://quadrofly.ni-c.de)
  *  
- * @file 	controller/include/kalman.c
+ * @file 	controller/lib/kalman.c
  * @brief 	Kalman Filter
  * @ingroup controller
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
