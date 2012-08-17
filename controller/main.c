@@ -26,7 +26,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-uint32_t lastlooptime = 0; /*!< Timestamp of the last loop */
+uint64_t lastlooptime = 0; /*!< Timestamp of the last loop */
 uint8_t looptime = 0; /*!< Loop time in ms */
 
 float kalman[3]; /*!< Kalman Filter results */
@@ -37,11 +37,11 @@ int16_t mpu6050[7]; /*!< MPU-6050 measurements */
 #endif /* MPU6050_AVAILABLE */
 
 #ifdef MOTORCONTROL_AVAILABLE
-int16_t motor[4] = {0,0,0,0};
-uint8_t rc_channel[4] = {0,0,0,0};
+int16_t motor[4] = {0,0,0,0}; /*!< Calculated speed values */
+uint8_t rc_channel[4] = {0,0,0,0}; /*!< Values of the RC channels */
 #endif /* MOTORCONTROL_AVAILABLE */
 
-uint8_t speed[4] = {0,0,0,0};
+uint8_t speed[4] = {0,0,0,0}; /*!< Speed values from the RC */
 
 #ifdef RFM12B_AVAILABLE
 /**
@@ -70,30 +70,22 @@ void mpu6050_update(void) {
 }
 
 /**
- * The main function.
+ * Calculates the Kalman filter and PID controller values
  */
-int main(void) {
+void pid_update(void) {
+    for (int i = 0; i < 3; i++) {
+        kalman[i] = kalmanCalculate((float)mpu6050[i], (float)mpu6050[3+i], looptime, i);
+        pid[i] = pidCalculate(0, kalman[i]) / 10;
+    }
+}
 
-    /* Initialization */
-    init_qfly();
-    log_s("up and running\n");
 
-    /* Our loop */
-    while (1) {
-
-        /* Get time of the last program loop in milliseconds */
-        looptime = millis() - lastlooptime;
-        lastlooptime = millis();
-
-        /* Update the MPU-6050 values */
-        mpu6050_update();
-
-        /* Kalman filter and PID controller for the MPU-6050 measurements */
-        for (int i = 0; i < 3; i++) {
-            kalman[i] = kalmanCalculate((float)mpu6050[i], (float)mpu6050[3+i], looptime, i);
-            pid[i] = pidCalculate(0, kalman[i]) / 10;
-        }
-
+/**
+ * Calculates the motor speeds, sends them to the motorcontrol and reads the RC channels from
+ * the motorcontrol.
+ */
+void motorcontrol_update(void) {
+#ifdef MOTORCONTROL_AVAILABLE
         /* Calculate motor speeds */
         motor[0] = (speed[0]==0) ? 0 : speed[0] + (pid[ACC_X] / 10);
         motor[1] = (speed[1]==0) ? 0 : speed[1] - (pid[ACC_Y] / 10);
@@ -115,15 +107,35 @@ int main(void) {
         for (int i = 0; i < 4; ++i) {
             speed[i] = tmp_speed;
         }
+#endif /* MOTORCONTROL_AVAILABLE */
+}
 
-#ifdef UART_AVAILABLE
-        if (uart_tx_ready()) {
-            /*
-            uart_tx_int16_t(mpu6050[ACC_X]);
-            uart_tx("\n");
-            */
-        }
-#endif /* UART_AVAILABLE */
+
+/**
+ * The main function.
+ */
+int main(void) {
+
+    /* Initialization */
+    init_qfly();
+    log_s("up and running\n");
+
+    /* Our loop */
+    while (1) {
+
+        /* Get time of the last program loop in milliseconds */
+        looptime = millis() - lastlooptime;
+        lastlooptime = millis();
+
+        /* Update the MPU-6050 values */
+        mpu6050_update();
+
+        /* Kalman filter and PID controller for the MPU-6050 measurements */
+        pid_update();
+
+        /* Set motor speed and read RC channel values */
+        motorcontrol_update();
+
     }
 
     /* Finally. (Never ever) */
