@@ -79,7 +79,6 @@ void pid_update(void) {
     }
 }
 
-
 /**
  * Calculates the motor speeds, sends them to the motorcontrol and reads the RC channels from
  * the motorcontrol.
@@ -109,7 +108,6 @@ void motorcontrol_update(void) {
         }
 #endif /* MOTORCONTROL_AVAILABLE */
 }
-
 
 /**
  * The main function.
