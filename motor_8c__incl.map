@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node5" href="$motorcontrol_8h.html" title="Motor control definitions." alt="" coords="23,83,127,112"/>
+<area shape="rect" id="node7" href="$motor_8h.html" title="Library to control the motor. The motors are attached to the ports PB3, PB4, PD6 and PD7..." alt="" coords="255,83,322,112"/>
+<area shape="rect" id="node13" href="$i2cslave_8h.html" title="I2C slave definitions." alt="" coords="151,83,231,112"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$i2cmaster_8h.html#aa3d328f00326115e9c660ccc838417c8" title="Issues a start condition and sends address and transfer direction." alt="" coords="156,5,228,35"/>
+<area shape="rect" id="node5" href="$i2cmaster_8h.html#add947aade44ed6b7f92265f9dec4a711" title="Send one byte to I2C device." alt="" coords="155,59,229,88"/>
+<area shape="rect" id="node7" href="$i2cmaster_8h.html#ad35d4e4f52ca74b503d5e5e1e0a3f5f3" title="Terminates the data transfer and releases the I2C bus." alt="" coords="157,112,227,141"/>
+</map>

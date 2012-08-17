@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$rfm12_8c.html" title="Library to communicate with the RFM12 module." alt="" coords="5,83,131,112"/>
+<area shape="rect" id="node5" href="$controller_2init_8c.html" title="Global initialization file." alt="" coords="155,83,261,112"/>
+<area shape="rect" id="node7" href="$mpu6050_8c.html" title="MPU6050 I2C device class." alt="" coords="285,83,445,112"/>
+<area shape="rect" id="node9" href="$controller_2main_8c.html" title="Main program." alt="" coords="469,83,587,112"/>
+<area shape="rect" id="node11" href="$telemetrics_2main_8c.html" title="Main program." alt="" coords="611,83,739,112"/>
+</map>

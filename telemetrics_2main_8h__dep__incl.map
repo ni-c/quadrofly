@@ -1,0 +1,19 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$i2cslave_8h.html" title="I2C slave definitions." alt="" coords="227,83,395,112"/>
+<area shape="rect" id="node5" href="$i2cslave_8c.html" title="I2C slave functions." alt="" coords="5,160,147,189"/>
+<area shape="rect" id="node9" href="$motor_8c.html" title="Library to control the motor. The motors are attached to the ports PB3, PB4, PD6 and PD7..." alt="" coords="480,160,637,189"/>
+<area shape="rect" id="node13" href="$i2cmaster_8c.html" title="I2C master library using hardware TWI interface." alt="" coords="469,83,619,112"/>
+<area shape="rect" id="node16" href="$log_8c.html" title="Log helper class." alt="" coords="643,83,752,112"/>
+<area shape="rect" id="node18" href="$millis_8c.html" title="Counting milliseconds since start." alt="" coords="776,83,899,112"/>
+<area shape="rect" id="node20" href="$rfm12_8c.html" title="Library to communicate with the RFM12 module." alt="" coords="923,83,1048,112"/>
+<area shape="rect" id="node22" href="$uart_8c.html" title="Helper methods for UART." alt="" coords="1072,83,1187,112"/>
+<area shape="rect" id="node24" href="$kalman_8c.html" title="controller/lib/kalman.c" alt="" coords="1211,83,1360,112"/>
+<area shape="rect" id="node26" href="$motorcom_8c.html" title="Communication with the motorcontrol." alt="" coords="1384,83,1549,112"/>
+<area shape="rect" id="node28" href="$mpu6050_8c.html" title="MPU6050 I2C device class." alt="" coords="1573,83,1733,112"/>
+<area shape="rect" id="node30" href="$pid_8c.html" title="PID controller." alt="" coords="1757,83,1880,112"/>
+<area shape="rect" id="node33" href="$rx_8c.html" title="Unit to read the signal from the RX receiver." alt="" coords="1904,83,2040,112"/>
+<area shape="rect" id="node35" href="$telemetrics_2init_8c.html" title="Global initialization file." alt="" coords="2064,83,2181,112"/>
+<area shape="rect" id="node37" href="$telemetrics_2main_8c.html" title="Main program." alt="" coords="2205,83,2333,112"/>
+<area shape="rect" id="node7" href="$motorcontrol_2init_8c.html" title="Global initialization file." alt="" coords="171,160,296,189"/>
+<area shape="rect" id="node11" href="$motorcontrol_2main_8c.html" title="Main program." alt="" coords="320,160,456,189"/>
+</map>

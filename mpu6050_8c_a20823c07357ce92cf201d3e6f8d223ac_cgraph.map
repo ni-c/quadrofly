@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$log_8h.html#a1ae4bed30c73ea75ff9836ba4eb37697" title="log_s" alt="" coords="177,31,231,60"/>
+<area shape="rect" id="node9" href="$mpu6050_8h.html#af1211733937a4f65470898fc2677d74d" title="mpu6050_set" alt="" coords="155,109,253,139"/>
+<area shape="rect" id="node17" href="$mpu6050_8h.html#ae615a9a507551f0c2860a17831aad412" title="mpu6050_test" alt="" coords="152,189,256,219"/>
+<area shape="rect" id="node5" href="$uart_8h.html#a4ff96641e032cfc64cb3a9262429fb27" title="uart_tx" alt="" coords="323,5,384,35"/>
+<area shape="rect" id="node7" href="$uart_8c.html#a81f78171155efa18b7e545203194ef13" title="tx_buffer" alt="" coords="452,5,524,35"/>
+<area shape="rect" id="node11" href="$i2cmaster_8h.html#aa3d328f00326115e9c660ccc838417c8" title="Issues a start condition and sends address and transfer direction." alt="" coords="452,215,524,244"/>
+<area shape="rect" id="node13" href="$i2cmaster_8h.html#add947aade44ed6b7f92265f9dec4a711" title="Send one byte to I2C device." alt="" coords="316,163,391,192"/>
+<area shape="rect" id="node15" href="$i2cmaster_8h.html#ad35d4e4f52ca74b503d5e5e1e0a3f5f3" title="Terminates the data transfer and releases the I2C bus." alt="" coords="319,109,388,139"/>
+<area shape="rect" id="node21" href="$i2cmaster_8h.html#a70c934b61f3c6ba8524104a1d7197d30" title="Issues a repeated start condition and sends address and transfer direction." alt="" coords="305,267,401,296"/>
+<area shape="rect" id="node24" href="$i2cmaster_8h.html#ad4bda1a6138ccdad09a3fa9dda383c84" title="read one byte from the I2C device, read is followed by a stop condition" alt="" coords="304,320,403,349"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$i2cslave_8c.html" title="I2C slave functions." alt="" coords="5,83,147,112"/>
+<area shape="rect" id="node5" href="$motorcontrol_2init_8c.html" title="Global initialization file." alt="" coords="171,83,296,112"/>
+<area shape="rect" id="node7" href="$motor_8c.html" title="Library to control the motor. The motors are attached to the ports PB3, PB4, PD6 and PD7..." alt="" coords="320,83,477,112"/>
+<area shape="rect" id="node9" href="$motorcontrol_2main_8c.html" title="Main program." alt="" coords="501,83,637,112"/>
+</map>

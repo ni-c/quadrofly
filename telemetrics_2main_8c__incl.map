@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$telemetrics_2main_8h.html" title="Global header file." alt="" coords="5,83,67,112"/>
+<area shape="rect" id="node7" href="$global__def_8h.html" title="Global initialization file." alt="" coords="91,83,181,112"/>
+<area shape="rect" id="node11" href="$uart_8h.html" title="UART control methods." alt="" coords="445,83,499,112"/>
+<area shape="rect" id="node16" href="$log_8h.html" title="Log handling." alt="" coords="280,83,331,112"/>
+<area shape="rect" id="node19" href="$rfm12_8h.html" title="Header file for the RFM12 module." alt="" coords="355,83,421,112"/>
+</map>

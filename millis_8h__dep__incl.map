@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$millis_8c.html" title="Counting milliseconds since start." alt="" coords="5,83,128,112"/>
+<area shape="rect" id="node5" href="$controller_2init_8c.html" title="Global initialization file." alt="" coords="152,83,259,112"/>
+<area shape="rect" id="node7" href="$controller_2main_8c.html" title="Main program." alt="" coords="283,83,400,112"/>
+</map>

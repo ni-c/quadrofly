@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$controller_2main_8h.html" title="Global header file." alt="" coords="5,83,67,112"/>
+<area shape="rect" id="node5" href="$global__def_8h.html" title="Global initialization file." alt="" coords="91,83,181,112"/>
+<area shape="rect" id="node7" href="$motorcontrol_8h.html" title="Motor control definitions." alt="" coords="205,83,309,112"/>
+<area shape="rect" id="node11" href="$uart_8h.html" title="UART control methods." alt="" coords="408,83,461,112"/>
+<area shape="rect" id="node17" href="$log_8h.html" title="Log handling." alt="" coords="485,83,536,112"/>
+<area shape="rect" id="node20" href="$rfm12_8h.html" title="Header file for the RFM12 module." alt="" coords="560,83,627,112"/>
+<area shape="rect" id="node23" href="$i2cmaster_8h.html" title="I2C (TWI) Master Software Library." alt="" coords="1133,83,1224,112"/>
+<area shape="rect" id="node27" href="$mpu6050_8h.html" title="MPU6050 I2C device class." alt="" coords="651,83,736,112"/>
+<area shape="rect" id="node30" href="$motorcom_8h.html" title="Communication with the motorcontrol." alt="" coords="760,83,851,112"/>
+<area shape="rect" id="node33" href="$millis_8h.html" title="Counting milliseconds since start." alt="" coords="875,83,936,112"/>
+<area shape="rect" id="node36" href="$kalman_8h.html" title="Kalman Filter Implementation." alt="" coords="960,83,1035,112"/>
+<area shape="rect" id="node39" href="$pid_8h.html" title="PID Controller." alt="" coords="1059,83,1109,112"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$controller_2main_8h.html" title="Global header file." alt="" coords="5,83,67,112"/>
+<area shape="rect" id="node5" href="$global__def_8h.html" title="Global initialization file." alt="" coords="91,83,181,112"/>
+<area shape="rect" id="node7" href="$motorcontrol_8h.html" title="Motor control definitions." alt="" coords="205,83,309,112"/>
+<area shape="rect" id="node9" href="$motorcom_8h.html" title="Communication with the motorcontrol." alt="" coords="411,83,501,112"/>
+<area shape="rect" id="node13" href="$log_8h.html" title="Log handling." alt="" coords="525,83,576,112"/>
+<area shape="rect" id="node16" href="$uart_8h.html" title="UART control methods." alt="" coords="333,83,387,112"/>
+<area shape="rect" id="node21" href="$i2cmaster_8h.html" title="I2C (TWI) Master Software Library." alt="" coords="885,83,976,112"/>
+<area shape="rect" id="node25" href="$rfm12_8h.html" title="Header file for the RFM12 module." alt="" coords="600,83,667,112"/>
+<area shape="rect" id="node28" href="$mpu6050_8h.html" title="MPU6050 I2C device class." alt="" coords="691,83,776,112"/>
+<area shape="rect" id="node31" href="$millis_8h.html" title="Counting milliseconds since start." alt="" coords="800,83,861,112"/>
+</map>

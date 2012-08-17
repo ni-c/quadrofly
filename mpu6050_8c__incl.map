@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node5" href="$mpu6050_8h.html" title="MPU6050 I2C device class." alt="" coords="91,83,176,112"/>
+<area shape="rect" id="node9" href="$i2cmaster_8h.html" title="I2C (TWI) Master Software Library." alt="" coords="403,83,493,112"/>
+<area shape="rect" id="node13" href="$log_8h.html" title="Log handling." alt="" coords="251,83,301,112"/>
+<area shape="rect" id="node16" href="$uart_8h.html" title="UART control methods." alt="" coords="325,83,379,112"/>
+</map>

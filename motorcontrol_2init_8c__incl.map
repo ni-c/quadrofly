@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$motorcontrol_2main_8h.html" title="Global header file." alt="" coords="5,83,67,112"/>
+<area shape="rect" id="node7" href="$global__def_8h.html" title="Global initialization file." alt="" coords="91,83,181,112"/>
+<area shape="rect" id="node9" href="$i2cslave_8h.html" title="I2C slave definitions." alt="" coords="205,83,285,112"/>
+<area shape="rect" id="node14" href="$motor_8h.html" title="Library to control the motor. The motors are attached to the ports PB3, PB4, PD6 and PD7..." alt="" coords="309,83,376,112"/>
+<area shape="rect" id="node20" href="$rx_8h.html" title="Unit to read the signal from the RX receiver." alt="" coords="400,83,443,112"/>
+</map>

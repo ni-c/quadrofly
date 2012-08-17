@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$rfm12_8c.html" title="Library to communicate with the RFM12 module." alt="" coords="5,83,131,112"/>
+<area shape="rect" id="node5" href="$controller_2init_8c.html" title="Global initialization file." alt="" coords="155,83,261,112"/>
+<area shape="rect" id="node7" href="$controller_2main_8c.html" title="Main program." alt="" coords="285,83,403,112"/>
+<area shape="rect" id="node9" href="$telemetrics_2init_8c.html" title="Global initialization file." alt="" coords="427,83,544,112"/>
+<area shape="rect" id="node11" href="$telemetrics_2main_8c.html" title="Main program." alt="" coords="568,83,696,112"/>
+</map>

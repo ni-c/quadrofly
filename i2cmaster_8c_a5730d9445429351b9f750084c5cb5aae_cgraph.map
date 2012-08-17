@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$log_8h.html#a1ae4bed30c73ea75ff9836ba4eb37697" title="log_s" alt="" coords="117,5,171,35"/>
+<area shape="rect" id="node5" href="$uart_8h.html#a4ff96641e032cfc64cb3a9262429fb27" title="uart_tx" alt="" coords="220,5,281,35"/>
+<area shape="rect" id="node7" href="$uart_8c.html#a81f78171155efa18b7e545203194ef13" title="tx_buffer" alt="" coords="332,5,404,35"/>
+</map>

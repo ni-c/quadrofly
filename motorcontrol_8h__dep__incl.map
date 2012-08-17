@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$controller_2init_8c.html" title="Global initialization file." alt="" coords="5,83,112,112"/>
+<area shape="rect" id="node5" href="$controller_2main_8c.html" title="Main program." alt="" coords="136,83,253,112"/>
+<area shape="rect" id="node7" href="$motor_8c.html" title="Library to control the motor. The motors are attached to the ports PB3, PB4, PD6 and PD7..." alt="" coords="277,83,435,112"/>
+<area shape="rect" id="node9" href="$motorcontrol_2main_8c.html" title="Main program." alt="" coords="459,83,595,112"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$log_8c.html" title="Log helper class." alt="" coords="5,83,115,112"/>
+<area shape="rect" id="node5" href="$uart_8c.html" title="Helper methods for UART." alt="" coords="139,83,253,112"/>
+<area shape="rect" id="node7" href="$controller_2init_8c.html" title="Global initialization file." alt="" coords="277,83,384,112"/>
+<area shape="rect" id="node9" href="$mpu6050_8c.html" title="MPU6050 I2C device class." alt="" coords="408,83,568,112"/>
+<area shape="rect" id="node11" href="$controller_2main_8c.html" title="Main program." alt="" coords="592,83,709,112"/>
+<area shape="rect" id="node13" href="$telemetrics_2init_8c.html" title="Global initialization file." alt="" coords="733,83,851,112"/>
+<area shape="rect" id="node15" href="$telemetrics_2main_8c.html" title="Main program." alt="" coords="875,83,1003,112"/>
+</map>
