@@ -3,6 +3,7 @@
  *
  * @file 	controller/main.h
  * @brief 	Global header file.
+ * @ingroup controller
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
  * @date 	Mar 6, 2012
  */

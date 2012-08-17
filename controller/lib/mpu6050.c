@@ -1,8 +1,9 @@
 /**
  * Quadrofly Software (http://quadrofly.ni-c.de)
  *
- * @file 	mpu6050.c
+ * @file 	controller/lib/mpu6050.c
  * @brief   MPU6050 I2C device class.
+ * @ingroup controller
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
  * @date 	Apr 1, 2012
  */

@@ -12,9 +12,7 @@
 
 #ifdef DOXYGEN
 /**
- @defgroup pfleury_ic2master I2C Master library
- @code #include <i2cmaster.h> @endcode
-
+ @file shared/include/i2cmaster.h
  @brief I2C (TWI) Master Software Library
 
  Basic routines for communicating with I2C slave devices. This single master 

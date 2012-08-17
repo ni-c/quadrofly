@@ -5,6 +5,9 @@
  * @brief 	Main program
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
  * @date 	Mar 6, 2012
+ *
+ * @defgroup controller Controller
+ *
  */
 #include "main.h"
 #include "global_def.h"

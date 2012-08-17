@@ -3,6 +3,7 @@
  *
  * @file 	motorcontrol/include/motor.h
  * @brief 	Library to control the motor. The motors are attached to the ports PB3, PB4, PD6 and PD7.
+ * @ingroup motorcontrol
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
  * @date 	Mar 10, 2012
  */

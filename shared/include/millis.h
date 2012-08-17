@@ -1,7 +1,7 @@
 /**
  * Quadrofly Software (http://quadrofly.ni-c.de)
  *  
- * @file 	/quadrofly/shared/include/millis.h/millis.h
+ * @file 	/shared/include/millis.h
  * @brief 	Counting milliseconds since start
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
  * @date 	Apr 23, 2012

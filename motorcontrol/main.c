@@ -22,6 +22,7 @@
  *
  * @file 	motorcontrol/main.c
  * @brief 	Main program
+ * @defgroup motorcontrol Motorcontrol
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
  * @date 	Mar 6, 2012
  */

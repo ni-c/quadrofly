@@ -1,8 +1,9 @@
 /**
  * Quadrofly Software (http://quadrofly.ni-c.de)
  *  
- * @file 	/quadrofly/controller/include/pid.h/pid.h
- * @brief 	
+ * @file 	controller/include/pid.h
+ * @brief 	PID Controller
+ * @ingroup controller
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
  * @date 	Apr 29, 2012
  */

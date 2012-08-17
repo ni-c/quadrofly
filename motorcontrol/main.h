@@ -3,6 +3,7 @@
  *
  * @file 	motorcontrol/main.h
  * @brief 	Global header file.
+ * @ingroup motorcontrol
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
  * @date 	Mar 6, 2012
  */

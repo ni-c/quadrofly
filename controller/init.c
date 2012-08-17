@@ -3,6 +3,7 @@
  *
  * @file 	controller/init.c
  * @brief 	Global initialization file.
+ * @ingroup controller
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
  * @date 	Mar 6, 2012
  */

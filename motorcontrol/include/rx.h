@@ -3,6 +3,7 @@
  *  
  * @file 	rx.h
  * @brief 	Unit to read the signal from the RX receiver
+ * @ingroup motorcontrol
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
  * @date 	Apr 27, 2012
  */

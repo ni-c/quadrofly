@@ -1,8 +1,9 @@
 /**
  * Quadrofly Software (http://quadrofly.ni-c.de)
  *  
- * @file    motorcom.h
+ * @file    controller/include/motorcom.h
  * @brief   Communication with the motorcontrol
+ * @ingroup controller
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
  * @date 	Apr 19, 2012
  */

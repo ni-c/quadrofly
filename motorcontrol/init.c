@@ -3,6 +3,7 @@
  *
  * @file 	motorcontrol/init.c
  * @brief 	Global initialization file.
+ * @ingroup motorcontrol
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
  * @date 	Mar 6, 2012
  */
