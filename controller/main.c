@@ -37,11 +37,11 @@ int16_t mpu6050[7]; /*!< MPU-6050 measurements */
 #endif /* MPU6050_AVAILABLE */
 
 #ifdef MOTORCONTROL_AVAILABLE
-int16_t motor[4] = {0,0,0,0}; /*!< Calculated speed values */
-uint8_t rc_channel[4] = {0,0,0,0}; /*!< Values of the RC channels */
+int16_t motor[4] = { 0, 0, 0, 0 }; /*!< Calculated speed values */
+uint8_t rc_channel[4] = { 0, 0, 0, 0 }; /*!< Values of the RC channels */
 #endif /* MOTORCONTROL_AVAILABLE */
 
-uint8_t speed[4] = {0,0,0,0}; /*!< Speed values from the RC */
+uint8_t speed[4] = { 0, 0, 0, 0 }; /*!< Speed values from the RC */
 
 #ifdef RFM12B_AVAILABLE
 /**
@@ -74,7 +74,7 @@ void mpu6050_update(void) {
  */
 void pid_update(void) {
     for (int i = 0; i < 3; i++) {
-        kalman[i] = kalman_calculate((float)mpu6050[i], (float)mpu6050[3+i], looptime, i);
+        kalman[i] = kalman_calculate((float) mpu6050[i], (float) mpu6050[3 + i], looptime, i);
         pid[i] = pid_calculate(0, kalman[i]) / 10;
     }
 }
@@ -85,27 +85,29 @@ void pid_update(void) {
  */
 void motorcontrol_update(void) {
 #ifdef MOTORCONTROL_AVAILABLE
-        /* Calculate motor speeds */
-        motor[0] = (speed[0]==0) ? 0 : speed[0] + (pid[ACC_X] / 10);
-        motor[1] = (speed[1]==0) ? 0 : speed[1] - (pid[ACC_Y] / 10);
-        motor[2] = (speed[2]==0) ? 0 : speed[2] - (pid[ACC_X] / 10);
-        motor[3] = (speed[3]==0) ? 0 : speed[3] + (pid[ACC_Y] / 10);
-        for (int i = 0; i < 4; ++i) {
-            if (motor[i]>255) {
-                motor[i] = 255;
-            } else if (motor[i] < 0) {
-                motor[i] = 0;
-            }
-        }
 
-        /* Set motor speed and read RC channel values */
-        motorcontrol((uint8_t)motor[0], (uint8_t)motor[1], (uint8_t)motor[2], (uint8_t)motor[3], &rc_channel[0], &rc_channel[1], &rc_channel[2], &rc_channel[3]);
-
-        /* Flatten RC channel values and prepare motor speed variables */
-        uint8_t tmp_speed = (rc_channel[0] < 25) ? 0 : rc_channel[0];
-        for (int i = 0; i < 4; ++i) {
-            speed[i] = tmp_speed;
+    /* Calculate motor speeds */
+    motor[0] = (speed[0] == 0) ? 0 : speed[0] + (pid[ACC_X] / 10);
+    motor[1] = (speed[1] == 0) ? 0 : speed[1] - (pid[ACC_Y] / 10);
+    motor[2] = (speed[2] == 0) ? 0 : speed[2] - (pid[ACC_X] / 10);
+    motor[3] = (speed[3] == 0) ? 0 : speed[3] + (pid[ACC_Y] / 10);
+    for (int i = 0; i < 4; ++i) {
+        if (motor[i] > 255) {
+            motor[i] = 255;
+        } else if (motor[i] < 0) {
+            motor[i] = 0;
         }
+    }
+
+    /* Set motor speed and read RC channel values */
+    motorcontrol((uint8_t) motor[0], (uint8_t) motor[1], (uint8_t) motor[2], (uint8_t) motor[3], &rc_channel[0], &rc_channel[1], &rc_channel[2], &rc_channel[3]);
+
+    /* Flatten RC channel values and prepare motor speed variables */
+    uint8_t tmp_speed = (rc_channel[0] < 25) ? 0 : rc_channel[0];
+    for (int i = 0; i < 4; ++i) {
+        speed[i] = tmp_speed;
+    }
+
 #endif /* MOTORCONTROL_AVAILABLE */
 }
 

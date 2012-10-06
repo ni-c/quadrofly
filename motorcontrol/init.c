@@ -36,7 +36,7 @@ void init_qfly(void) {
 
 #ifdef RX_AVAILABLE
     /*
-     * Initialize motors
+     * Initialize rx
      */
     rx_init();
 #endif /* RX_AVAILABLE */

@@ -11,3 +11,4 @@ main.map
 main.sym
 *.lst
 *.o
+*.hex
