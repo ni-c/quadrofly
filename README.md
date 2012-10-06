@@ -12,23 +12,23 @@ Building a Quadrocopter
 
 #### Schematics
 
-![Controller Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/controller_schematics.jpg)
+![Controller Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/controller_schematics.png)
 
 #### Board
 
-![Controller Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/controller_board.jpg)
+![Controller Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/controller_board.png)
 
 ### Motorcontrol
 
-![Controller](https://raw.github.com/ni-c/quadrofly/gh-pages/images/motorcontrol.jpg)
+![Motorcontrol](https://raw.github.com/ni-c/quadrofly/gh-pages/images/motorcontrol.jpg)
 
 #### Schematics
 
-![Controller Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/motorcontrol_schematics.jpg)
+![Motorcontrol Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/motorcontrol_schematics.png)
 
 #### Board
 
-![Controller Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/motorcontrol_board.jpg)
+![Motorcontrol Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/motorcontrol_board.png)
 
 ## Software
 
