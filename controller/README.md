@@ -6,11 +6,11 @@ The main controller of quadrofly
 
 ## Schematics
 
-![Controller Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/controller_schematics.jpg)
+![Controller Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/controller_schematics.png)
 
 ## Board
 
-![Controller Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/controller_board.jpg)
+![Controller Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/controller_board.png)
 
 ## Flash
 
