@@ -6,11 +6,11 @@ Reads the RX values and generates the PWM for the motor controllers. Communicate
 
 ## Schematics
 
-![Controller Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/motorcontrol_schematics.jpg)
+![Controller Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/motorcontrol_schematics.png)
 
 ## Board
 
-![Controller Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/motorcontrol_board.jpg)
+![Controller Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/motorcontrol_board.png)
 
 ## Flash
 
