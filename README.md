@@ -4,35 +4,7 @@ Building a Quadrocopter
 
 ![Quadrofly](https://raw.github.com/ni-c/quadrofly/gh-pages/images/quadrofly.jpg)
 
-## Hardware
-
-### Controller
-
-![Controller](https://raw.github.com/ni-c/quadrofly/gh-pages/images/controller.jpg)
-
-#### Schematics
-
-![Controller Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/controller_schematics.jpg)
-
-#### Board
-
-![Controller Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/controller_board.jpg)
-
-### Motorcontrol
-
-![Controller](https://raw.github.com/ni-c/quadrofly/gh-pages/images/motorcontrol.jpg)
-
-#### Schematics
-
-![Controller Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/motorcontrol_schematics.jpg)
-
-#### Board
-
-![Controller Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/motorcontrol_board.jpg)
-
-## Software
-
-### Directory Structure
+## Directory Structure
 
 - `/shared` – Libraries that are used by the main controller and the motor control unit
 - `/controller` – The code for the main controller of the Quadrocopter, an ATMega1284
@@ -40,13 +12,13 @@ Building a Quadrocopter
 - `/telemetrics` – The code for the telemetrics module, an ATMega1284
 - `/contrib` – Contributions like datasheets and schematics
 
-### Documentation
+## Documentation
 
 Source code documentation is generated with Doxygen and can be viewed under http://ni-c.github.com/quadrofly/
 
 More information about Quadrofly on my blog: http://quadrofly.ni-c.de
 
-### License
+## License
 
 MIT License
 
