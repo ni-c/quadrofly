@@ -1,5 +1,6 @@
 var uart_8h =
 [
+    [ "BAUD", "uart_8h.html#a62634036639f88eece6fbf226b45f84b", null ],
     [ "UART_BUFFER_SIZE", "uart_8h.html#a0d57378e32bf8278011460740bc29f7f", null ],
     [ "uart_init", "uart_8h.html#a0c0ca72359ddf28dcd15900dfba19343", null ],
     [ "uart_rx", "uart_8h.html#a7890596fcd6af238f22d2fa16f626bb6", null ],

@@ -8,9 +8,9 @@ var controller_2main_8c =
     [ "kalman", "controller_2main_8c.html#a739178273abbd81514ead4446821e220", null ],
     [ "lastlooptime", "controller_2main_8c.html#a3ed7ab22569662b959c042cba1201992", null ],
     [ "looptime", "controller_2main_8c.html#a1867efa4c258062812ca83a7b49cdcb8", null ],
-    [ "motor", "controller_2main_8c.html#a20e3dfc07930f1f1e290eba94e210319", null ],
     [ "mpu6050", "controller_2main_8c.html#af39aa193965493af8ded797529019f58", null ],
-    [ "pid", "controller_2main_8c.html#a6bf7383a8b924928aa6f87a699c93346", null ],
+    [ "pid", "controller_2main_8c.html#a605a96c3a5c6309b5598ec5198ee4b32", null ],
     [ "rc_channel", "controller_2main_8c.html#a0a57aa994b5f319997526eaf139d1ef0", null ],
-    [ "speed", "controller_2main_8c.html#aa9711ab30b79503e448e0cc042638a44", null ]
+    [ "speed", "controller_2main_8c.html#aa9711ab30b79503e448e0cc042638a44", null ],
+    [ "target", "controller_2main_8c.html#a44fd2275ebc1b7d236c506e6971c17a1", null ]
 ];

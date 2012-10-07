@@ -94,15 +94,15 @@ Include dependency graph for pid.c:</div>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pid_8c.html#ad080143a011ad0052b5cc653bd8f556c">MAX_PID_E_SUM</a>&#160;&#160;&#160;5000</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pid_8c.html#a3fa5131163a4775229163e648c213789">PID_ERROR_CAP</a>&#160;&#160;&#160;-10</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pid_8c.html#ad080143a011ad0052b5cc653bd8f556c">MAX_PID_E_SUM</a>&#160;&#160;&#160;500</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pid_8c.html#a3fa5131163a4775229163e648c213789">PID_ERROR_CAP</a>&#160;&#160;&#160;20</td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pid_8c.html#a4c77c277ae0934404fb21846d9226a6a">pid_calculate</a> (int16_t target, int16_t actual)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pid_8c.html#ac934f2e4169867052830c3c12cb7cbc3">pid_calculate</a> (int16_t <a class="el" href="controller_2main_8c.html#a44fd2275ebc1b7d236c506e6971c17a1">target</a>, int16_t actual, uint8_t key)</td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">volatile int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pid_8c.html#a1cb1784de8ec5998c0fc0ba80a075666">pid_e_sum</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">volatile int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pid_8c.html#a812f9e0244682d3eea8da9ff0447bc91">pid_e_old</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">volatile int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pid_8c.html#a1caf5bf5c13831450465188550e3ac81">pid_e_sum</a> [4] = {0, 0, 0, 0}</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">volatile int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pid_8c.html#ade34157c5228ac56bbfea68587955e76">pid_e_old</a> [4] = {0, 0, 0, 0}</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>PID controller. </p>
@@ -115,7 +115,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="pid_8c.html#ad080143a011ad0052b5cc653bd8f556c">MAX_PID_E_SUM</a>&#160;&#160;&#160;5000</td>
+          <td class="memname">#define <a class="el" href="pid_8c.html#ad080143a011ad0052b5cc653bd8f556c">MAX_PID_E_SUM</a>&#160;&#160;&#160;500</td>
         </tr>
       </table>
 </div>
@@ -129,7 +129,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="pid_8c.html#a3fa5131163a4775229163e648c213789">PID_ERROR_CAP</a>&#160;&#160;&#160;-10</td>
+          <td class="memname">#define <a class="el" href="pid_8c.html#a3fa5131163a4775229163e648c213789">PID_ERROR_CAP</a>&#160;&#160;&#160;20</td>
         </tr>
       </table>
 </div>
@@ -139,12 +139,12 @@ Variables</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="a4c77c277ae0934404fb21846d9226a6a"></a><!-- doxytag: member="pid.c::pid_calculate" ref="a4c77c277ae0934404fb21846d9226a6a" args="(int16_t target, int16_t actual)" -->
+<a class="anchor" id="ac934f2e4169867052830c3c12cb7cbc3"></a><!-- doxytag: member="pid.c::pid_calculate" ref="ac934f2e4169867052830c3c12cb7cbc3" args="(int16_t target, int16_t actual, uint8_t key)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int16_t <a class="el" href="pid_8c.html#a4c77c277ae0934404fb21846d9226a6a">pid_calculate</a> </td>
+          <td class="memname">int16_t <a class="el" href="pid_8c.html#ac934f2e4169867052830c3c12cb7cbc3">pid_calculate</a> </td>
           <td>(</td>
           <td class="paramtype">int16_t&#160;</td>
           <td class="paramname"><em>target</em>, </td>
@@ -153,7 +153,13 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int16_t&#160;</td>
-          <td class="paramname"><em>actual</em>&#160;</td>
+          <td class="paramname"><em>actual</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>key</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -168,23 +174,23 @@ Variables</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">target</td><td>The target value to reach </td></tr>
     <tr><td class="paramname">actual</td><td>The actual value </td></tr>
+    <tr><td class="paramname">key</td><td>A unique key to identify the pid filter (0..3) </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The calculated PID control value </dd></dl>
-<p>&lt; Result</p>
 <p>&lt; Error</p>
 <p>&lt; Temporary Factor I </p>
 
 </div>
 </div>
 <hr/><h2>Variable Documentation</h2>
-<a class="anchor" id="a812f9e0244682d3eea8da9ff0447bc91"></a><!-- doxytag: member="pid.c::pid_e_old" ref="a812f9e0244682d3eea8da9ff0447bc91" args="" -->
+<a class="anchor" id="ade34157c5228ac56bbfea68587955e76"></a><!-- doxytag: member="pid.c::pid_e_old" ref="ade34157c5228ac56bbfea68587955e76" args="[4]" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">volatile int16_t <a class="el" href="pid_8c.html#a812f9e0244682d3eea8da9ff0447bc91">pid_e_old</a></td>
+          <td class="memname">volatile int16_t <a class="el" href="pid_8c.html#ade34157c5228ac56bbfea68587955e76">pid_e_old</a>[4] = {0, 0, 0, 0}</td>
         </tr>
       </table>
 </div>
@@ -192,12 +198,12 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a1cb1784de8ec5998c0fc0ba80a075666"></a><!-- doxytag: member="pid.c::pid_e_sum" ref="a1cb1784de8ec5998c0fc0ba80a075666" args="" -->
+<a class="anchor" id="a1caf5bf5c13831450465188550e3ac81"></a><!-- doxytag: member="pid.c::pid_e_sum" ref="a1caf5bf5c13831450465188550e3ac81" args="[4]" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">volatile int16_t <a class="el" href="pid_8c.html#a1cb1784de8ec5998c0fc0ba80a075666">pid_e_sum</a></td>
+          <td class="memname">volatile int16_t <a class="el" href="pid_8c.html#a1caf5bf5c13831450465188550e3ac81">pid_e_sum</a>[4] = {0, 0, 0, 0}</td>
         </tr>
       </table>
 </div>
@@ -211,7 +217,7 @@ Variables</h2></td></tr>
     <ul>
       <li class="navelem"><a class="el" href="pid_8c.html">pid.c</a>      </li>
 
-    <li class="footer">Generated on Fri Aug 17 2012 21:38:35 for Quadrofly by
+    <li class="footer">Generated on Sun Oct 7 2012 22:08:59 for Quadrofly by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

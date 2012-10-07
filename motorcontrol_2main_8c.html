@@ -85,7 +85,6 @@
 <code>#include &quot;init.h&quot;</code><br/>
 <code>#include &quot;<a class="el" href="motor_8h.html">motor.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="i2cslave_8h.html">i2cslave.h</a>&quot;</code><br/>
-<code>#include &lt;avr/delay.h&gt;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for main.c:</div>
 <div class="dyncontent">
@@ -96,7 +95,7 @@ Include dependency graph for main.c:</div>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="motorcontrol_2main_8c.html#a11e761b5179fe5d40a52759528eab2fe">i2c_receive</a> (uint8_t *addr)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="motorcontrol_2main_8c.html#a032e8b62b985a1739aed8ba564f204e0">i2c_receive</a> (uint8_t addr)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="motorcontrol_2main_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a> (void)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
@@ -119,21 +118,21 @@ Functions</h2></td></tr>
  0x11         RC Channel 7
  0x12         RC Channel 8
  </pre> </div><hr/><h2>Function Documentation</h2>
-<a class="anchor" id="a11e761b5179fe5d40a52759528eab2fe"></a><!-- doxytag: member="main.c::i2c_receive" ref="a11e761b5179fe5d40a52759528eab2fe" args="(uint8_t *addr)" -->
+<a class="anchor" id="a032e8b62b985a1739aed8ba564f204e0"></a><!-- doxytag: member="main.c::i2c_receive" ref="a032e8b62b985a1739aed8ba564f204e0" args="(uint8_t addr)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="motorcontrol_2main_8c.html#a11e761b5179fe5d40a52759528eab2fe">i2c_receive</a> </td>
+          <td class="memname">void <a class="el" href="motorcontrol_2main_8c.html#a032e8b62b985a1739aed8ba564f204e0">i2c_receive</a> </td>
           <td>(</td>
-          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<p>interrupt funcition handling received bytes</p>
+<p>interrupt function handling received bytes</p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">addr</td><td>The address of the last received bytes </td></tr>
@@ -176,7 +175,7 @@ Here is the call graph for this function:</div>
     <ul>
       <li class="navelem"><a class="el" href="motorcontrol_2main_8c.html">main.c</a>      </li>
 
-    <li class="footer">Generated on Fri Aug 17 2012 21:38:35 for Quadrofly by
+    <li class="footer">Generated on Sun Oct 7 2012 22:08:59 for Quadrofly by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

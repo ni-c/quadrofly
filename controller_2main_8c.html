@@ -114,12 +114,12 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_2main_8c.html#a3ed7ab22569662b959c042cba1201992">lastlooptime</a> = 0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_2main_8c.html#a1867efa4c258062812ca83a7b49cdcb8">looptime</a> = 0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_2main_8c.html#a739178273abbd81514ead4446821e220">kalman</a> [3]</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_2main_8c.html#a6bf7383a8b924928aa6f87a699c93346">pid</a> [3]</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_2main_8c.html#af39aa193965493af8ded797529019f58">mpu6050</a> [7]</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_2main_8c.html#a20e3dfc07930f1f1e290eba94e210319">motor</a> [4] = {0,0,0,0}</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_2main_8c.html#a0a57aa994b5f319997526eaf139d1ef0">rc_channel</a> [4] = {0,0,0,0}</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_2main_8c.html#aa9711ab30b79503e448e0cc042638a44">speed</a> [4] = {0,0,0,0}</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_2main_8c.html#a739178273abbd81514ead4446821e220">kalman</a> [3] = { 0, 0, 0 }</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_2main_8c.html#a605a96c3a5c6309b5598ec5198ee4b32">pid</a> [4] = { 0, 0, 0, 0 }</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_2main_8c.html#af39aa193965493af8ded797529019f58">mpu6050</a> [7] = { -1 * <a class="el" href="mpu6050_8h.html#a7591629cec656fe927fb9b62c3bcc247">ACC_X_OFFSET</a>, -1 * <a class="el" href="mpu6050_8h.html#abf225478aeed93daae4dfbced6fd9769">ACC_Y_OFFSET</a>, -1 * <a class="el" href="mpu6050_8h.html#a3976beeac9962a349243c9c458a504f2">ACC_Z_OFFSET</a>, 0, 0, 0, 0 }</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_2main_8c.html#a0a57aa994b5f319997526eaf139d1ef0">rc_channel</a> [4] = { 0, 0, 0, 0 }</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_2main_8c.html#aa9711ab30b79503e448e0cc042638a44">speed</a> [4] = { 0, 0, 0, 0 }</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_2main_8c.html#a44fd2275ebc1b7d236c506e6971c17a1">target</a> [4] = { 0, 0, 0, 0 }</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Main program. </p>
@@ -148,7 +148,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="controller_2main_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph.png" border="0" usemap="#controller_2main_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph" alt=""/></div>
 <map name="controller_2main_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph" id="controller_2main_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph">
-<area shape="rect" id="node3" href="controller_2include_2init_8h.html#a3093aa084cccba48441fb76c640822d0" title="init_qfly" alt="" coords="141,5,208,35"/><area shape="rect" id="node5" href="log_8h.html#a1ae4bed30c73ea75ff9836ba4eb37697" title="log_s" alt="" coords="148,59,201,88"/><area shape="rect" id="node11" href="millis_8h.html#ac4da2262c9e029e8213116c8482099b9" title="millis" alt="" coords="149,112,200,141"/><area shape="rect" id="node13" href="controller_2main_8c.html#a7aaf9462e9aec00c00f87e81bb9d1f92" title="mpu6050_update" alt="" coords="115,219,235,248"/><area shape="rect" id="node30" href="controller_2main_8c.html#a55d9adccabe077df9a55b345522d0126" title="pid_update" alt="" coords="132,272,217,301"/><area shape="rect" id="node36" href="controller_2main_8c.html#a44a86a9e48f1e8da0be4a326482782ba" title="motorcontrol_update" alt="" coords="105,165,244,195"/><area shape="rect" id="node7" href="uart_8h.html#a4ff96641e032cfc64cb3a9262429fb27" title="uart_tx" alt="" coords="324,33,385,63"/><area shape="rect" id="node9" href="uart_8c.html#a81f78171155efa18b7e545203194ef13" title="tx_buffer" alt="" coords="477,8,549,37"/><area shape="rect" id="node15" href="mpu6050_8h.html#a70f521a2549e64a1a6bf2251755c9aec" title="mpu6050_getall" alt="" coords="299,219,411,248"/><area shape="rect" id="node17" href="i2cmaster_8h.html#aa3d328f00326115e9c660ccc838417c8" title="Issues a start condition and sends address and transfer direction." alt="" coords="611,219,683,248"/><area shape="rect" id="node19" href="i2cmaster_8h.html#add947aade44ed6b7f92265f9dec4a711" title="Send one byte to I2C device." alt="" coords="476,165,551,195"/><area shape="rect" id="node21" href="i2cmaster_8h.html#a70c934b61f3c6ba8524104a1d7197d30" title="Issues a repeated start condition and sends address and transfer direction." alt="" coords="465,219,561,248"/><area shape="rect" id="node24" href="i2cmaster_8h.html#a9d083c878f400523eba6e073e36c6fd8" title="read one byte from the I2C device, request more data from device" alt="" coords="464,272,563,301"/><area shape="rect" id="node26" href="i2cmaster_8h.html#ad4bda1a6138ccdad09a3fa9dda383c84" title="read one byte from the I2C device, read is followed by a stop condition" alt="" coords="464,325,563,355"/><area shape="rect" id="node28" href="i2cmaster_8h.html#ad35d4e4f52ca74b503d5e5e1e0a3f5f3" title="Terminates the data transfer and releases the I2C bus." alt="" coords="479,112,548,141"/><area shape="rect" id="node32" href="kalman_8h.html#affdcfb81c8cd94121e09346aa7f4b9f4" title="kalman_calculate" alt="" coords="293,325,416,355"/><area shape="rect" id="node34" href="pid_8h.html#a4c77c277ae0934404fb21846d9226a6a" title="pid_calculate" alt="" coords="305,272,404,301"/><area shape="rect" id="node38" href="motorcom_8h.html#a6d0e2fed00f11cb2685499227fbf8b52" title="motorcontrol" alt="" coords="308,165,401,195"/></map>
+<area shape="rect" id="node3" href="controller_2include_2init_8h.html#a3093aa084cccba48441fb76c640822d0" title="init_qfly" alt="" coords="141,295,208,325"/><area shape="rect" id="node5" href="log_8h.html#a1ae4bed30c73ea75ff9836ba4eb37697" title="log_s" alt="" coords="328,402,381,431"/><area shape="rect" id="node11" href="millis_8h.html#ac4da2262c9e029e8213116c8482099b9" title="millis" alt="" coords="149,506,200,535"/><area shape="rect" id="node13" href="controller_2main_8c.html#a7aaf9462e9aec00c00f87e81bb9d1f92" title="mpu6050_update" alt="" coords="115,349,235,378"/><area shape="rect" id="node36" href="controller_2main_8c.html#a55d9adccabe077df9a55b345522d0126" title="pid_update" alt="" coords="132,559,217,589"/><area shape="rect" id="node42" href="controller_2main_8c.html#a44a86a9e48f1e8da0be4a326482782ba" title="motorcontrol_update" alt="" coords="105,402,244,431"/><area shape="rect" id="node7" href="uart_8h.html#a4ff96641e032cfc64cb3a9262429fb27" title="uart_tx" alt="" coords="627,403,688,433"/><area shape="rect" id="node9" href="uart_8c.html#a81f78171155efa18b7e545203194ef13" title="tx_buffer" alt="" coords="743,403,815,433"/><area shape="rect" id="node15" href="mpu6050_8h.html#a70f521a2549e64a1a6bf2251755c9aec" title="mpu6050_getall" alt="" coords="299,141,411,170"/><area shape="rect" id="node31" href="log_8h.html#acf72a1e9f4d9e846d646d7fb4ef7f641" title="log_int16_t" alt="" coords="312,349,397,378"/><area shape="rect" id="node17" href="i2cmaster_8h.html#aa3d328f00326115e9c660ccc838417c8" title="Issues a start condition and sends address and transfer direction." alt="" coords="621,141,693,170"/><area shape="rect" id="node19" href="i2cmaster_8h.html#add947aade44ed6b7f92265f9dec4a711" title="Send one byte to I2C device." alt="" coords="481,87,556,117"/><area shape="rect" id="node21" href="i2cmaster_8h.html#a70c934b61f3c6ba8524104a1d7197d30" title="Issues a repeated start condition and sends address and transfer direction." alt="" coords="471,141,567,170"/><area shape="rect" id="node24" href="i2cmaster_8h.html#a9d083c878f400523eba6e073e36c6fd8" title="read one byte from the I2C device, request more data from device" alt="" coords="469,194,568,223"/><area shape="rect" id="node26" href="i2cmaster_8h.html#ad4bda1a6138ccdad09a3fa9dda383c84" title="read one byte from the I2C device, read is followed by a stop condition" alt="" coords="469,247,568,277"/><area shape="rect" id="node28" href="i2cmaster_8h.html#ad35d4e4f52ca74b503d5e5e1e0a3f5f3" title="Terminates the data transfer and releases the I2C bus." alt="" coords="484,34,553,63"/><area shape="rect" id="node33" href="uart_8h.html#ac62b0ab30834b841559c97ef6cb4406a" title="uart_tx_int16_t" alt="" coords="465,351,572,381"/><area shape="rect" id="node38" href="kalman_8h.html#affdcfb81c8cd94121e09346aa7f4b9f4" title="kalman_calculate" alt="" coords="293,587,416,617"/><area shape="rect" id="node40" href="pid_8h.html#ac934f2e4169867052830c3c12cb7cbc3" title="pid_calculate" alt="" coords="305,534,404,563"/><area shape="rect" id="node45" href="log_8h.html#a93739368dbb16c85e303f505119cef7d" title="log_uint8_t" alt="" coords="312,455,397,485"/><area shape="rect" id="node50" href="motorcom_8h.html#a6d0e2fed00f11cb2685499227fbf8b52" title="motorcontrol" alt="" coords="308,194,401,223"/><area shape="rect" id="node47" href="uart_8h.html#ab413e196d44f29bd8a4dd403702bd195" title="uart_tx_uint8_t" alt="" coords="465,455,572,485"/></map>
 </div>
 </p>
 
@@ -169,13 +169,22 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 <p>Calculates the motor speeds, sends them to the motorcontrol and reads the RC channels from the motorcontrol. </p>
+<p>Flattens the given value </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>The value to flatten </td></tr>
+    <tr><td class="paramname">cap</td><td>The cap under which the value should be flattened </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The flatten value</dd></dl>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="controller_2main_8c_a44a86a9e48f1e8da0be4a326482782ba_cgraph.png" border="0" usemap="#controller_2main_8c_a44a86a9e48f1e8da0be4a326482782ba_cgraph" alt=""/></div>
 <map name="controller_2main_8c_a44a86a9e48f1e8da0be4a326482782ba_cgraph" id="controller_2main_8c_a44a86a9e48f1e8da0be4a326482782ba_cgraph">
-<area shape="rect" id="node3" href="motorcom_8h.html#a6d0e2fed00f11cb2685499227fbf8b52" title="motorcontrol" alt="" coords="196,108,289,137"/><area shape="rect" id="node5" href="i2cmaster_8h.html#aa3d328f00326115e9c660ccc838417c8" title="Issues a start condition and sends address and transfer direction." alt="" coords="485,29,557,58"/><area shape="rect" id="node7" href="i2cmaster_8h.html#add947aade44ed6b7f92265f9dec4a711" title="Send one byte to I2C device." alt="" coords="351,28,425,57"/><area shape="rect" id="node9" href="i2cmaster_8h.html#a70c934b61f3c6ba8524104a1d7197d30" title="Issues a repeated start condition and sends address and transfer direction." alt="" coords="340,81,436,110"/><area shape="rect" id="node12" href="i2cmaster_8h.html#a9d083c878f400523eba6e073e36c6fd8" title="read one byte from the I2C device, request more data from device" alt="" coords="339,134,437,164"/><area shape="rect" id="node14" href="i2cmaster_8h.html#ad4bda1a6138ccdad09a3fa9dda383c84" title="read one byte from the I2C device, read is followed by a stop condition" alt="" coords="339,188,437,217"/><area shape="rect" id="node16" href="i2cmaster_8h.html#ad35d4e4f52ca74b503d5e5e1e0a3f5f3" title="Terminates the data transfer and releases the I2C bus." alt="" coords="353,241,423,270"/></map>
+<area shape="rect" id="node3" href="log_8h.html#a1ae4bed30c73ea75ff9836ba4eb37697" title="log_s" alt="" coords="216,5,269,35"/><area shape="rect" id="node9" href="log_8h.html#a93739368dbb16c85e303f505119cef7d" title="log_uint8_t" alt="" coords="200,59,285,88"/><area shape="rect" id="node14" href="motorcom_8h.html#a6d0e2fed00f11cb2685499227fbf8b52" title="motorcontrol" alt="" coords="196,215,289,244"/><area shape="rect" id="node5" href="uart_8h.html#a4ff96641e032cfc64cb3a9262429fb27" title="uart_tx" alt="" coords="501,32,563,61"/><area shape="rect" id="node7" href="uart_8c.html#a81f78171155efa18b7e545203194ef13" title="tx_buffer" alt="" coords="617,32,689,61"/><area shape="rect" id="node11" href="uart_8h.html#ab413e196d44f29bd8a4dd403702bd195" title="uart_tx_uint8_t" alt="" coords="340,57,447,87"/><area shape="rect" id="node16" href="i2cmaster_8h.html#aa3d328f00326115e9c660ccc838417c8" title="Issues a start condition and sends address and transfer direction." alt="" coords="496,137,568,167"/><area shape="rect" id="node18" href="i2cmaster_8h.html#add947aade44ed6b7f92265f9dec4a711" title="Send one byte to I2C device." alt="" coords="356,161,431,191"/><area shape="rect" id="node20" href="i2cmaster_8h.html#a70c934b61f3c6ba8524104a1d7197d30" title="Issues a repeated start condition and sends address and transfer direction." alt="" coords="345,215,441,244"/><area shape="rect" id="node23" href="i2cmaster_8h.html#a9d083c878f400523eba6e073e36c6fd8" title="read one byte from the I2C device, request more data from device" alt="" coords="344,268,443,297"/><area shape="rect" id="node25" href="i2cmaster_8h.html#ad4bda1a6138ccdad09a3fa9dda383c84" title="read one byte from the I2C device, read is followed by a stop condition" alt="" coords="344,321,443,351"/><area shape="rect" id="node27" href="i2cmaster_8h.html#ad35d4e4f52ca74b503d5e5e1e0a3f5f3" title="Terminates the data transfer and releases the I2C bus." alt="" coords="359,375,428,404"/></map>
 </div>
 </p>
 
@@ -202,7 +211,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="controller_2main_8c_a7aaf9462e9aec00c00f87e81bb9d1f92_cgraph.png" border="0" usemap="#controller_2main_8c_a7aaf9462e9aec00c00f87e81bb9d1f92_cgraph" alt=""/></div>
 <map name="controller_2main_8c_a7aaf9462e9aec00c00f87e81bb9d1f92_cgraph" id="controller_2main_8c_a7aaf9462e9aec00c00f87e81bb9d1f92_cgraph">
-<area shape="rect" id="node3" href="mpu6050_8h.html#a70f521a2549e64a1a6bf2251755c9aec" title="mpu6050_getall" alt="" coords="177,107,289,136"/><area shape="rect" id="node5" href="i2cmaster_8h.html#aa3d328f00326115e9c660ccc838417c8" title="Issues a start condition and sends address and transfer direction." alt="" coords="485,28,557,58"/><area shape="rect" id="node7" href="i2cmaster_8h.html#add947aade44ed6b7f92265f9dec4a711" title="Send one byte to I2C device." alt="" coords="351,27,425,56"/><area shape="rect" id="node9" href="i2cmaster_8h.html#a70c934b61f3c6ba8524104a1d7197d30" title="Issues a repeated start condition and sends address and transfer direction." alt="" coords="340,80,436,110"/><area shape="rect" id="node12" href="i2cmaster_8h.html#a9d083c878f400523eba6e073e36c6fd8" title="read one byte from the I2C device, request more data from device" alt="" coords="339,134,437,163"/><area shape="rect" id="node14" href="i2cmaster_8h.html#ad4bda1a6138ccdad09a3fa9dda383c84" title="read one byte from the I2C device, read is followed by a stop condition" alt="" coords="339,187,437,216"/><area shape="rect" id="node16" href="i2cmaster_8h.html#ad35d4e4f52ca74b503d5e5e1e0a3f5f3" title="Terminates the data transfer and releases the I2C bus." alt="" coords="353,240,423,270"/></map>
+<area shape="rect" id="node3" href="mpu6050_8h.html#a70f521a2549e64a1a6bf2251755c9aec" title="mpu6050_getall" alt="" coords="177,136,289,166"/><area shape="rect" id="node18" href="log_8h.html#a1ae4bed30c73ea75ff9836ba4eb37697" title="log_s" alt="" coords="207,294,260,323"/><area shape="rect" id="node24" href="log_8h.html#acf72a1e9f4d9e846d646d7fb4ef7f641" title="log_int16_t" alt="" coords="191,347,276,376"/><area shape="rect" id="node5" href="i2cmaster_8h.html#aa3d328f00326115e9c660ccc838417c8" title="Issues a start condition and sends address and transfer direction." alt="" coords="496,31,568,60"/><area shape="rect" id="node7" href="i2cmaster_8h.html#add947aade44ed6b7f92265f9dec4a711" title="Send one byte to I2C device." alt="" coords="356,30,431,59"/><area shape="rect" id="node9" href="i2cmaster_8h.html#a70c934b61f3c6ba8524104a1d7197d30" title="Issues a repeated start condition and sends address and transfer direction." alt="" coords="345,83,441,112"/><area shape="rect" id="node12" href="i2cmaster_8h.html#a9d083c878f400523eba6e073e36c6fd8" title="read one byte from the I2C device, request more data from device" alt="" coords="344,136,443,166"/><area shape="rect" id="node14" href="i2cmaster_8h.html#ad4bda1a6138ccdad09a3fa9dda383c84" title="read one byte from the I2C device, read is followed by a stop condition" alt="" coords="344,190,443,219"/><area shape="rect" id="node16" href="i2cmaster_8h.html#ad35d4e4f52ca74b503d5e5e1e0a3f5f3" title="Terminates the data transfer and releases the I2C bus." alt="" coords="359,243,428,272"/><area shape="rect" id="node20" href="uart_8h.html#a4ff96641e032cfc64cb3a9262429fb27" title="uart_tx" alt="" coords="501,320,563,350"/><area shape="rect" id="node22" href="uart_8c.html#a81f78171155efa18b7e545203194ef13" title="tx_buffer" alt="" coords="617,320,689,350"/><area shape="rect" id="node26" href="uart_8h.html#ac62b0ab30834b841559c97ef6cb4406a" title="uart_tx_int16_t" alt="" coords="340,347,447,376"/></map>
 </div>
 </p>
 
@@ -229,7 +238,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="controller_2main_8c_a55d9adccabe077df9a55b345522d0126_cgraph.png" border="0" usemap="#controller_2main_8c_a55d9adccabe077df9a55b345522d0126_cgraph" alt=""/></div>
 <map name="controller_2main_8c_a55d9adccabe077df9a55b345522d0126_cgraph" id="controller_2main_8c_a55d9adccabe077df9a55b345522d0126_cgraph">
-<area shape="rect" id="node3" href="kalman_8h.html#affdcfb81c8cd94121e09346aa7f4b9f4" title="kalman_calculate" alt="" coords="139,5,261,35"/><area shape="rect" id="node5" href="pid_8h.html#a4c77c277ae0934404fb21846d9226a6a" title="pid_calculate" alt="" coords="151,59,249,88"/></map>
+<area shape="rect" id="node3" href="kalman_8h.html#affdcfb81c8cd94121e09346aa7f4b9f4" title="kalman_calculate" alt="" coords="139,5,261,35"/><area shape="rect" id="node5" href="pid_8h.html#ac934f2e4169867052830c3c12cb7cbc3" title="pid_calculate" alt="" coords="151,59,249,88"/></map>
 </div>
 </p>
 
@@ -265,7 +274,7 @@ Here is the call graph for this function:</div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float <a class="el" href="controller_2main_8c.html#a739178273abbd81514ead4446821e220">kalman</a>[3]</td>
+          <td class="memname">float <a class="el" href="controller_2main_8c.html#a739178273abbd81514ead4446821e220">kalman</a>[3] = { 0, 0, 0 }</td>
         </tr>
       </table>
 </div>
@@ -302,26 +311,12 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="a20e3dfc07930f1f1e290eba94e210319"></a><!-- doxytag: member="main.c::motor" ref="a20e3dfc07930f1f1e290eba94e210319" args="[4]" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int16_t <a class="el" href="controller_2main_8c.html#a20e3dfc07930f1f1e290eba94e210319">motor</a>[4] = {0,0,0,0}</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Calculated speed values </p>
-
-</div>
-</div>
 <a class="anchor" id="af39aa193965493af8ded797529019f58"></a><!-- doxytag: member="main.c::mpu6050" ref="af39aa193965493af8ded797529019f58" args="[7]" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int16_t <a class="el" href="controller_2main_8c.html#af39aa193965493af8ded797529019f58">mpu6050</a>[7]</td>
+          <td class="memname">int16_t <a class="el" href="controller_2main_8c.html#af39aa193965493af8ded797529019f58">mpu6050</a>[7] = { -1 * <a class="el" href="mpu6050_8h.html#a7591629cec656fe927fb9b62c3bcc247">ACC_X_OFFSET</a>, -1 * <a class="el" href="mpu6050_8h.html#abf225478aeed93daae4dfbced6fd9769">ACC_Y_OFFSET</a>, -1 * <a class="el" href="mpu6050_8h.html#a3976beeac9962a349243c9c458a504f2">ACC_Z_OFFSET</a>, 0, 0, 0, 0 }</td>
         </tr>
       </table>
 </div>
@@ -330,17 +325,17 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="a6bf7383a8b924928aa6f87a699c93346"></a><!-- doxytag: member="main.c::pid" ref="a6bf7383a8b924928aa6f87a699c93346" args="[3]" -->
+<a class="anchor" id="a605a96c3a5c6309b5598ec5198ee4b32"></a><!-- doxytag: member="main.c::pid" ref="a605a96c3a5c6309b5598ec5198ee4b32" args="[4]" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float <a class="el" href="controller_2main_8c.html#a6bf7383a8b924928aa6f87a699c93346">pid</a>[3]</td>
+          <td class="memname">int16_t <a class="el" href="controller_2main_8c.html#a605a96c3a5c6309b5598ec5198ee4b32">pid</a>[4] = { 0, 0, 0, 0 }</td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<p>PID controller results </p>
+<p>Calculated speed values </p>
 
 </div>
 </div>
@@ -349,7 +344,7 @@ Here is the call graph for this function:</div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t <a class="el" href="controller_2main_8c.html#a0a57aa994b5f319997526eaf139d1ef0">rc_channel</a>[4] = {0,0,0,0}</td>
+          <td class="memname">uint8_t <a class="el" href="controller_2main_8c.html#a0a57aa994b5f319997526eaf139d1ef0">rc_channel</a>[4] = { 0, 0, 0, 0 }</td>
         </tr>
       </table>
 </div>
@@ -363,12 +358,25 @@ Here is the call graph for this function:</div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t <a class="el" href="controller_2main_8c.html#aa9711ab30b79503e448e0cc042638a44">speed</a>[4] = {0,0,0,0}</td>
+          <td class="memname">uint8_t <a class="el" href="controller_2main_8c.html#aa9711ab30b79503e448e0cc042638a44">speed</a>[4] = { 0, 0, 0, 0 }</td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 <p>Speed values from the RC </p>
+
+</div>
+</div>
+<a class="anchor" id="a44fd2275ebc1b7d236c506e6971c17a1"></a><!-- doxytag: member="main.c::target" ref="a44fd2275ebc1b7d236c506e6971c17a1" args="[4]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t <a class="el" href="controller_2main_8c.html#a44fd2275ebc1b7d236c506e6971c17a1">target</a>[4] = { 0, 0, 0, 0 }</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -378,7 +386,7 @@ Here is the call graph for this function:</div>
     <ul>
       <li class="navelem"><a class="el" href="controller_2main_8c.html">main.c</a>      </li>
 
-    <li class="footer">Generated on Fri Aug 17 2012 21:38:35 for Quadrofly by
+    <li class="footer">Generated on Sun Oct 7 2012 22:08:59 for Quadrofly by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

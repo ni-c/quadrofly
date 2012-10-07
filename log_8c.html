@@ -93,7 +93,10 @@ Include dependency graph for log.c:</div>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="log_8c.html#a1c685f549a78d3ae6aff41cac0944200">log_i</a> (uint8_t i)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="log_8c.html#a93739368dbb16c85e303f505119cef7d">log_uint8_t</a> (uint8_t i)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="log_8c.html#a4bb3b90eb0b74883e0a3fb2675a3f722">log_int8_t</a> (int8_t i)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="log_8c.html#a67900560320c53f0b2a34d8ee08768e7">log_uint16_t</a> (uint16_t i)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="log_8c.html#acf72a1e9f4d9e846d646d7fb4ef7f641">log_int16_t</a> (int16_t i)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="log_8c.html#a1ae4bed30c73ea75ff9836ba4eb37697">log_s</a> (const char *s)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
@@ -102,24 +105,24 @@ Functions</h2></td></tr>
 <dl class="author"><dt><b>Author:</b></dt><dd>Willi Thiel (<a href="mailto:wthiel@quadrofly.ni-c.de">wthiel@quadrofly.ni-c.de</a>) </dd></dl>
 <dl class="date"><dt><b>Date:</b></dt><dd>Mar 7, 2012 </dd></dl>
 </div><hr/><h2>Function Documentation</h2>
-<a class="anchor" id="a1c685f549a78d3ae6aff41cac0944200"></a><!-- doxytag: member="log.c::log_i" ref="a1c685f549a78d3ae6aff41cac0944200" args="(uint8_t i)" -->
+<a class="anchor" id="acf72a1e9f4d9e846d646d7fb4ef7f641"></a><!-- doxytag: member="log.c::log_int16_t" ref="acf72a1e9f4d9e846d646d7fb4ef7f641" args="(int16_t i)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="log_8c.html#a1c685f549a78d3ae6aff41cac0944200">log_i</a> </td>
+          <td class="memname">void <a class="el" href="log_8c.html#acf72a1e9f4d9e846d646d7fb4ef7f641">log_int16_t</a> </td>
           <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramtype">int16_t&#160;</td>
           <td class="paramname"><em>i</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Poll the specified uint8 out the log port.</p>
+<p>Poll the specified int16_t out the log port.</p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">i</td><td>The specified uint8 </td></tr>
+    <tr><td class="paramname">i</td><td>The specified int16_t </td></tr>
   </table>
   </dd>
 </dl>
@@ -127,9 +130,42 @@ Functions</h2></td></tr>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="log_8c_a1c685f549a78d3ae6aff41cac0944200_cgraph.png" border="0" usemap="#log_8c_a1c685f549a78d3ae6aff41cac0944200_cgraph" alt=""/></div>
-<map name="log_8c_a1c685f549a78d3ae6aff41cac0944200_cgraph" id="log_8c_a1c685f549a78d3ae6aff41cac0944200_cgraph">
-<area shape="rect" id="node3" href="uart_8h.html#ab413e196d44f29bd8a4dd403702bd195" title="uart_tx_uint8_t" alt="" coords="105,5,212,35"/><area shape="rect" id="node5" href="uart_8h.html#a4ff96641e032cfc64cb3a9262429fb27" title="uart_tx" alt="" coords="263,5,324,35"/><area shape="rect" id="node7" href="uart_8c.html#a81f78171155efa18b7e545203194ef13" title="tx_buffer" alt="" coords="375,5,447,35"/></map>
+<div class="center"><img src="log_8c_acf72a1e9f4d9e846d646d7fb4ef7f641_cgraph.png" border="0" usemap="#log_8c_acf72a1e9f4d9e846d646d7fb4ef7f641_cgraph" alt=""/></div>
+<map name="log_8c_acf72a1e9f4d9e846d646d7fb4ef7f641_cgraph" id="log_8c_acf72a1e9f4d9e846d646d7fb4ef7f641_cgraph">
+<area shape="rect" id="node3" href="uart_8h.html#ac62b0ab30834b841559c97ef6cb4406a" title="uart_tx_int16_t" alt="" coords="140,5,247,35"/><area shape="rect" id="node5" href="uart_8h.html#a4ff96641e032cfc64cb3a9262429fb27" title="uart_tx" alt="" coords="297,5,359,35"/><area shape="rect" id="node7" href="uart_8c.html#a81f78171155efa18b7e545203194ef13" title="tx_buffer" alt="" coords="409,5,481,35"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a4bb3b90eb0b74883e0a3fb2675a3f722"></a><!-- doxytag: member="log.c::log_int8_t" ref="a4bb3b90eb0b74883e0a3fb2675a3f722" args="(int8_t i)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="log_8c.html#a4bb3b90eb0b74883e0a3fb2675a3f722">log_int8_t</a> </td>
+          <td>(</td>
+          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Poll the specified int8_t out the log port.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>The specified int8_t </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="log_8c_a4bb3b90eb0b74883e0a3fb2675a3f722_cgraph.png" border="0" usemap="#log_8c_a4bb3b90eb0b74883e0a3fb2675a3f722_cgraph" alt=""/></div>
+<map name="log_8c_a4bb3b90eb0b74883e0a3fb2675a3f722_cgraph" id="log_8c_a4bb3b90eb0b74883e0a3fb2675a3f722_cgraph">
+<area shape="rect" id="node3" href="uart_8h.html#a5a08ac8770108f9f12a353c0f55f2997" title="uart_tx_int8_t" alt="" coords="133,5,235,35"/><area shape="rect" id="node5" href="uart_8h.html#a4ff96641e032cfc64cb3a9262429fb27" title="uart_tx" alt="" coords="284,5,345,35"/><area shape="rect" id="node7" href="uart_8c.html#a81f78171155efa18b7e545203194ef13" title="tx_buffer" alt="" coords="396,5,468,35"/></map>
 </div>
 </p>
 
@@ -168,13 +204,79 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<a class="anchor" id="a67900560320c53f0b2a34d8ee08768e7"></a><!-- doxytag: member="log.c::log_uint16_t" ref="a67900560320c53f0b2a34d8ee08768e7" args="(uint16_t i)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="log_8c.html#a67900560320c53f0b2a34d8ee08768e7">log_uint16_t</a> </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Poll the specified uint16_t out the log port.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>The specified uint16_t </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="log_8c_a67900560320c53f0b2a34d8ee08768e7_cgraph.png" border="0" usemap="#log_8c_a67900560320c53f0b2a34d8ee08768e7_cgraph" alt=""/></div>
+<map name="log_8c_a67900560320c53f0b2a34d8ee08768e7_cgraph" id="log_8c_a67900560320c53f0b2a34d8ee08768e7_cgraph">
+<area shape="rect" id="node3" href="uart_8h.html#a550675f9f03f6f5e1dbff1030b094ca2" title="uart_tx_uint16_t" alt="" coords="147,5,261,35"/><area shape="rect" id="node5" href="uart_8h.html#a4ff96641e032cfc64cb3a9262429fb27" title="uart_tx" alt="" coords="311,5,372,35"/><area shape="rect" id="node7" href="uart_8c.html#a81f78171155efa18b7e545203194ef13" title="tx_buffer" alt="" coords="423,5,495,35"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a93739368dbb16c85e303f505119cef7d"></a><!-- doxytag: member="log.c::log_uint8_t" ref="a93739368dbb16c85e303f505119cef7d" args="(uint8_t i)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="log_8c.html#a93739368dbb16c85e303f505119cef7d">log_uint8_t</a> </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Poll the specified uint8_t out the log port.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>The specified uint8_t </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="log_8c_a93739368dbb16c85e303f505119cef7d_cgraph.png" border="0" usemap="#log_8c_a93739368dbb16c85e303f505119cef7d_cgraph" alt=""/></div>
+<map name="log_8c_a93739368dbb16c85e303f505119cef7d_cgraph" id="log_8c_a93739368dbb16c85e303f505119cef7d_cgraph">
+<area shape="rect" id="node3" href="uart_8h.html#ab413e196d44f29bd8a4dd403702bd195" title="uart_tx_uint8_t" alt="" coords="140,5,247,35"/><area shape="rect" id="node5" href="uart_8h.html#a4ff96641e032cfc64cb3a9262429fb27" title="uart_tx" alt="" coords="297,5,359,35"/><area shape="rect" id="node7" href="uart_8c.html#a81f78171155efa18b7e545203194ef13" title="tx_buffer" alt="" coords="409,5,481,35"/></map>
+</div>
+</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="log_8c.html">log.c</a>      </li>
 
-    <li class="footer">Generated on Fri Aug 17 2012 21:38:35 for Quadrofly by
+    <li class="footer">Generated on Sun Oct 7 2012 22:09:00 for Quadrofly by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

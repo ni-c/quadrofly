@@ -9,6 +9,8 @@ var controller_2main_8h =
     [ "GYRO_Z", "controller_2main_8h.html#ae6f0fb99646bbcdafcf8c8691a6bcafd", null ],
     [ "I2C_BUFFER_SIZE", "controller_2main_8h.html#a6458dbf193a0eef0470fc1b08400bfcd", null ],
     [ "I2C_MASTER_AVAILABLE", "controller_2main_8h.html#aaa701ea35e32d15e7666d072ef50d83d", null ],
+    [ "I2C_MASTER_AVAILABLE", "controller_2main_8h.html#aaa701ea35e32d15e7666d072ef50d83d", null ],
+    [ "I2C_MASTER_AVAILABLE", "controller_2main_8h.html#aaa701ea35e32d15e7666d072ef50d83d", null ],
     [ "LED_AVAILABLE", "controller_2main_8h.html#a2f3ec9fa00a39653bbae34e51c2f8bd4", null ],
     [ "LOG_AVAILABLE", "controller_2main_8h.html#a2f7f94900ab38fd775b36e54fc492877", null ],
     [ "MOTORCONTROL_AVAILABLE", "controller_2main_8h.html#aaf723cafe3f6bbdc69434ce1a788b865", null ],
