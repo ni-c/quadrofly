@@ -13,17 +13,18 @@
 
 #include <inttypes.h>
 
-#define PID_KP  0.2     /*!< Factor P */
-#define PID_KI  0.03    /*!< Factor I */
-#define PID_KD  0.05    /*!< Factor D */
+#define PID_KP  0.3     /*!< Factor P */
+#define PID_KI  0.04    /*!< Factor I */
+#define PID_KD  0.07    /*!< Factor D */
 
 /**
  * PID controller
  *
  * @param target The target value to reach
  * @param actual The actual value
+ * @param key A unique key to identify the pid filter (0..3)
  * @return The calculated PID control value
  */
-int16_t pid_calculate(int16_t target, int16_t actual);
+int16_t pid_calculate(int16_t target, int16_t actual, uint8_t key);
 
 #endif /* PID_H_ */

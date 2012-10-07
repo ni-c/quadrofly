@@ -29,19 +29,20 @@
 uint64_t lastlooptime = 0; /*!< Timestamp of the last loop */
 uint8_t looptime = 0; /*!< Loop time in ms */
 
-float kalman[3]; /*!< Kalman Filter results */
-float pid[3]; /*!< PID controller results */
+int16_t kalman[3] = { 0, 0, 0 }; /*!< Kalman Filter results */
+int16_t pid[4] = { 0, 0, 0, 0 }; /*!< Calculated speed values */
 
 #ifdef MPU6050_AVAILABLE
-int16_t mpu6050[7]; /*!< MPU-6050 measurements */
+int16_t mpu6050[7] = { -1 * ACC_X_OFFSET, -1 * ACC_Y_OFFSET, -1 * ACC_Z_OFFSET, 0, 0, 0, 0 }; /*!< MPU-6050 measurements */
 #endif /* MPU6050_AVAILABLE */
 
 #ifdef MOTORCONTROL_AVAILABLE
-int16_t motor[4] = { 0, 0, 0, 0 }; /*!< Calculated speed values */
 uint8_t rc_channel[4] = { 0, 0, 0, 0 }; /*!< Values of the RC channels */
 #endif /* MOTORCONTROL_AVAILABLE */
 
 uint8_t speed[4] = { 0, 0, 0, 0 }; /*!< Speed values from the RC */
+
+int16_t target[4] = { 0, 0, 0, 0 };
 
 #ifdef RFM12B_AVAILABLE
 /**
@@ -73,9 +74,26 @@ void mpu6050_update(void) {
  * Calculates the Kalman filter and PID controller values
  */
 void pid_update(void) {
+
+    /* Calculate kalman values */
     for (int i = 0; i < 3; i++) {
-        kalman[i] = kalman_calculate((float) mpu6050[i], (float) mpu6050[3 + i], looptime, i);
-        pid[i] = pid_calculate(0, kalman[i]) / 10;
+        kalman[i] = (int16_t) kalman_calculate((float) mpu6050[i], (float) mpu6050[3 + i], looptime, i) / 100;
+    }
+
+    /* Calculate target speeds */
+    target[0] = speed[0] + kalman[ACC_X] - kalman[ACC_Y];
+    target[1] = speed[1] + kalman[ACC_X] - kalman[ACC_Y];
+    target[2] = speed[2] + kalman[ACC_X] - kalman[ACC_Y];
+    target[3] = speed[3] + kalman[ACC_X] - kalman[ACC_Y];
+
+    /* PID control */
+    for (int i = 0; i < 4; ++i) {
+        pid[i] = (speed[i] == 0) ? 0 : (int16_t) pid_calculate(target[i], pid[i], i);
+        if (pid[i] > 255) {
+            pid[i] = 255;
+        } else if (pid[i] < 0) {
+            pid[i] = 0;
+        }
     }
 }
 
@@ -86,26 +104,27 @@ void pid_update(void) {
 void motorcontrol_update(void) {
 #ifdef MOTORCONTROL_AVAILABLE
 
-    /* Calculate motor speeds */
-    motor[0] = (speed[0] == 0) ? 0 : speed[0] + (pid[ACC_X] / 10);
-    motor[1] = (speed[1] == 0) ? 0 : speed[1] - (pid[ACC_Y] / 10);
-    motor[2] = (speed[2] == 0) ? 0 : speed[2] - (pid[ACC_X] / 10);
-    motor[3] = (speed[3] == 0) ? 0 : speed[3] + (pid[ACC_Y] / 10);
-    for (int i = 0; i < 4; ++i) {
-        if (motor[i] > 255) {
-            motor[i] = 255;
-        } else if (motor[i] < 0) {
-            motor[i] = 0;
-        }
+    /**
+     * Flattens the given value
+     * @param value The value to flatten
+     * @param cap The cap under which the value should be flattened
+     * @result The flatten value
+     */
+    uint8_t flatten(uint8_t value, uint8_t cap) {
+        return (value < cap) ? 0 : value;
     }
 
     /* Set motor speed and read RC channel values */
-    motorcontrol((uint8_t) motor[0], (uint8_t) motor[1], (uint8_t) motor[2], (uint8_t) motor[3], &rc_channel[0], &rc_channel[1], &rc_channel[2], &rc_channel[3]);
+    motorcontrol((uint8_t) pid[0], (uint8_t) pid[1], (uint8_t) pid[2], (uint8_t) pid[3], &rc_channel[0], &rc_channel[1], &rc_channel[2], &rc_channel[3]);
 
-    /* Flatten RC channel values and prepare motor speed variables */
-    uint8_t tmp_speed = (rc_channel[0] < 25) ? 0 : rc_channel[0];
+    /* Flatten RC channel values */
+    for (int i = 0; i < 3; ++i) {
+        rc_channel[i] = flatten(rc_channel[i], 25);
+    }
+
+    /* Calculate motor speed values */
     for (int i = 0; i < 4; ++i) {
-        speed[i] = tmp_speed;
+        speed[i] = rc_channel[0];
     }
 
 #endif /* MOTORCONTROL_AVAILABLE */
