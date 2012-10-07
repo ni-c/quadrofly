@@ -18,13 +18,11 @@
 
 #define LED_AVAILABLE /*!< LEDs available */
 
-//#define SIMULAVR_AVAILABLE /*!< Compile for the simulavr simulator */
 #define LOG_AVAILABLE /*!< Is Logging available */
-
 #define UART_AVAILABLE /*!< Is UART available */
 #define BAUD 57600UL /*!< UART Baudrate in bit per second */
 
-//#define I2C_MASTER_AVAILABLE /*!< I2C is available as master */
+#define I2C_MASTER_AVAILABLE /*!< I2C is available as master */
 
 #define RFM12B_AVAILABLE /*!< Is RFM12B available */
 
@@ -33,11 +31,14 @@
 #define MOTORCONTROL_AVAILABLE /*!< Is the motor control module available */
 
 /* Dependencies */
-#ifdef SIMULAVR_AVAILABLE
-#undef UART_AVAILABLE /*!< UART doesn't work if the software runs on simulavr, deactivate it */
-#endif /* SIMULAVR_AVAILABLE */
+#ifdef MOTORCONTROL_AVAILABLE
+
+#define I2C_MASTER_AVAILABLE /*!< We need I2C to communicate with the motor control */
+
+#endif /* MOTORCONTROL_AVAILABLE */
 
 #ifdef MPU6050_AVAILABLE
+
 #define I2C_MASTER_AVAILABLE /*!< We need I2C to communicate with MPU6050 */
 
 /* mpu6050 buffer array positions */
@@ -48,7 +49,7 @@
 #define GYRO_X  4   /*!< X gyroscope value */
 #define GYRO_Y  5   /*!< Y gyroscope value */
 #define GYRO_Z  6   /*!< Z gyroscope value */
-#endif
 
+#endif /* MPU6050_AVAILABLE */
 
 #endif

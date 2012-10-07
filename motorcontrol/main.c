@@ -33,14 +33,12 @@
 #include "motor.h"
 #include "i2cslave.h"
 
-#include <avr/delay.h>
-
 /**
- * interrupt funcition handling received bytes
+ * interrupt function handling received bytes
  *
  * @param addr The address of the last received bytes
  */
-void i2c_receive(uint8_t *addr) {
+void i2c_receive(uint8_t addr) {
 }
 
 /**

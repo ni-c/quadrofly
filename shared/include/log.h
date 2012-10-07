@@ -13,11 +13,32 @@
 #include <inttypes.h>
 
 /**
- * Poll the specified uint8 out the log port.
+ * Poll the specified uint8_t out the log port.
  *
- * @param i The specified uint8
+ * @param i The specified uint8_t
  */
-void log_i(uint8_t i);
+void log_uint8_t(uint8_t i);
+
+/**
+ * Poll the specified int8_t out the log port.
+ *
+ * @param i The specified int8_t
+ */
+void log_int8_t(int8_t i);
+
+/**
+ * Poll the specified uint16_t out the log port.
+ *
+ * @param i The specified uint16_t
+ */
+void log_uint16_t(uint16_t i);
+
+/**
+ * Poll the specified int16_t out the log port.
+ *
+ * @param i The specified int16_t
+ */
+void log_int16_t(int16_t i);
 
 /**
  * Poll the specified string out the debug port.

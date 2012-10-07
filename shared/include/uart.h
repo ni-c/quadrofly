@@ -14,6 +14,12 @@
 
 #define UART_BUFFER_SIZE	64 /*!< The size of the uart TX and RX buffer */
 
+#ifndef BAUD
+
+#define BAUD 57600UL /*!< UART Baudrate in bit per second */
+
+#endif
+
 /**
  * UART Initialization
  */

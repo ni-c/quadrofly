@@ -13,9 +13,9 @@
 
 #include <inttypes.h>
 
-#define PID_KP  0.3     /*!< Factor P */
-#define PID_KI  0.04    /*!< Factor I */
-#define PID_KD  0.07    /*!< Factor D */
+#define PID_KP  0.6     /*!< Factor P */
+#define PID_KI  0.0     /*!< Factor I */
+#define PID_KD  0.3     /*!< Factor D */
 
 /**
  * PID controller

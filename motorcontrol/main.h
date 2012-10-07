@@ -24,7 +24,8 @@
 
 #define I2C_SLAVE_AVAILABLE /*!< I2C is available as slave */
 
-//#define SIMULAVR_AVAILABLE /*!< Compile for the simulavr simulator */
+//#define UART_AVAILABLE /*!< Is UART available */
+
 //#define LOG_AVAILABLE /*!< Is Logging available */
 
 /* Dependencies */

@@ -29,7 +29,7 @@ volatile uint8_t i2c_buffer_addr; /*!< TX buffer address register */
  *
  * @param addr The address of the last received bytes
  */
-extern void i2c_receive(uint8_t *addr);
+extern void i2c_receive(uint8_t addr);
 
 #endif /*I2C_SLAVE_AVAILABLE */
 

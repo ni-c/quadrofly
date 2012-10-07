@@ -29,7 +29,7 @@
 uint64_t lastlooptime = 0; /*!< Timestamp of the last loop */
 uint8_t looptime = 0; /*!< Loop time in ms */
 
-int16_t kalman[3] = { 0, 0, 0 }; /*!< Kalman Filter results */
+float kalman[3] = { 0, 0, 0 }; /*!< Kalman Filter results */
 int16_t pid[4] = { 0, 0, 0, 0 }; /*!< Calculated speed values */
 
 #ifdef MPU6050_AVAILABLE
@@ -67,6 +67,16 @@ void mpu6050_update(void) {
     mpu6050[ACC_X] = mpu6050[ACC_X] + ACC_X_OFFSET;
     mpu6050[ACC_Y] = mpu6050[ACC_Y] + ACC_Y_OFFSET;
     mpu6050[ACC_Z] = mpu6050[ACC_Z] + ACC_Z_OFFSET;
+
+#ifdef LOG_AVAILABLE
+    log_s("MPU");
+    for (int i = 0; i < 7; ++i) {
+        log_s(";");
+        log_int16_t((int16_t)mpu6050[i]);
+    }
+    log_s("\n");
+#endif /* LOG_AVAILABLE */
+
 #endif /* MPU6050_AVAILABLE */
 }
 
@@ -77,18 +87,18 @@ void pid_update(void) {
 
     /* Calculate kalman values */
     for (int i = 0; i < 3; i++) {
-        kalman[i] = (int16_t) kalman_calculate((float) mpu6050[i], (float) mpu6050[3 + i], looptime, i) / 100;
+        kalman[i] = 1 + kalman_calculate((float) mpu6050[i], (float) mpu6050[3 + i], looptime, i) / 24000;
     }
 
     /* Calculate target speeds */
-    target[0] = speed[0] + kalman[ACC_X] - kalman[ACC_Y];
-    target[1] = speed[1] + kalman[ACC_X] - kalman[ACC_Y];
-    target[2] = speed[2] + kalman[ACC_X] - kalman[ACC_Y];
-    target[3] = speed[3] + kalman[ACC_X] - kalman[ACC_Y];
+    target[0] = (int16_t) ((float) speed[0] * kalman[ACC_X] * (2 - kalman[ACC_Y]));
+    target[1] = (int16_t) ((float) speed[1] * (2 - kalman[ACC_X]) * kalman[ACC_Y]);
+    target[2] = (int16_t) ((float) speed[2] * (2 - (kalman[ACC_X] * kalman[ACC_Y])));
+    target[3] = (int16_t) ((float) speed[3] * kalman[ACC_X] * kalman[ACC_Y]);
 
     /* PID control */
     for (int i = 0; i < 4; ++i) {
-        pid[i] = (speed[i] == 0) ? 0 : (int16_t) pid_calculate(target[i], pid[i], i);
+        pid[i] = (target[i] == 0) ? 0 : pid_calculate(target[i], pid[i], i);
         if (pid[i] > 255) {
             pid[i] = 255;
         } else if (pid[i] < 0) {
@@ -110,21 +120,61 @@ void motorcontrol_update(void) {
      * @param cap The cap under which the value should be flattened
      * @result The flatten value
      */
-    uint8_t flatten(uint8_t value, uint8_t cap) {
+    uint8_t flatten(int16_t value, uint8_t cap) {
         return (value < cap) ? 0 : value;
     }
+
+#ifdef LOG_AVAILABLE
+    log_s("PID");
+    for (int i = 0; i < 4; ++i) {
+        log_s(";");
+        log_uint8_t(pid[i]);
+    }
+    log_s("\n");
+#endif /* LOG_AVAILABLE */
 
     /* Set motor speed and read RC channel values */
     motorcontrol((uint8_t) pid[0], (uint8_t) pid[1], (uint8_t) pid[2], (uint8_t) pid[3], &rc_channel[0], &rc_channel[1], &rc_channel[2], &rc_channel[3]);
 
-    /* Flatten RC channel values */
-    for (int i = 0; i < 3; ++i) {
-        rc_channel[i] = flatten(rc_channel[i], 25);
+#ifdef LOG_AVAILABLE
+    log_s("RC");
+    for (int i = 0; i < 4; ++i) {
+        log_s(";");
+        log_uint8_t(rc_channel[i]);
     }
+    log_s("\n");
+#endif /* LOG_AVAILABLE */
+
+    /* Flatten RC channel speed value */
+    rc_channel[0] = (flatten((int16_t) rc_channel[0], 25) / 2);
 
     /* Calculate motor speed values */
     for (int i = 0; i < 4; ++i) {
         speed[i] = rc_channel[0];
+    }
+
+    /* Add pitch and roll direction */
+    if ((speed[0] > 0) && (speed[1] > 0) && (speed[2] > 0) && (speed[3] > 0)) {
+
+        int16_t tmp;
+        int16_t pitch = (((int16_t) (rc_channel[2] / 2)) - 50);
+        int16_t roll = (((int16_t) (rc_channel[1] / 2)) - 50);
+
+        if (pitch >= 0) {
+            tmp = speed[0] + pitch;
+            speed[0] = (tmp > 250) ? 250 : tmp;
+        } else {
+            tmp = speed[1] + (-1 * pitch);
+            speed[1] = (tmp > 250) ? 250 : tmp;
+        }
+
+        if (roll >= 0) {
+            tmp = speed[2] + roll;
+            speed[2] = (tmp > 250) ? 250 : tmp;
+        } else {
+            tmp = speed[3] + (-1 * roll);
+            speed[3] = (tmp > 250) ? 250 : tmp;
+        }
     }
 
 #endif /* MOTORCONTROL_AVAILABLE */

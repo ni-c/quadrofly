@@ -12,29 +12,54 @@
 #include <stdio.h>
 #include <inttypes.h>
 
-#ifdef SIMULAVR_AVAILABLE
-
-#define SIMULAVR_PORT (*((volatile char *)0x20)) /*!< This port correponds to the "-W 0x20,-" command line option. */
-
-#endif
-
 /**
- * Poll the specified uint8 out the log port.
+ * Poll the specified uint8_t out the log port.
  *
- * @param i The specified uint8
+ * @param i The specified uint8_t
  */
-void log_i(uint8_t i) {
+void log_uint8_t(uint8_t i) {
 #ifdef LOG_AVAILABLE
-#ifdef SIMULAVR_AVAILABLE
-    char buffer[2];
-    char* buffer_p = buffer;
-    sprintf(buffer, "%02X", i);
-    SIMULAVR_PORT = *buffer_p++;
-    SIMULAVR_PORT = *buffer_p;
-    SIMULAVR_PORT = 32;
-#endif /* SIMULAVAR_AVAILABLE */
 #ifdef UART_AVAILABLE
     uart_tx_uint8_t(i);
+#endif /* UART_AVAILABLE */
+#endif /* LOG_AVAILBLE */
+}
+
+/**
+ * Poll the specified int8_t out the log port.
+ *
+ * @param i The specified int8_t
+ */
+void log_int8_t(int8_t i) {
+#ifdef LOG_AVAILABLE
+#ifdef UART_AVAILABLE
+    uart_tx_int8_t(i);
+#endif /* UART_AVAILABLE */
+#endif /* LOG_AVAILBLE */
+}
+
+/**
+ * Poll the specified uint16_t out the log port.
+ *
+ * @param i The specified uint16_t
+ */
+void log_uint16_t(uint16_t i) {
+#ifdef LOG_AVAILABLE
+#ifdef UART_AVAILABLE
+    uart_tx_uint16_t(i);
+#endif /* UART_AVAILABLE */
+#endif /* LOG_AVAILBLE */
+}
+
+/**
+ * Poll the specified int16_t out the log port.
+ *
+ * @param i The specified int16_t
+ */
+void log_int16_t(int16_t i) {
+#ifdef LOG_AVAILABLE
+#ifdef UART_AVAILABLE
+    uart_tx_int16_t(i);
 #endif /* UART_AVAILABLE */
 #endif /* LOG_AVAILBLE */
 }
@@ -46,11 +71,6 @@ void log_i(uint8_t i) {
  */
 void log_s(const char *s) {
 #ifdef LOG_AVAILABLE
-#ifdef SIMULAVR_AVAILABLE
-    for(int i = 0; s[i] != '\0'; i++) {
-        SIMULAVR_PORT = s[i];
-    }
-#endif /* SIMULAVAR_AVAILABLE */
 #ifdef UART_AVAILABLE
     uart_tx(s);
 #endif /* UART_AVAILABLE */
