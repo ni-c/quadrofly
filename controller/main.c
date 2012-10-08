@@ -42,7 +42,8 @@ uint8_t rc_channel[4] = { 0, 0, 0, 0 }; /*!< Values of the RC channels */
 
 uint8_t speed[4] = { 0, 0, 0, 0 }; /*!< Speed values from the RC */
 
-int16_t target[4] = { 0, 0, 0, 0 };
+int16_t target[4] = { 0, 0, 0, 0 }; /*!< Desired target speed */
+int8_t actual[4] = { 0, 0, 0, 0 }; /*!< Actual speed */
 
 #ifdef RFM12B_AVAILABLE
 /**
@@ -72,7 +73,7 @@ void mpu6050_update(void) {
     log_s("MPU");
     for (int i = 0; i < 7; ++i) {
         log_s(";");
-        log_int16_t((int16_t)mpu6050[i]);
+        log_int16_t(mpu6050[i]);
     }
     log_s("\n");
 #endif /* LOG_AVAILABLE */
@@ -85,6 +86,11 @@ void mpu6050_update(void) {
  */
 void pid_update(void) {
 
+    /* Save actual speeds */
+    for (int i = 0; i < 4; ++i) {
+        actual[i] = target[i];
+    }
+
     /* Calculate kalman values */
     for (int i = 0; i < 3; i++) {
         kalman[i] = 1 + kalman_calculate((float) mpu6050[i], (float) mpu6050[3 + i], looptime, i) / 24000;
@@ -96,9 +102,26 @@ void pid_update(void) {
     target[2] = (int16_t) ((float) speed[2] * (2 - (kalman[ACC_X] * kalman[ACC_Y])));
     target[3] = (int16_t) ((float) speed[3] * kalman[ACC_X] * kalman[ACC_Y]);
 
+    /* Overflow protection */
+    for (int i = 0; i < 4; ++i) {
+        if (target[i]>255) {
+            target[i] = 255;
+        }
+    }
+
+#ifdef LOG_AVAILABLE
+    log_s("SPEED");
+    for (int i = 0; i < 4; ++i) {
+        log_s(";");
+        log_uint16_t(target[i]);
+    }
+    log_s("\n");
+#endif /* LOG_AVAILABLE */
+
+
     /* PID control */
     for (int i = 0; i < 4; ++i) {
-        pid[i] = (target[i] == 0) ? 0 : pid_calculate(target[i], pid[i], i);
+        pid[i] = (target[i] == 0) ? 0 : pid_calculate(target[i], actual[i], i);
         if (pid[i] > 255) {
             pid[i] = 255;
         } else if (pid[i] < 0) {
@@ -114,21 +137,11 @@ void pid_update(void) {
 void motorcontrol_update(void) {
 #ifdef MOTORCONTROL_AVAILABLE
 
-    /**
-     * Flattens the given value
-     * @param value The value to flatten
-     * @param cap The cap under which the value should be flattened
-     * @result The flatten value
-     */
-    uint8_t flatten(int16_t value, uint8_t cap) {
-        return (value < cap) ? 0 : value;
-    }
-
 #ifdef LOG_AVAILABLE
     log_s("PID");
     for (int i = 0; i < 4; ++i) {
         log_s(";");
-        log_uint8_t(pid[i]);
+        log_uint16_t(pid[i]);
     }
     log_s("\n");
 #endif /* LOG_AVAILABLE */
@@ -140,13 +153,13 @@ void motorcontrol_update(void) {
     log_s("RC");
     for (int i = 0; i < 4; ++i) {
         log_s(";");
-        log_uint8_t(rc_channel[i]);
+        log_uint16_t(rc_channel[i]);
     }
     log_s("\n");
 #endif /* LOG_AVAILABLE */
 
     /* Flatten RC channel speed value */
-    rc_channel[0] = (flatten((int16_t) rc_channel[0], 25) / 2);
+    rc_channel[0] =  rc_channel[0] < 25 ? 0 : rc_channel[0];
 
     /* Calculate motor speed values */
     for (int i = 0; i < 4; ++i) {

@@ -17,31 +17,42 @@
 #include "rfm12.h"
 #include "mpu6050.h"
 #include "millis.h"
+#include "pid.h"
 
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
-uint8_t ready = 1; /*!< If the initialization was successful */
+/**
+ * Wait between initializations
+ */
+static void wait() {
+    _delay_ms(10);
+}
 
 /**
  * Quadrofly initialization
  */
 void init_qfly(void) {
 
+    uint8_t ready = 1; /*!< If the initialization was successful */
+
+    /* Initialize PID values */
+    pid_init();
+    wait();
+
     /* Enable global interrupts */
     sei();
-    _delay_ms(10);
+    wait();
 
     /* Initialize Millis */
     millis_init();
-    _delay_ms(10);
+    wait();
 
 #ifdef LED_AVAILABLE
 
-    /* Set pins to output */
-    DDRB |= (1 << DD0) | (1 << DD1);
+    /* Set pins to output */DDRB |= (1 << DD0) | (1 << DD1);
     PORTB |= (1 << PB1);
-    _delay_ms(10);
+    wait();
 
 #endif /* LED_AVAILABLE */
 
@@ -51,7 +62,7 @@ void init_qfly(void) {
     uart_init();
     log_s("\n\n");
     log_s("uart ... ok\n");
-    _delay_ms(10);
+    wait();
 
 #endif /* UART_AVAILABLE */
 
@@ -60,7 +71,7 @@ void init_qfly(void) {
     /* Initialize I2C */
     log_s("i2c ...");
     i2c_init();
-    _delay_ms(10);
+    wait();
 
 #endif /* I2C_MASTER_AVAILABLE */
 
@@ -81,7 +92,7 @@ void init_qfly(void) {
      * Enable RX
      */
     rfm12_rx_on();
-    _delay_ms(10);
+    wait();
 
 #endif /* RFM12B_AVAILABLE */
 
@@ -95,7 +106,7 @@ void init_qfly(void) {
         log_s("failed\n");
         ready = 0;
     }
-    _delay_ms(10);
+    wait();
 
 #endif /* MOTORCONTROL_AVAILABLE */
 
@@ -105,7 +116,7 @@ void init_qfly(void) {
     if (!mpu6050_init()) {
         ready = 0;
     }
-    _delay_ms(10);
+    wait();
 
 #endif /* MPU6050_AVAILABLE */
 
@@ -116,7 +127,7 @@ void init_qfly(void) {
         PORTB |= (1 << PB0);
         PORTB &= ~(1 << PB1);
     }
-    _delay_ms(10);
+    wait();
 
 #endif /* LED_AVAILABLE */
 

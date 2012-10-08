@@ -11,16 +11,16 @@
 #include "main.h"
 #include "kalman.h"
 
-float kalman_angle[3] = {0, 0, 0}; /*!< Kalman filter help var */
-float kalman_bias[3] = {0, 0, 0}; /*!< Kalman filter help var */
-float kalman_P_00[3] = {0, 0, 0}; /*!< Kalman filter help var */
-float kalman_P_01[3] = {0, 0, 0}; /*!< Kalman filter help var */
-float kalman_P_10[3] = {0, 0, 0}; /*!< Kalman filter help var */
-float kalman_P_11[3] = {0, 0, 0}; /*!< Kalman filter help var */
-float kalman_y[3] = {0, 0, 0}; /*!< Kalman filter help var */
-float kalman_S[3] = {0, 0, 0}; /*!< Kalman filter help var */
-float kalman_K_0[3] = {0, 0, 0}; /*!< Kalman filter help var */
-float kalman_K_1[3] = {0, 0, 0}; /*!< Kalman filter help var */
+volatile float kalman_angle[3] = {0, 0, 0}; /*!< Kalman filter help var */
+volatile float kalman_bias[3] = {0, 0, 0}; /*!< Kalman filter help var */
+volatile float kalman_P_00[3] = {0, 0, 0}; /*!< Kalman filter help var */
+volatile float kalman_P_01[3] = {0, 0, 0}; /*!< Kalman filter help var */
+volatile float kalman_P_10[3] = {0, 0, 0}; /*!< Kalman filter help var */
+volatile float kalman_P_11[3] = {0, 0, 0}; /*!< Kalman filter help var */
+volatile float kalman_y[3] = {0, 0, 0}; /*!< Kalman filter help var */
+volatile float kalman_S[3] = {0, 0, 0}; /*!< Kalman filter help var */
+volatile float kalman_K_0[3] = {0, 0, 0}; /*!< Kalman filter help var */
+volatile float kalman_K_1[3] = {0, 0, 0}; /*!< Kalman filter help var */
 
 /**
  * Kalman filter

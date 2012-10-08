@@ -13,32 +13,6 @@
 #include <inttypes.h>
 
 /**
- * Poll the specified uint8_t out the log port.
- *
- * @param i The specified uint8_t
- */
-void log_uint8_t(uint8_t i) {
-#ifdef LOG_AVAILABLE
-#ifdef UART_AVAILABLE
-    uart_tx_uint8_t(i);
-#endif /* UART_AVAILABLE */
-#endif /* LOG_AVAILBLE */
-}
-
-/**
- * Poll the specified int8_t out the log port.
- *
- * @param i The specified int8_t
- */
-void log_int8_t(int8_t i) {
-#ifdef LOG_AVAILABLE
-#ifdef UART_AVAILABLE
-    uart_tx_int8_t(i);
-#endif /* UART_AVAILABLE */
-#endif /* LOG_AVAILBLE */
-}
-
-/**
  * Poll the specified uint16_t out the log port.
  *
  * @param i The specified uint16_t

@@ -18,7 +18,7 @@
 struct {
     unsigned rx :1; /*<! If there is data in the RX buffer */
     unsigned tx :1; /*<! If there is data in the TX buffer */
-}uart_flag;
+} uart_flag;
 
 char uart_tx_buffer[UART_BUFFER_SIZE]; /*!< UART send buffer */
 
@@ -166,34 +166,6 @@ void uart_tx(const char *s) {
 
 #ifdef UART_AVAILABLE
     tx_buffer(s);
-#endif /* UART_AVAILABLE */
-}
-	
-/**
- * Converts the integer value to its HEX representation and sends it
- *
- * @param i The int8_t to send
- */
-void uart_tx_int8_t(int8_t i) {
-		
-#ifdef UART_AVAILABLE
-	char buffer[4];
-	sprintf(buffer, "%i", i);
-	uart_tx(buffer);
-#endif /* UART_AVAILABLE */
-}
-	
-/**
- * Converts the integer value to its HEX representation and sends it
- *
- * @param i The uint8_t to send
- */
-void uart_tx_uint8_t(uint8_t i) {
-
-#ifdef UART_AVAILABLE
-    char buffer[3];
-    sprintf(buffer, "%i", i);
-    uart_tx(buffer);
 #endif /* UART_AVAILABLE */
 }
 

@@ -54,22 +54,10 @@ void uart_tx(const char *s);
 /**
  * Converts the integer value to its HEX representation and sends it
  *
- * @param i The int8_t to send
- */
-void uart_tx_int8_t(int8_t i);
-
-/**
- * Converts the integer value to its HEX representation and sends it
- *
- * @param i The uint8_t to send
- */
-void uart_tx_uint8_t(uint8_t i);
-/**
- * Converts the integer value to its HEX representation and sends it
- *
  * @param i The int16_t to send
  */
 void uart_tx_int16_t(int16_t i);
+
 /**
  * Converts the integer value to its HEX representation and sends it
  *
