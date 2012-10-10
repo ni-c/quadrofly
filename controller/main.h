@@ -30,12 +30,21 @@
 
 #define MOTORCONTROL_AVAILABLE /*!< Is the motor control module available */
 
-#define EEPROM_AVAILABLE /*!< Is the EEPROM of the MCU available */
+// #define EEPROM_AVAILABLE /*!< Is the EEPROM of the MCU available */
 
 /* Dependencies */
 #ifdef MOTORCONTROL_AVAILABLE
 
 #define I2C_MASTER_AVAILABLE /*!< We need I2C to communicate with the motor control */
+
+#define RC_CAP 25 /*!< RC values lower than this cap should be ignored */
+
+#define RC_SPEED 0 /*!< RC Speed channel */
+#define RC_PITCH 1 /*!< RC Pitch channel */
+#define RC_ROLL  2 /*!< RC Roll channel */
+#define RC_YAW   3 /*!< RC Yaw channel */
+
+#define RC_SENSITIVITY 2.0 /*!< Sensitivity of the RC channels for Pitch and Roll */
 
 #endif /* MOTORCONTROL_AVAILABLE */
 

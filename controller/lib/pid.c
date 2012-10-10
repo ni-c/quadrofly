@@ -18,22 +18,22 @@
 #include <avr/eeprom.h>
 #endif /* EEPROM_AVAILABLE */
 
-static int16_t pid_e_sum[4] = { 0, 0, 0, 0 }; /*!< Sum of last errors */
-static int8_t pid_e_old[4] = { 0, 0, 0, 0 }; /*!< Last error */
+static float pid_e_sum[4] = { 0, 0, 0, 0 }; /*!< Sum of last errors */
+static float pid_e_old[4] = { 0, 0, 0, 0 }; /*!< Last error */
 
 /* PID values */
 float pid_p = PID_KP; /*!< Factor P */
 float pid_i = PID_KI; /*!< Factor I */
 float pid_d = PID_KD; /*!< Factor D */
-uint16_t pid_max_error_sum = PID_MAX_ERROR_SUM; /*!< Max errors we sum, more errors will be ignored */
-uint8_t pid_error_cap = PID_ERROR_CAP; /*!< An error below this cap invalidates all errors and starts from scratch */
+float pid_max_error_sum = PID_MAX_ERROR_SUM; /*!< Max errors we sum, more errors will be ignored */
+float pid_error_cap = PID_ERROR_CAP; /*!< An error below this cap invalidates all errors and starts from scratch */
 
 #ifdef EEPROM_AVAILABLE
 static float EEMEM ee_pid_p = PID_KP; /*!< EEMEM var for pid_p */
 static float EEMEM ee_pid_i = PID_KI; /*!< EEMEM var for pid_i */
 static float EEMEM ee_pid_d = PID_KD; /*!< EEMEM var for pid_d */
-static uint16_t EEMEM ee_pid_max_error_sum = PID_MAX_ERROR_SUM; /*!< EEMEM var for max_error_sum */
-static uint8_t EEMEM ee_pid_error_cap = PID_ERROR_CAP; /*!< EEMEM var for error_cap */
+static float EEMEM ee_pid_max_error_sum = PID_MAX_ERROR_SUM; /*!< EEMEM var for max_error_sum */
+static float EEMEM ee_pid_error_cap = PID_ERROR_CAP; /*!< EEMEM var for error_cap */
 #endif /* EEPROM_AVAILABLE */
 
 /**
@@ -45,8 +45,8 @@ void pid_init(void) {
     pid_p = eeprom_read_float(&ee_pid_p);
     pid_i = eeprom_read_float(&ee_pid_i);
     pid_d = eeprom_read_float(&ee_pid_d);
-    pid_max_error_sum = eeprom_read_word(&ee_pid_max_error_sum);
-    pid_error_cap = eeprom_read_byte(&ee_pid_error_cap);
+    pid_max_error_sum = eeprom_read_float(&ee_pid_max_error_sum);
+    pid_error_cap = eeprom_read_float(&ee_pid_error_cap);
 #endif /* EEPROM_AVAILABLE */
 }
 
@@ -58,8 +58,8 @@ void pid_eeprom_write(void) {
     eeprom_update_float(&ee_pid_p, pid_p);
     eeprom_update_float(&ee_pid_i, pid_i);
     eeprom_update_float(&ee_pid_d, pid_d);
-    eeprom_update_word(&ee_pid_max_error_sum, pid_max_error_sum);
-    eeprom_update_byte(&ee_pid_error_cap, pid_error_cap);
+    eeprom_update_float(&ee_pid_max_error_sum, pid_max_error_sum);
+    eeprom_update_float(&ee_pid_error_cap, pid_error_cap);
 #endif /* EEPROM_AVAILABLE */
 }
 
@@ -71,13 +71,15 @@ void pid_eeprom_write(void) {
  * @param key A unique key to identify the pid filter (0..3)
  * @return The calculated PID control value
  */
-int16_t pid_calculate(int8_t target, int8_t actual, uint8_t key) {
-    int16_t e; /*!< Error */
+float pid_calculate(float target, float actual, uint8_t key) {
+    float e; /*!< Error */
 
     float Ki; /*!< Temporary Factor I */
-    int16_t u_p; /* P value */
-    int16_t u_i; /* I value */
-    int16_t u_d; /* D value */
+    float u_p; /*!< P value */
+    float u_i; /*!< I value */
+    float u_d; /*!< D value */
+
+    float result; /*!< The result */
 
     /* Error */
     e = (target - actual);
@@ -107,5 +109,13 @@ int16_t pid_calculate(int8_t target, int8_t actual, uint8_t key) {
 
     pid_e_old[key] = e;
 
-    return actual + (u_p + u_i + u_d);
+    result = 1.0 + ((u_p + u_i + u_d) / PID_SENSITIVITY);
+
+    if (result > 2.0) {
+        result = 2.0;
+    } else if (result < 0.0) {
+        result = 0.0;
+    }
+
+    return result;
 }

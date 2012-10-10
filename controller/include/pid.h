@@ -17,15 +17,17 @@
 #define PID_KI              0.0     /*!< Initial factor I */
 #define PID_KD              0.3     /*!< Initial factor D */
 
-#define PID_MAX_ERROR_SUM   500     /*!< Initial max value for error sum */
-#define PID_ERROR_CAP       20      /*!< Initial cap that invalidates errors */
+#define PID_MAX_ERROR_SUM   1000.0  /*!< Initial max value for error sum */
+#define PID_ERROR_CAP       20.0    /*!< Initial cap that invalidates errors */
+
+#define PID_SENSITIVITY     1000.0  /*!< Sensitivity of the PID controller (lower value = higher sensitivity) */
 
 /* PID values */
 float pid_p;                        /*!< Current factor P */
 float pid_i;                        /*!< Current factor I */
 float pid_d;                        /*!< Current factor D */
-uint16_t pid_max_error_sum;          /*!< Max errors we sum, more errors will be ignored */
-uint8_t pid_error_cap;              /*!< An error below this cap invalidates all errors and starts from scratch */
+float pid_max_error_sum;            /*!< Max errors we sum, more errors will be ignored */
+float pid_error_cap;                /*!< An error below this cap invalidates all errors and starts from scratch */
 
 /**
  * Initialize PID controller and read settings from EEPROM
@@ -45,6 +47,6 @@ void pid_eeprom_write(void);
  * @param key A unique key to identify the pid filter (0..3)
  * @return The calculated PID control value
  */
-int16_t pid_calculate(int8_t target, int8_t actual, uint8_t key);
+float pid_calculate(float target, float actual, uint8_t key);
 
 #endif /* PID_H_ */

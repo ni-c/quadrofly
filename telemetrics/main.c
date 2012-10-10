@@ -5,6 +5,8 @@
  * @brief 	Main program
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
  * @date 	Mar 6, 2012
+ *
+ * @defgroup telemetrics Telemetrics
  */
 #include "main.h"
 #include "global_def.h"

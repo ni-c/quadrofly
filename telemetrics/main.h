@@ -5,6 +5,8 @@
  * @brief 	Global header file.
  * @author 	Willi Thiel (wthiel@quadrofly.ni-c.de)
  * @date 	Mar 6, 2012
+ *
+ * @defgroup telemetrics Telemetrics
  */
 #ifndef MAIN_H_
 #define MAIN_H_
