@@ -142,6 +142,15 @@ int main(void) {
             log_uint16_t(motor[i]);
         }
         log_s("\n");
+
+        log_s("PIDV");
+        log_s(";");
+        log_uint16_t((uint16_t)(pid_p*10));
+        log_s(";");
+        log_uint16_t((uint16_t)(pid_i*10));
+        log_s(";");
+        log_uint16_t((uint16_t)(pid_d*10));
+        log_s("\n");
 #endif /* LOG_AVAILABLE */
 
     }

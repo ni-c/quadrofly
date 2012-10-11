@@ -30,7 +30,7 @@
 
 #define MOTORCONTROL_AVAILABLE /*!< Is the motor control module available */
 
-// #define EEPROM_AVAILABLE /*!< Is the EEPROM of the MCU available */
+#define EEPROM_AVAILABLE /*!< Is the EEPROM of the MCU available */
 
 /* Dependencies */
 #ifdef MOTORCONTROL_AVAILABLE

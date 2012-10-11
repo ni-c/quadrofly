@@ -3,12 +3,11 @@
 .settings
 .dep
 doc
-main.eep
 main.elf
-main.hex
 main.lss
 main.map
 main.sym
 *.lst
 *.o
 *.hex
+*.eep
