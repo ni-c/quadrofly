@@ -18,9 +18,9 @@
 
 #define LED_AVAILABLE /*!< LEDs available */
 
-#define LOG_AVAILABLE /*!< Is Logging available */
-#define UART_AVAILABLE /*!< Is UART available */
-#define BAUD 57600UL /*!< UART Baudrate in bit per second */
+//#define LOG_AVAILABLE /*!< Is Logging available */
+
+//#define UART_AVAILABLE /*!< Is UART available */
 
 #define I2C_MASTER_AVAILABLE /*!< I2C is available as master */
 
@@ -33,11 +33,15 @@
 #define EEPROM_AVAILABLE /*!< Is the EEPROM of the MCU available */
 
 /* Dependencies */
+#ifdef UART_AVAILABLE
+#define BAUD 57600UL /*!< UART Baudrate in bit per second */
+#endif
+
 #ifdef MOTORCONTROL_AVAILABLE
 
 #define I2C_MASTER_AVAILABLE /*!< We need I2C to communicate with the motor control */
 
-#define RC_CAP 25 /*!< RC values lower than this cap should be ignored */
+#define RC_CAP 35 /*!< RC values lower than this cap should be ignored */
 
 #define RC_SPEED 0 /*!< RC Speed channel */
 #define RC_PITCH 1 /*!< RC Pitch channel */

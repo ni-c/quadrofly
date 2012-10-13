@@ -13,9 +13,9 @@
 
 #include <inttypes.h>
 
-#define PID_KP              0.6     /*!< Initial factor P */
+#define PID_KP              0.3     /*!< Initial factor P */
 #define PID_KI              0.0     /*!< Initial factor I */
-#define PID_KD              0.3     /*!< Initial factor D */
+#define PID_KD              0.0     /*!< Initial factor D */
 
 #define PID_MAX_ERROR_SUM   1000.0  /*!< Initial max value for error sum */
 #define PID_ERROR_CAP       20.0    /*!< Initial cap that invalidates errors */

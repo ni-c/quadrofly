@@ -98,7 +98,6 @@ int main(void) {
         motorcontrol(motor[0], motor[1], motor[2], motor[3], &rc_channel[0], &rc_channel[1], &rc_channel[2], &rc_channel[3]);
 
         /* Flatten RC channel speed value */
-        rc_channel[RC_SPEED] = rc_channel[RC_SPEED] < RC_CAP ? 0 : rc_channel[RC_SPEED];
         rc_channel[RC_PITCH] = rc_channel[RC_PITCH] - 90;
         rc_channel[RC_ROLL] = rc_channel[RC_ROLL] - 90;
 
@@ -108,48 +107,46 @@ int main(void) {
         pid[ACC_Z] = pid_calculate(0.0, kalman_calculate((float) mpu6050[ACC_Z], (float) mpu6050[GYRO_Z], looptime, 2), 2);
 
         /* Calculate speeds */
-        motor[0] = parseFloat(rc_channel[RC_SPEED] * (pid[ACC_X] * (2.0 - pid[ACC_Y])));
-        motor[1] = parseFloat(rc_channel[RC_SPEED] * ((2.0 - pid[ACC_X]) * pid[ACC_Y]));
-        motor[2] = parseFloat(rc_channel[RC_SPEED] * (2.0 - (pid[ACC_X] * pid[ACC_Y])));
-        motor[3] = parseFloat(rc_channel[RC_SPEED] * (pid[ACC_X] * pid[ACC_Y]));
+        if (rc_channel[RC_SPEED] > RC_CAP) {
+            motor[0] = parseFloat(rc_channel[RC_SPEED] * ((2.0 - pid[ACC_X]) * pid[ACC_Y]));
+            motor[1] = parseFloat(rc_channel[RC_SPEED] * (pid[ACC_X] * (2.0 - pid[ACC_Y])));
+            motor[2] = parseFloat(rc_channel[RC_SPEED] * (pid[ACC_X] * pid[ACC_Y]));
+            motor[3] = parseFloat(rc_channel[RC_SPEED] * (2.0 - (pid[ACC_X] * pid[ACC_Y])));
+        } else {
+            for (int i = 0; i < 4; ++i) {
+                motor[i] = 0;
+            }
+        }
+
 #endif /* MOTORCONTROL_AVAILABLE */
 
 #ifdef LOG_AVAILABLE
-        log_s("MPU");
+        log_s("M");
         for (int i = 0; i < 7; ++i) {
             log_s(";");
             log_int16_t(mpu6050[i]);
         }
         log_s("\n");
 
-        log_s("PID");
+        log_s("P");
         for (int i = 0; i < 4; ++i) {
             log_s(";");
             log_uint16_t((uint16_t)(pid[i]*100));
         }
         log_s("\n");
 
-        log_s("RC");
+        log_s("R");
         for (int i = 0; i < 4; ++i) {
             log_s(";");
             log_uint16_t(rc_channel[i]);
         }
         log_s("\n");
 
-        log_s("SPEED");
+        log_s("S");
         for (int i = 0; i < 4; ++i) {
             log_s(";");
             log_uint16_t(motor[i]);
         }
-        log_s("\n");
-
-        log_s("PIDV");
-        log_s(";");
-        log_uint16_t((uint16_t)(pid_p*10));
-        log_s(";");
-        log_uint16_t((uint16_t)(pid_i*10));
-        log_s(";");
-        log_uint16_t((uint16_t)(pid_d*10));
         log_s("\n");
 #endif /* LOG_AVAILABLE */
 
