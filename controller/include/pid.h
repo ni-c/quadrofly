@@ -13,14 +13,14 @@
 
 #include <inttypes.h>
 
-#define PID_KP              0.3     /*!< Initial factor P */
+#define PID_KP              0.4     /*!< Initial factor P */
 #define PID_KI              0.0     /*!< Initial factor I */
-#define PID_KD              0.0     /*!< Initial factor D */
+#define PID_KD              0.2     /*!< Initial factor D */
 
 #define PID_MAX_ERROR_SUM   1000.0  /*!< Initial max value for error sum */
 #define PID_ERROR_CAP       20.0    /*!< Initial cap that invalidates errors */
 
-#define PID_SENSITIVITY     1000.0  /*!< Sensitivity of the PID controller (lower value = higher sensitivity) */
+#define PID_SENSITIVITY     5000.0  /*!< Sensitivity of the PID controller (lower value = higher sensitivity) */
 
 /* PID values */
 float pid_p;                        /*!< Current factor P */
