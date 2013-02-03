@@ -66,6 +66,21 @@ The motorcontrol is responsible for the following tasks:
 
 ![Motorcontrol](https://raw.github.com/ni-c/quadrofly/gh-pages/images/motorcontrol.jpg)
 
+### Telemetrics
+
+The telemetrics is responsible for the following tasks:
+
+- RF communication with the Quadrocopter
+- Telemetrics logging
+
+#### Schematics
+
+![Telemetrics Schematics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/telemetrics_schematics.png)
+
+#### Assembled
+
+![Telemetrics](https://raw.github.com/ni-c/quadrofly/gh-pages/images/telemetrics.jpg)
+
 ## License
 
 MIT License
