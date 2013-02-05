@@ -7000,7 +7000,7 @@ Based on the following sources:&lt;p&gt;
 <part name="C6" library="capacitor-wima" deviceset="C" device="2.5/2" value="22pF"/>
 <part name="C7" library="capacitor-wima" deviceset="C" device="2.5/2" value="22pF"/>
 <part name="GND1" library="supply1" deviceset="GND" device=""/>
-<part name="IC2" library="ic-package" deviceset="DIL8" device="S" value="MAX 603"/>
+<part name="IC2" library="ic-package" deviceset="DIL8" device="S" value="MAX 604"/>
 <part name="C8" library="capacitor-wima" deviceset="C" device="2.5/6" value="220µF"/>
 <part name="C10" library="capacitor-wima" deviceset="C" device="2.5/5" value="10µF"/>
 <part name="C11" library="capacitor-wima" deviceset="C" device="2.5/2" value="100nF"/>
