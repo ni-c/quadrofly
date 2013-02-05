@@ -25,8 +25,8 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <avr/delay.h>
 #include <avr/wdt.h>
+#include <util/delay.h>
 
 uint64_t lastlooptime = 0; /*!< Timestamp of the last loop */
 uint8_t looptime = 0; /*!< Loop time in ms */
@@ -78,7 +78,7 @@ int main(void) {
     log_s("up and running\n");
 
     /* Enable watchdog */
-    wdt_enable(WDTO_125MS);
+    wdt_enable(WDTO_250MS);
 
     /* Our loop */
     while (1) {

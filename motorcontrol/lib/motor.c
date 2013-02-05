@@ -20,7 +20,8 @@
 
 int16_t pwm_cnt; /*!< counter for the actual position in the PWM cycle */
 
-uint8_t tmp; /*!< tmp value */
+uint32_t ms = 0; /*!< Milliseconds */
+
 
 /**
  * Timer Compare Interrupt
@@ -34,7 +35,7 @@ ISR (TIMER0_COMPA_vect) {
         PORTD |= ((1 << PD5) | (1 << PD6));
         pwm_cnt = 0;
     } else if ((pwm_cnt <= NO_THROTTLE + 255) && (pwm_cnt >= NO_THROTTLE)){
-        tmp = pwm_cnt - NO_THROTTLE;
+        uint8_t tmp = pwm_cnt - NO_THROTTLE;
         if (tmp == i2c_buffer[MC_MOTOR_1_SPEED]) {
             PORTD &= ~(1 << PD6);
         }

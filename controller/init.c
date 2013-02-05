@@ -25,7 +25,7 @@
 /**
  * Wait between initializations
  */
-static void wait() {
+static void wait(void) {
     _delay_ms(10);
 }
 
@@ -44,7 +44,7 @@ void init_qfly(void) {
     sei();
     wait();
 
-    /* Initialize Millis */
+    /* Initialize millis */
     millis_init();
     wait();
 
