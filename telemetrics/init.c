@@ -10,6 +10,7 @@
  */
 #include "main.h"
 #include "global_def.h"
+#include "i2cslave.h"
 #include "uart.h"
 #include "rfm12.h"
 
@@ -19,6 +20,13 @@
  * Quadrofly initialization
  */
 void init_qfly(void) {
+
+#ifdef I2C_SLAVE_AVAILABLE
+    /*
+     * Initialize I2C slave
+     */
+    i2c_slave_init(I2C_ADDR_MOTORCONTROL);
+#endif /* I2C_SLAVE_AVAILABLE */
 
 #ifdef UART_AVAILABLE
     /*

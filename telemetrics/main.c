@@ -14,10 +14,19 @@
 #include "uart.h"
 #include "log.h"
 #include "rfm12.h"
+#include "i2cslave.h"
 
 #include <avr/pgmspace.h>
 #include <avr/io.h>
 #include <util/delay.h>
+
+/**
+ * interrupt function handling received bytes
+ *
+ * @param addr The address of the last received bytes
+ */
+void i2c_receive(uint8_t addr) {
+}
 
 /**
  * Received a rfm12 packet
@@ -27,10 +36,8 @@
 void rfm12_receive(uint8_t *value) {
 
 #ifdef UART_AVAILABLE
-    uart_tx_uint8_t(value[1]);
-    uart_tx_uint8_t(value[2]);
-    uart_tx_uint8_t(value[3]);
-    uart_tx_uint8_t(value[4]);
+    uart_tx_uint16_t((((uint16_t)value[1] << 8) | value[2]));
+    uart_tx_uint16_t((((uint16_t)value[3] << 8) | value[4]));
     uart_tx("\n");
 #endif /* UART_AVAILABLE */
 }

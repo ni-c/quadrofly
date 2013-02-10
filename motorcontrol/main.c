@@ -33,6 +33,8 @@
 #include "motor.h"
 #include "i2cslave.h"
 
+#include <avr/wdt.h>
+
 /**
  * interrupt function handling received bytes
  *
@@ -50,12 +52,15 @@ int main(void) {
     DDRD |= (1 << DDD0);
     PORTD |= (1 << PD0);
 
+    /* Enable watchdog */
+    wdt_enable(WDTO_250MS);
+
     /* Initialization */
     init_qfly();
 
     /* Our loop */
     while (1) {
-        if (i2c_buffer[MC_RC_CHANNEL_1]!=0) {
+        if (i2c_buffer[MC_RC_CHANNEL_1] != 0) {
             PORTD &= ~(1 << PD0);
         }
     }
